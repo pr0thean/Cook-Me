@@ -18,7 +18,7 @@ export default function ErrorBoundary({ error }: { error: Error }) {
           className="text-center text-3xl tracking-widest text-yellow"
           style={{ fontFamily: 'fantasy' }}
         >
-          {error.message}
+          Recipe not found...
         </p>
         <Button label="Go to home page" link="/" variant="link" />
       </div>
