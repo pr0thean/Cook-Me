@@ -1,13 +1,12 @@
 'use client'
 import Image from 'next/image'
-import notFound from '@assets/not-found.webp'
 import Button from '@app/components/button'
 
 export default function ErrorBoundary({ error }: { error: Error }) {
   return (
     <div className="relative flex h-[calc(100vh-4rem)] w-full items-center justify-center">
       <Image
-        src={notFound}
+        src="/not-found.webp"
         alt="Not found"
         width={0}
         height={0}
