@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-white: 0deg 0% 93%;
+    --color-black: 0deg 0% 15%;
+    --color-gray: 0deg 0% 45%;
+    --color-orange: 16deg 100% 59%;
+    --color-yellow: 54deg 100% 50%;
+    --color-green: 156deg 79% 37%;
+    --color-off-black: 0deg 0% 0%;
+    --color-off-white: 0deg 0% 100%;
+  }
+}
+
+.contentful-document ul {
+  list-style-type: disc;
+  padding-left: 15px;
+  margin: 8px 0;
+}
+
+.contentful-document > p {
+  margin: 8px 0;
+}
+
+.contentful-document h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
