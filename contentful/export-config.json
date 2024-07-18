@@ -1,0 +1,6 @@
+{
+  "exportDir": "contentful",
+  "contentFile": "export.json",
+  "downloadAssets": false,
+  "errorLogFile": "contentful/errors.log"
+}
