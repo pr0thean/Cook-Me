@@ -2,6 +2,10 @@
   "name": "recipes-app",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Jakub Wolal",
+    "email": "kuba.wolak@gmail.com"
+  },
   "scripts": {
     "dev": "next dev",
     "prebuild": "rimraf dist && run-s contentful-export-types contentful-generate-types && tsc --pretty --noEmit",
