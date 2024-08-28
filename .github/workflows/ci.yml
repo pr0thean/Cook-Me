@@ -30,3 +30,20 @@ jobs:
 
       - name: Build project 👷‍♀️
         run: npm run build
+
+      - name: Run E2E tests 🌳
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run start
+          wait-on: http://localhost:3000
+          config: baseUrl=http://localhost:3000
+          browser: chrome
+          spec: cypress/e2e/*
+
+      - name: Run Component tests 🧪
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          component: true
+          browser: chrome

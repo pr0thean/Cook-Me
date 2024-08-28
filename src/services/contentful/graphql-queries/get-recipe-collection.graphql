@@ -1,0 +1,14 @@
+query getRecipeCollection($name: String, $level: String, $category: String, $tag: String) {
+  recipeCollection(
+    where: {
+      name_contains: $name
+      level: $level
+      category: { slug: $category }
+      tags: { name: $tag }
+    }
+  ) {
+    items {
+      ...RecipeCollection
+    }
+  }
+}

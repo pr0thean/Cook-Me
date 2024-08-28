@@ -1,0 +1,12 @@
+fragment Page on LandingPage {
+  slug
+  hero {
+    ...Hero
+  }
+  sectionsCollection(limit: 10) {
+    items {
+      __typename
+      ...Button
+    }
+  }
+}

@@ -10,6 +10,8 @@
     --color-orange: 16deg 100% 59%;
     --color-yellow: 54deg 100% 50%;
     --color-green: 156deg 79% 37%;
+    --color-blue-gray: 219deg 6% 44%;
+    --color-blue-gray-dark: 220deg 8% 23%;
     --color-off-black: 0deg 0% 0%;
     --color-off-white: 0deg 0% 100%;
   }
@@ -28,4 +30,14 @@
 .contentful-document h3 {
   font-size: 18px;
   font-weight: 500;
+}
+
+.hero-text-shadow {
+  text-shadow: 2px 2px #ff652f;
+}
+
+@media (min-width: 768px) {
+  .hero-text-shadow {
+    text-shadow: 3px 3px #ff652f;
+  }
 }

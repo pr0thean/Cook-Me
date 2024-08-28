@@ -1,25 +1,27 @@
-import ContentfulImage from '@app/components/contentful-image'
+import ContentfulImage from '@app/components/atoms/contentful-image'
 import { PageParams } from '@typings/PageParams'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { getRecipe } from '@services/getRecipe'
-import { Level } from '@app/components/level'
-import { Time } from '@app/components/time'
+import { Level } from '@app/components/atoms/level'
+import { Time } from '@app/components/atoms/time'
+import { PercentBadgeIcon } from '@heroicons/react/24/outline'
 
 export default async function RecipePage({ params }: PageParams) {
   const recipe = await getRecipe(params.slug)
-  const { time, level } = recipe
+
+  if (recipe.isErr() || !recipe.value) {
+    throw new Error('Recipe not found')
+  }
+
+  const { time, level, image, name, ingredients, instruction, tags } = recipe.value[0]
+
+  const isCheap = tags?.some((tag) => tag.name === 'Cheap')
 
   return (
     <div className="relative h-screen bg-black">
       {/* Image container */}
       <div className="absolute top-0 h-3/5 w-full">
-        {recipe.image && (
-          <ContentfulImage
-            alt={recipe.image.fields.title || ''}
-            src={recipe.image.fields.file?.url || ''}
-            priority
-          />
-        )}
+        {image && <ContentfulImage alt={image.title} src={image.url} priority />}
 
         {/* Custom gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black"></div>
@@ -27,17 +29,20 @@ export default async function RecipePage({ params }: PageParams) {
 
       {/* Content container */}
       <div className="relative z-10 flex justify-center">
-        <div className="mt-[300px] w-11/12 space-y-4 rounded-t-xl bg-white p-5 text-black shadow-lg">
-          <h1 className="text-xl font-semibold">{recipe.name}</h1>
+        <div className="mt-[300px] w-11/12 space-y-4 rounded-t-xl bg-white p-5 text-black shadow-lg md:space-y-6 md:p-10">
+          <div className="flex justify-between">
+            <h1 className="text-xl font-semibold">{name}</h1>
+            {isCheap && <PercentBadgeIcon width={30} fill={'#FF652F'} />}
+          </div>
 
           <p className="flex justify-between font-semibold">
             {level && <Level level={level} />}
             {time && <Time time={time} />}
           </p>
 
-          <div className="contentful-document">{documentToReactComponents(recipe.ingredients)}</div>
+          <div className="contentful-document">{documentToReactComponents(ingredients.json)}</div>
 
-          <div className="contentful-document">{documentToReactComponents(recipe.instruction)}</div>
+          <div className="contentful-document">{documentToReactComponents(instruction.json)}</div>
         </div>
       </div>
     </div>

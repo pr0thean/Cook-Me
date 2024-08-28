@@ -1,32 +1,25 @@
-import { contentFulClient } from '@services/contentful'
-import { TypeCategorySkeleton } from '@typings/contentful/generated-types/TypeCategory'
-import { EntryCollection } from 'contentful'
+import { getContentfulClient } from '@services/contentful/contentful-client'
+import { err, ok, ResultAsync } from 'neverthrow'
+import { z } from 'zod'
+import intoError from '@utils/intoError'
+import { categoryCollectionSchema } from '@typings/models/category-collection.model'
 
-type CategoryFields = EntryCollection<
-  TypeCategorySkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS',
-  string
->['items'][number]['fields']
-
-export async function getCategories(): Promise<CategoryFields[]>
-export async function getCategories(categorySlug: string): Promise<CategoryFields>
-export async function getCategories(
-  categorySlug?: string
-): Promise<CategoryFields | CategoryFields[]> {
-  const response = await contentFulClient.withoutUnresolvableLinks.getEntries<TypeCategorySkeleton>(
-    {
-      content_type: 'category',
-      'fields.slug': categorySlug,
-    }
+export async function getCategories(slug?: string) {
+  const categoryCollectionResponse = await ResultAsync.fromPromise(
+    getContentfulClient()
+      .getCategoryCollection({ slug })
+      .then((response) => {
+        if (!response.categoryCollection || response.categoryCollection?.items?.length === 0) {
+          return null
+        }
+        return z.array(categoryCollectionSchema).parse(response.categoryCollection?.items)
+      }),
+    (error) => intoError(error, 'Failed to get category collection')
   )
 
-  if (!response.items.length) {
-    throw new Error('Category not found')
+  if (categoryCollectionResponse.isErr()) {
+    return err(categoryCollectionResponse.error)
   }
 
-  if (categorySlug) {
-    return response.items[0].fields
-  }
-
-  return response.items.map((item) => item.fields)
+  return ok(categoryCollectionResponse.value)
 }

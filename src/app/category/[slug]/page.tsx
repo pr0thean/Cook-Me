@@ -1,18 +1,35 @@
-import Hero from '@app/components/hero'
-import RecipesList from '@app/components/recipes-list'
+import Hero from '@app/components/molecules/hero'
+import RecipesList from '@app/components/lists/recipes-list'
 import { getCategories } from '@services/getCategories'
 import { getRecipesByCategory } from '@services/getRecipesByCategory'
 import { PageParams } from '@typings/PageParams'
 
 export default async function CategoryPage({ params }: PageParams) {
-  const category = await getCategories(params.slug)
+  const categories = await getCategories(params.slug)
   const recipes = await getRecipesByCategory(params.slug)
+
+  if (recipes.isErr()) {
+    throw new Error('Failed to load recipes')
+  }
+
+  let hero
+
+  if (categories.isOk() && categories.value) {
+    hero = {
+      image: categories.value[0].image,
+      heading: categories.value[0].title,
+    }
+  }
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <Hero image={category.image} heading={category.title} />
+      {hero && <Hero image={hero.image} heading={hero.heading} />}
 
-      <RecipesList recipes={recipes} />
+      {!recipes.value ? (
+        <div className="text-center text-yellow">No recipes found</div>
+      ) : (
+        <RecipesList recipes={recipes.value} />
+      )}
     </div>
   )
 }

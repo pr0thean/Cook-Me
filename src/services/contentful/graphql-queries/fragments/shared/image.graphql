@@ -1,0 +1,4 @@
+fragment Image on Asset {
+  url
+  title
+}
