@@ -1,0 +1,5 @@
+fragment Button on Button {
+  __typename
+  label
+  link
+}

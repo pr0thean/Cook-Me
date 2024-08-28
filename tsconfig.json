@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": ["cypress", "@testing-library/cypress"],
     "plugins": [
       {
         "name": "next"
@@ -22,8 +23,7 @@
       "@app/*": ["app/*"],
       "@services/*": ["services/*"],
       "@typings/*": ["typings/*"],
-      "@utils/*": ["utils/*"],
-      "@assets/*": ["assets/*"]
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

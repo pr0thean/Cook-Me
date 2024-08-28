@@ -1,0 +1,7 @@
+query getTagCollection {
+  tagCollection {
+    items {
+      ...Tag
+    }
+  }
+}

@@ -1,12 +1,28 @@
-import { contentFulClient } from '@services/contentful'
-import { TypeLandingPageSkeleton } from '@typings/contentful/generated-types/TypeLandingPage'
+import { getContentfulClient } from '@services/contentful/contentful-client'
+import { err, ok, ResultAsync } from 'neverthrow'
+import { z } from 'zod'
+import intoError from '@utils/intoError'
+import { pageSchema } from '@typings/models/page.model'
 
 export async function getPage(slug: string) {
-  const res = await contentFulClient.withoutUnresolvableLinks.getEntries<TypeLandingPageSkeleton>({
-    content_type: 'landingPage', // should be 'page' but contentful CLI is fetching 'landingPage'...
-    'fields.slug': slug,
-    include: 2,
-  })
+  const pageResponse = await ResultAsync.fromPromise(
+    getContentfulClient()
+      .getPage({ slug })
+      .then((response) => {
+        if (
+          !response.landingPageCollection ||
+          response.landingPageCollection?.items?.length === 0
+        ) {
+          return null
+        }
+        return z.array(pageSchema).parse(response.landingPageCollection?.items)
+      }),
+    (error) => intoError(error, 'Page not found')
+  )
 
-  return res.items[0].fields
+  if (pageResponse.isErr()) {
+    return err(pageResponse.error)
+  }
+
+  return ok(pageResponse.value)
 }

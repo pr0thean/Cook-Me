@@ -1,0 +1,8 @@
+fragment CategoryCollection on Category {
+  title
+  slug
+  description
+  image {
+    ...Image
+  }
+}

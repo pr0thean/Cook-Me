@@ -8,7 +8,7 @@ on:
 env:
   CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
   CONTENTFUL_CODEGEN_TOKEN: ${{ secrets.CONTENTFUL_CODEGEN_TOKEN }}
-  CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+  CONTENTFUL_ACCESS_TOKEN=: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
 
 jobs:
   build-and-test:
@@ -30,3 +30,20 @@ jobs:
 
       - name: Build project 👷‍♀️
         run: npm run build
+
+      - name: Run E2E tests 🌳
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run start
+          wait-on: http://localhost:3000
+          config: baseUrl=http://localhost:3000
+          browser: chrome
+          spec: cypress/e2e/*
+
+      - name: Run Component tests 🧪
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          component: true
+          browser: chrome

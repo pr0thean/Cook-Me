@@ -1,0 +1,7 @@
+query getCategoryCollection($slug: String) {
+  categoryCollection(where: { slug: $slug }) {
+    items {
+      ...CategoryCollection
+    }
+  }
+}

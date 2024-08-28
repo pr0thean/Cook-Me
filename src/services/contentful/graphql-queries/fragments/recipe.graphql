@@ -1,0 +1,20 @@
+fragment Recipe on Recipe {
+  name
+  slug
+  ingredients {
+    json
+  }
+  instruction {
+    json
+  }
+  time
+  level
+  image {
+    ...Image
+  }
+  tagsCollection {
+    items {
+      ...Tag
+    }
+  }
+}

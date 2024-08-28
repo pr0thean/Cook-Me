@@ -1,8 +1,6 @@
-import { ButtonType } from '@typings/Button'
-import { Entry, EntrySkeletonType } from 'contentful'
+import { ButtonType } from '@typings/models/button.model'
+import { SectionType } from '@typings/models/section.model'
 
-export const isButton = (
-  entry: Entry<EntrySkeletonType, 'WITHOUT_UNRESOLVABLE_LINKS', string>
-): entry is ButtonType => {
-  return entry.sys.contentType.sys.id === 'button'
+export const isButton = (item: SectionType): item is ButtonType => {
+  return item.__typename === 'Button'
 }
