@@ -29,16 +29,26 @@ export default async function RecipePage({ params }: PageParams) {
 
       {/* Content container */}
       <div className="relative z-10 flex justify-center">
-        <div className="mt-[300px] w-11/12 space-y-4 rounded-t-xl bg-white p-5 text-black shadow-lg md:space-y-6 md:p-10">
+        <div className="page-content-shadow mt-[300px] w-11/12 space-y-4 rounded-t-xl bg-white p-5 text-black md:space-y-6 md:p-10">
           <div className="flex justify-between">
             <h1 className="text-xl font-semibold">{name}</h1>
             {isCheap && <PercentBadgeIcon width={30} fill={'#FF652F'} />}
           </div>
 
-          <p className="flex justify-between font-semibold">
-            {level && <Level level={level} />}
-            {time && <Time time={time} />}
-          </p>
+          <div className="flex justify-between font-semibold">
+            {level && (
+              <div>
+                <div className="text-xs uppercase text-blue-gray-dark">Level:</div>
+                <Level level={level} />
+              </div>
+            )}
+            {time && (
+              <div>
+                <div className="text-xs uppercase text-blue-gray-dark">Time:</div>
+                <Time time={time} />
+              </div>
+            )}
+          </div>
 
           <div className="contentful-document">{documentToReactComponents(ingredients.json)}</div>
 

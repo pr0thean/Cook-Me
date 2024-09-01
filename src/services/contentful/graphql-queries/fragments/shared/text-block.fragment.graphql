@@ -1,0 +1,7 @@
+fragment TextBlock on TextBlock {
+  __typename
+  heading
+  content {
+    json
+  }
+}

@@ -1,11 +1,11 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
-import { MagnifyingGlassIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import HeaderSearch, { ClickOutsideEvent } from '@app/components/molecules/header-search'
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { HeaderLink } from '@app/components/atoms/header-link'
 
 export const Header = () => {
   const router = useRouter()
@@ -37,17 +37,13 @@ export const Header = () => {
   return (
     <div className="relative">
       <header className="fixed top-0 z-30 flex w-full items-center justify-between border-b border-gray bg-black p-4 text-white">
-        {pathname !== '/' ? (
-          <ArrowLeftIcon onClick={() => router.back()} className="h-6 w-6">
-            Back
-          </ArrowLeftIcon>
-        ) : (
-          <div className="w-6"></div>
-        )}
+        <div className="hidden sm:block"></div>
 
-        <Link href="/" className="text-2xl font-bold">
-          Home
-        </Link>
+        <div className="flex gap-4 sm:gap-8">
+          <HeaderLink href="/" label="Home" isSelected={pathname === '/'} />
+          <HeaderLink href="/recipes" label="Recipes" isSelected={pathname === '/recipes'} />
+          <HeaderLink href="/about" label="About" isSelected={pathname === '/about'} />
+        </div>
 
         {enableHeaderSearch ? (
           <div ref={searchIconRef}>

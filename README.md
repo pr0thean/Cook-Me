@@ -1,4 +1,4 @@
-# Recipes Website - hobby project
+# Cook Me - hobby project
 
 A personal web project to store and browse my favorite recipes.
 
@@ -53,4 +53,3 @@ npm run start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-

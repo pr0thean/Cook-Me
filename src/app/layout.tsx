@@ -21,8 +21,20 @@ const medievalSharp = MedievalSharp({
 })
 
 export const metadata: Metadata = {
-  title: 'Recipes Website',
+  title: 'Cook Me',
   description: 'A personal web project to store and browse my favorite recipes',
+  icons: {
+    icon: [
+      { url: '/assets/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/assets/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/assets/favicon/favicon.ico', sizes: 'any' },
+    ],
+    apple: [{ url: '/assets/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    other: [
+      { rel: 'android-chrome-192x192', url: '/assets/favicon/android-chrome-192x192.png' },
+      { rel: 'android-chrome-512x512', url: '/assets/favicon/android-chrome-512x512.png' },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -41,7 +53,7 @@ export default function RootLayout({
         )}
       >
         <Header />
-        <main className="mx-auto mb-4 mt-12 max-w-5xl">{children}</main>
+        <main className="mx-auto mb-4 mt-12 max-w-4xl">{children}</main>
       </body>
     </html>
   )

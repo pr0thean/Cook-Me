@@ -7,13 +7,23 @@ for (const viewport of viewports) {
       cy.viewport(viewport.device)
     })
 
-    it('should display Home link', () => {
-      const homeLink = cy.findByRole('link', { name: /Home/i }).should('be.visible')
-      homeLink.should('have.attr', 'href', '/')
+    it('should display header links', () => {
+      const homeLink = cy
+        .findByRole('link', { name: /Home/i })
+        .should('be.visible')
+        .and('have.attr', 'href', '/')
+      homeLink.parent().within(() => {
+        cy.findByRole('link', { name: /Recipes/i })
+          .should('be.visible')
+          .and('have.attr', 'href', '/recipes')
+        cy.findByRole('link', { name: /About/i })
+          .should('be.visible')
+          .and('have.attr', 'href', '/about')
+      })
     })
 
     it('should display title', () => {
-      cy.findByRole('heading', { name: /Recipes website/i }).should('be.visible')
+      cy.findByRole('heading', { name: /Cook Me/i }).should('be.visible') // replace to mock later
     })
 
     it('can open and hide search form', () => {
@@ -22,7 +32,7 @@ for (const viewport of viewports) {
       cy.findByLabelText('search-icon', { selector: 'svg' }).click()
       cy.findByPlaceholderText(/Search recipes.../i).should('be.visible')
 
-      cy.findByRole('heading', { name: /Recipes website/i }).click()
+      cy.findByRole('heading', { name: /Cook Me/i }).click() // replace to mock later
       cy.findByPlaceholderText(/Search recipes.../i).should('not.exist')
     })
 
