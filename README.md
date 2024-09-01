@@ -4,7 +4,7 @@ A personal web project to store and browse my favorite recipes.
 
 ## Hosting
 
-https://recipes-jakub.vercel.app/
+https://cook-me-jakub.vercel.app/
 
 ## Overview
 
