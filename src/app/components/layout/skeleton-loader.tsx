@@ -1,11 +1,11 @@
 import React from 'react'
 
 type Props = {
-  type: 'page' | 'recipe' | 'category'
+  type: 'frontpage' | 'page' | 'category' | 'recipe'
 }
 
 const SkeletonLoader = ({ type }: Props) => {
-  if (type === 'page') {
+  if (type === 'frontpage') {
     return (
       <div className="min-h-screen">
         <div className="h-64 animate-pulse bg-gray md:h-96" />
@@ -15,6 +15,16 @@ const SkeletonLoader = ({ type }: Props) => {
             <div key={index} className="aspect-square animate-pulse rounded bg-gray" />
           ))}
         </div>
+      </div>
+    )
+  }
+
+  if (type === 'page') {
+    return (
+      <div className="min-h-screen">
+        <div className="h-64 animate-pulse bg-gray md:h-96" />
+
+        <div className="mx-auto mt-6 h-64 w-11/12 animate-pulse rounded-xl bg-gray md:h-96" />
       </div>
     )
   }

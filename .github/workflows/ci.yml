@@ -11,8 +11,9 @@ env:
   CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
 
 jobs:
-  build-and-test:
+  install-and-build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Cancel Previous Runs 🛑
         uses: styfle/cancel-workflow-action@0.11.0
@@ -25,16 +26,62 @@ jobs:
         with:
           node-version: 20
 
+      - name: Cache dependencies 📁
+        uses: actions/cache@v4
+        id: npm-cache
+        with:
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}-cypress-${{ hashFiles('**/package.json') }}
+
       - name: Install NPM dependencies 📦
-        uses: bahmutov/npm-install@v1
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Build project 👷‍♀️
         run: npm run build
 
+      - name: Upload build artifacts 🏺
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: .next
+
+  run-tests:
+    needs: install-and-build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v4
+
+      - name: Setup node ⎔
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache dependencies 📁
+        uses: actions/cache@v4
+        with:
+          path: |
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}-cypress-${{ hashFiles('**/package.json') }}
+
+      - name: Download build artifacts 📥
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: .next
+
+      - name: Verify Cypress 🔍
+        run: npx cypress verify
+
       - name: Run E2E tests 🌳
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
+          install: false
           start: npm run start
           wait-on: http://localhost:3000
           config: baseUrl=http://localhost:3000

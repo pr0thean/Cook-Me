@@ -22,7 +22,7 @@ const RecipeCard = ({ data }: Props) => {
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 flex h-[52px] justify-between rounded-b-lg bg-black/50 px-2 py-1 text-white backdrop-blur-sm">
-          <h2 className="text-lg">{name}</h2>
+          <h2 className="mr-16 truncate text-lg">{name}</h2>
 
           <div className="absolute bottom-0 right-0 flex flex-col space-y-1 px-2 py-1 text-right text-sm font-semibold backdrop-blur-sm">
             {time && <Time time={time} isWhite />}
