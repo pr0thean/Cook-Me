@@ -7,7 +7,7 @@ export default function ErrorBoundary() {
   return (
     <div className="relative flex h-[calc(100vh-4rem)] w-full items-center justify-center">
       <Image
-        src="/not-found.webp"
+        src="/assets/images/not-found.webp"
         alt="Not found"
         width={0}
         height={0}

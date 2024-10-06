@@ -4,7 +4,25 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { getRecipe } from '@services/getRecipe'
 import { Level } from '@app/components/atoms/level'
 import { Time } from '@app/components/atoms/time'
-import { PercentBadgeIcon } from '@heroicons/react/24/outline'
+
+import { getRecipesSlugs } from '@services/getRecipesSlugs'
+import dynamic from 'next/dynamic'
+
+const CheapTip = dynamic(() => import('@app/components/molecules/guided-tour/cheap-tip'), {
+  ssr: false,
+})
+
+export async function generateStaticParams() {
+  const slugs = await getRecipesSlugs()
+
+  if (slugs.isErr() || !slugs.value) {
+    return []
+  }
+
+  return slugs.value.map((slug) => ({
+    slug,
+  }))
+}
 
 export default async function RecipePage({ params }: PageParams) {
   const recipe = await getRecipe(params.slug)
@@ -32,7 +50,7 @@ export default async function RecipePage({ params }: PageParams) {
         <div className="page-content-shadow mt-[300px] w-11/12 space-y-4 rounded-t-xl bg-white p-5 text-black md:space-y-6 md:p-10">
           <div className="flex justify-between">
             <h1 className="text-xl font-semibold">{name}</h1>
-            {isCheap && <PercentBadgeIcon width={30} fill={'#FF652F'} />}
+            {isCheap && <CheapTip />}
           </div>
 
           <div className="flex justify-between font-semibold">

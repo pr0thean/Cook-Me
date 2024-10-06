@@ -2,6 +2,11 @@ import CategoriesList from '@app/components/lists/categories-list'
 import { getPage } from '@services/getPage'
 import Hero from '@app/components/molecules/hero'
 import Content from '@app/components/layout/content'
+import dynamic from 'next/dynamic'
+
+const GuidedTour = dynamic(() => import('@app/components/molecules/guided-tour/guided-tour'), {
+  ssr: false,
+})
 
 export default async function Home() {
   const page = await getPage('home')
@@ -21,6 +26,8 @@ export default async function Home() {
       <CategoriesList />
 
       {contentItems.length && <Content contentBody={contentItems} />}
+
+      <GuidedTour />
     </div>
   )
 }

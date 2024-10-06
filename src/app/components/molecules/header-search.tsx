@@ -1,4 +1,4 @@
-'use-client'
+'use client'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useSearchParams } from 'next/navigation'
 import { FormEvent, useRef, useState } from 'react'

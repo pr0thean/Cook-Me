@@ -4,29 +4,30 @@ import { getPage } from '@services/getPage'
 import { isTextBlock } from '@utils/isTextBlock'
 
 export default async function AboutPage() {
-  const page = await getPage('about')
+  const pageResult = await getPage('about')
 
-  let hero
-  let textBlock
+  return pageResult.match(
+    (page) => {
+      const hero = page[0].hero
 
-  if (page.isOk() && page.value) {
-    hero = page.value[0].hero
+      const textBlock = isTextBlock(page[0].sectionsCollection.items[0])
+        ? page[0].sectionsCollection.items[0]
+        : null
 
-    if (isTextBlock(page.value[0].sectionsCollection.items[0])) {
-      textBlock = page.value[0].sectionsCollection.items[0]
-    }
-  }
+      return (
+        <div>
+          {hero && <Hero image={hero.image} heading={hero.heading} />}
 
-  return (
-    <div>
-      {hero && <Hero image={hero.image} heading={hero.heading} />}
-      {textBlock && (
-        <div className="page-content-shadow mx-auto mt-6 w-11/12 rounded-xl bg-white p-5 text-black md:p-10">
-          <div className="contentful-document">
-            {documentToReactComponents(textBlock.content.json)}
-          </div>
+          {textBlock && (
+            <div className="page-content-shadow mx-auto mt-6 w-11/12 rounded-xl bg-white p-5 text-black md:p-10">
+              <div className="contentful-document">
+                {documentToReactComponents(textBlock.content.json)}
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      )
+    },
+    (error) => <div>Error: {error.message}</div>
   )
 }

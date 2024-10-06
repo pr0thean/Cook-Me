@@ -10,7 +10,10 @@ const CategoriesList = async () => {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 px-4 sm:grid-cols-4 sm:gap-6 sm:px-6">
+    <div
+      id="tour-categories"
+      className="grid grid-cols-2 gap-4 px-4 sm:grid-cols-4 sm:gap-6 sm:px-6"
+    >
       {categories.value.map((category, index) => (
         <Link
           href={`category/${category.slug}`}

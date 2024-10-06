@@ -4,7 +4,7 @@ A personal web project to store and browse my favorite recipes.
 
 ## Hosting
 
-https://cook-me-jakub.vercel.app/
+https://recipes-jakub.vercel.app/
 
 ## Overview
 
@@ -12,6 +12,7 @@ This website serves as a digital cookbook, allowing me to keep all my cherished 
 
 ## Features
 
+- Guided tour
 - Recipe browsing
 - Search functionality
 - Filter recipes by: category, difficulty, tag

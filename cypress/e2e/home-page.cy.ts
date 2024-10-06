@@ -5,6 +5,7 @@ for (const viewport of viewports) {
     beforeEach(() => {
       cy.visit('/')
       cy.viewport(viewport.device)
+      window.localStorage.setItem('tour-completed', 'true')
     })
 
     it('should display header links', () => {
@@ -12,10 +13,12 @@ for (const viewport of viewports) {
         .findByRole('link', { name: /Home/i })
         .should('be.visible')
         .and('have.attr', 'href', '/')
+
       homeLink.parent().within(() => {
         cy.findByRole('link', { name: /Recipes/i })
           .should('be.visible')
           .and('have.attr', 'href', '/recipes')
+
         cy.findByRole('link', { name: /About/i })
           .should('be.visible')
           .and('have.attr', 'href', '/about')
