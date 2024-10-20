@@ -9,7 +9,7 @@ env:
   CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
   CONTENTFUL_CODEGEN_TOKEN: ${{ secrets.CONTENTFUL_CODEGEN_TOKEN }}
   CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
-  NEXT_PUBLIC_API_MOCKING: true
+  NEXT_PUBLIC_API_MOCKING: false
 
 jobs:
   install-and-build:
@@ -42,9 +42,6 @@ jobs:
 
       - name: Build project 👷‍♀️
         run: npm run build
-
-      - name: List directory contents
-        run: ls -la
 
       - name: Upload build artifacts 🏺
         uses: actions/upload-artifact@v4
