@@ -1,3 +1,4 @@
+import { fixtures } from '@mocks/utils/fixtures'
 import { viewports } from '../utils'
 
 for (const viewport of viewports) {
@@ -25,8 +26,8 @@ for (const viewport of viewports) {
       })
     })
 
-    it('should display title', () => {
-      cy.findByRole('heading', { name: /Cook Me/i }).should('be.visible') // replace to mock later
+    it('should display page title', () => {
+      cy.findByRole('heading', { name: /Home/i }).should('be.visible')
     })
 
     it('can open and hide search form', () => {
@@ -35,13 +36,13 @@ for (const viewport of viewports) {
       cy.findByLabelText('search-icon', { selector: 'svg' }).click()
       cy.findByPlaceholderText(/Search recipes.../i).should('be.visible')
 
-      cy.findByRole('heading', { name: /Cook Me/i }).click() // replace to mock later
+      cy.findByRole('heading', { name: /Home/i }).click()
       cy.findByPlaceholderText(/Search recipes.../i).should('not.exist')
     })
 
     it('can click "Browse recipes" button and navigate to Recipes Page', () => {
-      cy.findByRole('button', { name: /Browse recipes/i }).click() // replace to mock later
-      cy.url().should('include', '/recipes')
+      cy.findByRole('button', { name: fixtures.recipesButton.label }).click()
+      cy.url().should('include', fixtures.recipesButton.link)
     })
   })
 }

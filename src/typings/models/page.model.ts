@@ -6,7 +6,7 @@ export const pageSchema = z.object({
   slug: z.string(),
   hero: heroSchema,
   sectionsCollection: z.object({
-    items: z.array(sectionSchema),
+    items: z.array(sectionSchema).optional(),
   }),
 })
 

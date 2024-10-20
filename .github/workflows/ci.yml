@@ -9,6 +9,7 @@ env:
   CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
   CONTENTFUL_CODEGEN_TOKEN: ${{ secrets.CONTENTFUL_CODEGEN_TOKEN }}
   CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+  NEXT_PUBLIC_API_MOCKING: true
 
 jobs:
   install-and-build:
@@ -78,6 +79,13 @@ jobs:
       - name: Verify Cypress 🔍
         run: npx cypress verify
 
+      - name: Run Component tests 🧪
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          component: true
+          browser: chrome
+
       - name: Run E2E tests 🌳
         uses: cypress-io/github-action@v6
         with:
@@ -88,9 +96,10 @@ jobs:
           browser: chrome
           spec: cypress/e2e/*
 
-      - name: Run Component tests 🧪
-        uses: cypress-io/github-action@v6
+      - name: Upload Cypress failure screenshots 📸
+        uses: actions/upload-artifact@v4
+        if: failure()
         with:
-          install: false
-          component: true
-          browser: chrome
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore

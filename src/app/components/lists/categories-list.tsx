@@ -18,14 +18,19 @@ const CategoriesList = async () => {
         <Link
           href={`category/${category.slug}`}
           key={index}
-          className="block aspect-square rounded-md bg-gray text-white"
+          className="group block aspect-square rounded-md bg-gray text-white"
         >
           {category.image && (
-            <ContentfulImage
-              alt={category.image.title}
-              src={category.image.url}
-              className="rounded-t-md"
-            />
+            <div
+              className="relative overflow-hidden rounded-t-md"
+              style={{ height: 'calc(100% - 28px)' }}
+            >
+              <ContentfulImage
+                alt={category.image.title}
+                src={category.image.url}
+                className="transition-all duration-300 group-hover:scale-110"
+              />
+            </div>
           )}
 
           <p className="p-[2px] text-center">{category.title}</p>

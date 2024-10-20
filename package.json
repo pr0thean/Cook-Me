@@ -17,18 +17,18 @@
     "format:fix": "prettier --write './src/**/*.{ts,tsx,js,jsx}'",
     "codegen": "graphql-codegen --require dotenv/config --config codegen.ts",
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --browser chrome",
     "cy:run:component": "cypress run --component"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.22.11",
     "@heroicons/react": "^2.1.5",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.5.6",
+    "framer-motion": "^11.11.9",
     "graphql": "^16.9.0",
     "graphql-request": "^6.1.0",
-    "neverthrow": "^7.2.0",
-    "next": "^14.2.7",
+    "neverthrow": "^8.0.0",
+    "next": "^14.2.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-joyride": "^2.9.2",
@@ -40,32 +40,38 @@
     "zod-validation-error": "^3.4.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/introspection": "^4.0.3",
-    "@graphql-codegen/typescript": "^4.0.9",
+    "@graphql-codegen/typescript": "^4.1.0",
     "@graphql-codegen/typescript-graphql-request": "^6.2.0",
-    "@graphql-codegen/typescript-operations": "^4.2.3",
+    "@graphql-codegen/typescript-operations": "^4.3.0",
     "@testing-library/cypress": "^10.0.2",
-    "@testing-library/jest-dom": "^6.5.0",
-    "@types/node": "^20.16.5",
-    "@types/react": "^18.3.8",
-    "@types/react-dom": "^18.3.0",
+    "@testing-library/jest-dom": "^6.6.1",
+    "@types/node": "^20.16.12",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "autoprefixer": "^10.4.20",
     "cf-content-types-generator": "^2.15.5",
-    "cypress": "^13.14.2",
+    "cypress": "^13.15.0",
     "dotenv-cli": "^7.4.2",
     "eslint": "^8.57.1",
-    "eslint-config-next": "14.2.3",
+    "eslint-config-next": "^14.2.15",
     "eslint-config-prettier": "^9.1.0",
     "expose-env": "^0.1.7",
+    "msw": "^2.4.11",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.6",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "rimraf": "^6.0.1",
-    "tailwindcss": "^3.4.12",
-    "typescript": "^5.6.2"
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

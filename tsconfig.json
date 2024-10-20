@@ -23,7 +23,8 @@
       "@app/*": ["app/*"],
       "@services/*": ["services/*"],
       "@typings/*": ["typings/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@mocks/*": ["mocks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

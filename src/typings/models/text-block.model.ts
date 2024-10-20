@@ -4,6 +4,7 @@ export const textBlockSchema = z.object({
   __typename: z.literal('TextBlock'),
   heading: z.string().optional(),
   content: z.object({
+    __typename: z.literal('TextBlockContent'),
     json: z.any(),
   }),
 })

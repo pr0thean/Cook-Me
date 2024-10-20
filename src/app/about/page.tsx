@@ -1,6 +1,7 @@
 import Hero from '@app/components/molecules/hero'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { getPage } from '@services/getPage'
+import { TextBlockType } from '@typings/models/text-block.model'
 import { isTextBlock } from '@utils/isTextBlock'
 
 export default async function AboutPage() {
@@ -10,9 +11,13 @@ export default async function AboutPage() {
     (page) => {
       const hero = page[0].hero
 
-      const textBlock = isTextBlock(page[0].sectionsCollection.items[0])
-        ? page[0].sectionsCollection.items[0]
-        : null
+      const items = page[0].sectionsCollection.items
+
+      let textBlock: TextBlockType | undefined
+
+      if (items) {
+        textBlock = items.find((item) => isTextBlock(item))
+      }
 
       return (
         <div>

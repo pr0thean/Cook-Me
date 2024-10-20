@@ -25,7 +25,7 @@ export default async function Home() {
 
       <CategoriesList />
 
-      {contentItems.length && <Content contentBody={contentItems} />}
+      {contentItems?.length && <Content contentBody={contentItems} />}
 
       <GuidedTour />
     </div>
