@@ -48,6 +48,7 @@ jobs:
         with:
           name: build
           path: .next
+          if-no-files-found: error
 
   run-tests:
     needs: install-and-build
