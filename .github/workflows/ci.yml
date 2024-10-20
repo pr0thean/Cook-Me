@@ -43,6 +43,9 @@ jobs:
       - name: Build project 👷‍♀️
         run: npm run build
 
+      - name: List directory contents
+        run: ls -la
+
       - name: Upload build artifacts 🏺
         uses: actions/upload-artifact@v4
         with:
