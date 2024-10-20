@@ -48,6 +48,8 @@ jobs:
         with:
           name: build
           path: .next
+          include-hidden-files: true
+          if-no-files-found: error
 
   run-tests:
     needs: install-and-build
