@@ -43,14 +43,11 @@ jobs:
       - name: Build project 👷‍♀️
         run: npm run build
 
-      - name: List .next directory contents
-        run: ls -la .next
-
       - name: Upload build artifacts 🏺
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: .next/**/*
+          path: ${{ github.workspace }}/.next/**/*
           if-no-files-found: error
 
   run-tests:
