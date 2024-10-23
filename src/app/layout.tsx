@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import { Rubik, Permanent_Marker, MedievalSharp } from 'next/font/google'
 import './globals.css'
-import { Header } from '@app/components/layout/header'
+import { Header } from '@components/layout/header'
 import clsx from 'clsx'
-import ClientOnly from '@mocks/client-only'
 
 const rubik = Rubik({
   subsets: ['latin'],
@@ -53,7 +52,6 @@ export default function RootLayout({
           'bg-black'
         )}
       >
-        <ClientOnly />
         <Header />
         <main className="mx-auto mt-12 max-w-4xl pb-8">{children}</main>
       </body>

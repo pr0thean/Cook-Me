@@ -2,7 +2,7 @@ import { getContentfulClient } from '@services/contentful/contentful-client'
 import { err, ok, ResultAsync } from 'neverthrow'
 import { z } from 'zod'
 import intoError from '@utils/intoError'
-import { recipeSchema } from '@typings/models/recipe.model'
+import { recipeSchema } from '@features/recipes/models/recipe.model'
 
 export async function getRecipe(slug: string) {
   const recipeResponse = await ResultAsync.fromPromise(

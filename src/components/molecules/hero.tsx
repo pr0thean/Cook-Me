@@ -1,4 +1,4 @@
-import ContentfulImage from '@app/components/atoms/contentful-image'
+import ContentfulImage from '@components/atoms/contentful-image'
 import { AssetType } from '@typings/models/asset.model'
 
 type Props = {

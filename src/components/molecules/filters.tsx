@@ -2,7 +2,7 @@
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 
-import { Select, SelectOption } from '@app/components/atoms/select'
+import { Select, SelectOption } from '@components/atoms/select'
 import { useDebounceValue } from 'usehooks-ts'
 import { useUpdateEffect } from 'react-use'
 

@@ -2,7 +2,7 @@ import { getContentfulClient } from '@services/contentful/contentful-client'
 import { err, ok, ResultAsync } from 'neverthrow'
 import { z } from 'zod'
 import intoError from '@utils/intoError'
-import { tagSchema } from '@typings/models/tag.model'
+import { tagSchema } from '@features/recipes/models/tag.model'
 
 export async function getTags() {
   const tagCollectionResponse = await ResultAsync.fromPromise(

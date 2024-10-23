@@ -26,6 +26,7 @@ This website serves as a digital cookbook, allowing me to keep all my cherished 
 - Contentful
 - GraphQL
 - Cypress (E2E and Component Testing)
+- MSW (API mocking)
 
 ## Getting Started
 

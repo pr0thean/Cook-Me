@@ -1,5 +1,5 @@
-import { Button } from '@app/components/atoms/button'
-import { SectionType } from '@typings/models/section.model'
+import { Button } from '@components/atoms/button'
+import { SectionType } from '@features/pages/models/section.model'
 import { isButton } from '@utils/isButton'
 import { ReactNode } from 'react'
 

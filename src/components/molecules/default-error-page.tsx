@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@app/components/atoms/button'
+import { Button } from '@components/atoms/button'
 
 export const DefaultErrorPage = () => {
   return (

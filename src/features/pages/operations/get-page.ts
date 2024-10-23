@@ -2,7 +2,7 @@ import { getContentfulClient } from '@services/contentful/contentful-client'
 import { err, ResultAsync } from 'neverthrow'
 import { z } from 'zod'
 import intoError from '@utils/intoError'
-import { pageSchema } from '@typings/models/page.model'
+import { pageSchema } from '@features/pages/models/page.model'
 
 export function getPage(slug: string) {
   return ResultAsync.fromPromise(getContentfulClient().getPage({ slug }), (error) =>

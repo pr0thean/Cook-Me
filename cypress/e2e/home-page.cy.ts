@@ -1,6 +1,8 @@
 import { fixtures } from '@mocks/utils/fixtures'
 import { viewports } from '../utils'
 
+// https://github.com/mswjs/msw/issues/1644
+// Mocking doesn't work on static pages.
 for (const viewport of viewports) {
   describe(`Home Page on ${viewport.title}`, () => {
     beforeEach(() => {
@@ -27,7 +29,7 @@ for (const viewport of viewports) {
     })
 
     it('should display page title', () => {
-      cy.findByRole('heading', { name: /Home/i }).should('be.visible')
+      cy.findByRole('heading', { name: /Cook Me/i }).should('be.visible')
     })
 
     it('can open and hide search form', () => {
@@ -36,7 +38,7 @@ for (const viewport of viewports) {
       cy.findByLabelText('search-icon', { selector: 'svg' }).click()
       cy.findByPlaceholderText(/Search recipes.../i).should('be.visible')
 
-      cy.findByRole('heading', { name: /Home/i }).click()
+      cy.findByRole('heading', { name: /Cook Me/i }).click()
       cy.findByPlaceholderText(/Search recipes.../i).should('not.exist')
     })
 

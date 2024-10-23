@@ -1,5 +1,5 @@
-import ContentfulImage from '@app/components/atoms/contentful-image'
-import { getCategories } from '@services/getCategories'
+import ContentfulImage from '@components/atoms/contentful-image'
+import { getCategories } from '@features/categories/operations/get-categories'
 import Link from 'next/link'
 
 const CategoriesList = async () => {
