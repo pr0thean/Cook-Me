@@ -21,10 +21,12 @@
     "baseUrl": "src",
     "paths": {
       "@app/*": ["app/*"],
+      "@components/*": ["components/*"],
+      "@features/*": ["features/*"],
+      "@mocks/*": ["mocks/*"],
       "@services/*": ["services/*"],
       "@typings/*": ["typings/*"],
-      "@utils/*": ["utils/*"],
-      "@mocks/*": ["mocks/*"]
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

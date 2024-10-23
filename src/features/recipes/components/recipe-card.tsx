@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import ContentfulImage from '@app/components/atoms/contentful-image'
-import { Time } from '@app/components/atoms/time'
-import { Level } from '@app/components/atoms/level'
-import { RecipeCollectionType } from '@typings/models/recipe-collection.model'
+import ContentfulImage from '@components/atoms/contentful-image'
+import { Time } from '@features/recipes/components/time'
+import { Level } from '@features/recipes/components/level'
+import { RecipeCollectionType } from '@features/recipes/models/recipe-collection.model'
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
 
 type Props = {

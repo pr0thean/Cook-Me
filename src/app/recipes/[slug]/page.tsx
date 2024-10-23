@@ -1,14 +1,14 @@
-import ContentfulImage from '@app/components/atoms/contentful-image'
-import { PageParams } from '@typings/PageParams'
+import ContentfulImage from '@components/atoms/contentful-image'
+import { PageParams } from '@typings/page-params'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { getRecipe } from '@services/getRecipe'
-import { Level } from '@app/components/atoms/level'
-import { Time } from '@app/components/atoms/time'
+import { getRecipe } from '@features/recipes/operations/get-recipe'
+import { Level } from '@features/recipes/components/level'
+import { Time } from '@features/recipes/components/time'
 
-import { getRecipesSlugs } from '@services/getRecipesSlugs'
+import { getRecipesSlugs } from '@features/recipes/operations/get-recipes-slugs'
 import dynamic from 'next/dynamic'
 
-const CheapTip = dynamic(() => import('@app/components/molecules/guided-tour/cheap-tip'), {
+const CheapTip = dynamic(() => import('@features/guided-tour/components/cheap-tip'), {
   ssr: false,
 })
 

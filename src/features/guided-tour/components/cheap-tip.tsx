@@ -1,7 +1,7 @@
 'use client'
 
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
-import { Tip } from '@app/components/atoms/tip'
+import { Tip } from '@features/guided-tour/components/tip'
 import { useState } from 'react'
 
 const CheapTip = () => {

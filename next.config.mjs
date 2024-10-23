@@ -7,7 +7,10 @@ const nextConfig = {
                 hostname: 'images.ctfassets.net',
             }
         ]
-    }
+    },
+    experimental: {
+        instrumentationHook: true,
+      },
 };
 
 export default nextConfig;

@@ -1,10 +1,10 @@
-import CategoriesList from '@app/components/lists/categories-list'
-import { getPage } from '@services/getPage'
-import Hero from '@app/components/molecules/hero'
-import Content from '@app/components/layout/content'
+import CategoriesList from '@features/categories/components/categories-list'
+import { getPage } from '@features/pages/operations/get-page'
+import Hero from '@components/molecules/hero'
+import Content from '@components/layout/content'
 import dynamic from 'next/dynamic'
 
-const GuidedTour = dynamic(() => import('@app/components/molecules/guided-tour/guided-tour'), {
+const GuidedTour = dynamic(() => import('@features/guided-tour/guided-tour'), {
   ssr: false,
 })
 

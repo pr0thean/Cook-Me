@@ -1,5 +1,7 @@
 import { viewports } from '../utils'
 
+// https://github.com/mswjs/msw/issues/1644
+// Mocking doesn't work on static pages.
 for (const viewport of viewports) {
   describe(`About Page on ${viewport.title}`, () => {
     beforeEach(() => {
@@ -9,7 +11,7 @@ for (const viewport of viewports) {
     })
 
     it('should display page title', () => {
-      cy.findByRole('heading', { name: /About/i }).should('be.visible')
+      cy.findByRole('heading', { name: /About Cook Me/i }).should('be.visible')
     })
   })
 }

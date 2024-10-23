@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { assetSchema } from '@typings/models/asset.model'
-import { tagSchema } from '@typings/models/tag.model'
+import { tagSchema } from '@features/recipes/models/tag.model'
 
 export const recipeCollectionSchema = z.object({
   name: z.string(),

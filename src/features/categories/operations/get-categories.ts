@@ -2,7 +2,7 @@ import { getContentfulClient } from '@services/contentful/contentful-client'
 import { err, ok, ResultAsync } from 'neverthrow'
 import { z } from 'zod'
 import intoError from '@utils/intoError'
-import { categoryCollectionSchema } from '@typings/models/category-collection.model'
+import { categoryCollectionSchema } from '@features/categories/models/category-collection.model'
 
 export async function getCategories(slug?: string) {
   const categoryCollectionResponse = await ResultAsync.fromPromise(

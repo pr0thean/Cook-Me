@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 
-import { Button } from '@app/components/atoms/button'
+import { Button } from '@components/atoms/button'
 
 export default function ErrorBoundary() {
   return (

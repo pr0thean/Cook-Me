@@ -1,6 +1,6 @@
-import Hero from '@app/components/molecules/hero'
+import Hero from '@components/molecules/hero'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { getPage } from '@services/getPage'
+import { getPage } from '@features/pages/operations/get-page'
 import { TextBlockType } from '@typings/models/text-block.model'
 import { isTextBlock } from '@utils/isTextBlock'
 

@@ -23,7 +23,7 @@ const textBlock: TextBlockWithJsonRequired = {
 
 const recipesButton: ButtonType = {
   __typename: 'Button',
-  label: 'Recipes button',
+  label: 'Browse recipes',
   link: '/recipes',
 }
 

@@ -1,8 +1,8 @@
-import Hero from '@app/components/molecules/hero'
-import RecipesList from '@app/components/lists/recipes-list'
-import { getCategories } from '@services/getCategories'
-import { getRecipesByCategory } from '@services/getRecipesByCategory'
-import { PageParams } from '@typings/PageParams'
+import Hero from '@components/molecules/hero'
+import RecipesList from '@features/recipes/components/recipes-list'
+import { getCategories } from '@features/categories/operations/get-categories'
+import { getRecipesByCategory } from '@features/recipes/operations/get-recipes-by-category'
+import { PageParams } from '@typings/page-params'
 
 export default async function CategoryPage({ params }: PageParams) {
   const categories = await getCategories(params.slug)

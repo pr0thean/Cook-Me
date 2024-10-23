@@ -1,5 +1,5 @@
-import RecipeCard from '@app/components/molecules/recipe-card'
-import { RecipeCollectionType } from '@typings/models/recipe-collection.model'
+import RecipeCard from '@features/recipes/components/recipe-card'
+import { RecipeCollectionType } from '@features/recipes/models/recipe-collection.model'
 
 type Props = {
   recipes: RecipeCollectionType[]

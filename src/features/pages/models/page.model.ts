@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { heroSchema } from '@typings/models/hero.model'
-import { sectionSchema } from '@typings/models/section.model'
+import { heroSchema } from '@features/pages/models/hero.model'
+import { sectionSchema } from '@features/pages/models/section.model'
 
 export const pageSchema = z.object({
   slug: z.string(),
