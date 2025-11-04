@@ -43,3 +43,5 @@ src/types/contentful/generated-types
 # graphql
 *.schema.json
 src/services/contentful/generated-types.ts
+
+/src/generated/prisma

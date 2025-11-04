@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id          BigInt     @id @default(autoincrement())
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  title       String     @unique
+  description String?
+  ingredients Json?      @db.Json
+  instruction Json?      @db.Json
+  time        Int?
+  difficulty  Difficulty @default(MEDIUM)
+  imageUrl    String?
+  
+  categoryId  BigInt?    @map("category")
+  category    Category?  @relation(fields: [categoryId], references: [id])
+  
+  comments    Comment[]
+
+  @@map("recipes")
+}
+
+model Category {
+  id        BigInt   @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  name      String   @unique
+  imageUrl  String?
+  
+  recipes   Recipe[]
+
+  @@map("categories")
+}
+
+model Comment {
+  id        BigInt   @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  content   String
+  imageUrl  String?
+  
+  recipeId  BigInt   @map("recipe_id")
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  
+  userId    BigInt   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model User {
+  id        BigInt   @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  name      String
+  email     String   @unique
+  role      Role     @default(USER)
+  
+  comments  Comment[]
+
+  @@map("users")
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+
+  @@map("difficulty")
+}
+
+enum Role {
+  USER
+  ADMIN
+
+  @@map("role")
+}

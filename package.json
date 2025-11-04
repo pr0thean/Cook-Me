@@ -18,11 +18,16 @@
     "codegen": "graphql-codegen --require dotenv/config --config codegen.ts",
     "cy:open": "cypress open",
     "cy:run": "cypress run --browser chrome",
-    "cy:run:component": "cypress run --component"
+    "cy:run:component": "cypress run --component",
+    "db:pull": "prisma db pull",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.22.11",
     "@heroicons/react": "^2.1.5",
+    "@prisma/client": "^6.18.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.9",
     "graphql": "^16.9.0",
@@ -65,6 +70,7 @@
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
+    "prisma": "^6.18.0",
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
