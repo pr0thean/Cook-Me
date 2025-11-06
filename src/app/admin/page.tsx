@@ -1,20 +1,32 @@
+import { getCategories } from '@app/actions/getCategories'
 import { getRecipes } from '@app/actions/getRecipes'
+import { CategoryForm } from '@features/admin/CategoryForm'
 import { RecipeForm } from '@features/admin/RecipeForm'
 import Image from 'next/image'
 
 export default async function AdminPage() {
   const recipes = await getRecipes()
+  const categories = await getCategories()
 
+  console.log(categories)
   console.log(recipes)
 
   return (
     <div className="mt-20 space-y-4 text-white">
       <h1 className="text-xl">Admin Page</h1>
 
-      <div>
-        <h2 className="text-lg">Create Recipe</h2>
+      <div className="flex gap-4">
+        <div className="w-2/3">
+          <h2 className="text-lg">Create Recipe</h2>
 
-        <RecipeForm />
+          <RecipeForm categories={categories} />
+        </div>
+
+        <div className="w-1/3">
+          <h2 className="text-lg">Create Category</h2>
+
+          <CategoryForm />
+        </div>
       </div>
 
       <div>

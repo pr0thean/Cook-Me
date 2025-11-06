@@ -1,7 +1,7 @@
 'use server'
 
 import { prismaClient } from '@lib/prismaClient'
-import { uploadRecipeImage } from '@lib/storage'
+import { uploadImage } from '@lib/storage'
 
 export async function createRecipe(formData: FormData) {
   try {
@@ -30,7 +30,7 @@ export async function createRecipe(formData: FormData) {
 
     // Upload image if provided
     if (imageFile && imageFile.size > 0) {
-      const { url } = await uploadRecipeImage(imageFile, recipe.id.toString())
+      const { url } = await uploadImage(imageFile, recipe.id.toString(), 'recipes-images')
 
       // Update recipe with image URL
       await prismaClient.recipe.update({
