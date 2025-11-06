@@ -1,4 +1,6 @@
 import { getRecipes } from '@app/actions/getRecipes'
+import { RecipeForm } from '@features/admin/RecipeForm'
+import Image from 'next/image'
 
 export default async function AdminPage() {
   const recipes = await getRecipes()
@@ -6,16 +8,30 @@ export default async function AdminPage() {
   console.log(recipes)
 
   return (
-    <div className="mt-20">
-      <h1>Admin Page</h1>
+    <div className="mt-20 space-y-4 text-white">
+      <h1 className="text-xl">Admin Page</h1>
 
       <div>
-        <h2>Recipes</h2>
+        <h2 className="text-lg">Create Recipe</h2>
 
-        <div>
+        <RecipeForm />
+      </div>
+
+      <div>
+        <h2 className="text-lg">Recipes</h2>
+
+        <div className="space-y-4 p-4">
           {recipes.map((recipe) => (
             <div key={recipe.id}>
-              {recipe.title} - {recipe.category?.name}
+              <div className="flex items-center gap-3">
+                {recipe.imageUrl && (
+                  <Image src={recipe.imageUrl} width={30} height={30} alt="recipe image" />
+                )}
+                <span>
+                  {recipe.title} - {recipe.category?.name}
+                </span>
+              </div>
+              <p className="text-xs">{recipe.description}</p>
             </div>
           ))}
         </div>

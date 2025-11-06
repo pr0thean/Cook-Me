@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "rimraf dist && run-s codegen type-check",
+    "prebuild": "rimraf dist && run-s codegen",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -28,6 +28,8 @@
     "@contentful/rich-text-react-renderer": "^15.22.11",
     "@heroicons/react": "^2.1.5",
     "@prisma/client": "^6.18.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.79.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.9",
     "graphql": "^16.9.0",

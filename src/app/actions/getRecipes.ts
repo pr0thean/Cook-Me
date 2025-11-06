@@ -1,9 +1,9 @@
 'use server'
 
-import { prisma } from '@lib/prisma'
+import { prismaClient } from '@lib/prismaClient'
 
 export async function getRecipes() {
-  const recipes = await prisma.recipe.findMany({
+  const recipes = await prismaClient.recipe.findMany({
     include: {
       category: true,
     },
