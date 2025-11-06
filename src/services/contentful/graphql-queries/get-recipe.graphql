@@ -1,7 +1,0 @@
-query getRecipe($slug: String!) {
-  recipeCollection(where: { slug: $slug }, limit: 1) {
-    items {
-      ...Recipe
-    }
-  }
-}

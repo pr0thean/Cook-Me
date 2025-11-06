@@ -1,7 +1,0 @@
-query getRecipesByCategory($category: String!) {
-  recipeCollection(where: { category: { slug: $category } }) {
-    items {
-      ...RecipeCollection
-    }
-  }
-}

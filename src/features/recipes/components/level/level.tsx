@@ -1,19 +1,14 @@
+import { Difficulty } from '@prisma/client'
 import clsx from 'clsx'
 
-export const Level = ({
-  level,
-  isWhite,
-}: {
-  level: 'Easy' | 'Average' | 'Hard'
-  isWhite?: boolean
-}) => {
+export const Level = ({ level, isWhite }: { level: Difficulty; isWhite?: boolean }) => {
   return (
     <span
       className={clsx('', {
-        'text-green': level === 'Easy',
-        'text-gray': !isWhite && level === 'Average',
-        'text-white': isWhite && level === 'Average',
-        'text-orange': level === 'Hard',
+        'text-green': level === Difficulty.EASY,
+        'text-gray': !isWhite && level === Difficulty.MEDIUM,
+        'text-white': isWhite && level === Difficulty.MEDIUM,
+        'text-orange': level === Difficulty.HARD,
       })}
     >
       {level}
