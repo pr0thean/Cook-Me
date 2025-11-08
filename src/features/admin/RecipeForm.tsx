@@ -1,21 +1,26 @@
 'use client'
 
 import { createRecipe } from '@app/actions/createRecipe'
+import { Category } from '@prisma/client'
+import { useState } from 'react'
 
 type Props = {
-  categories: {
-    name: string
-    id: bigint
-    imageUrl: string | null
-  }[]
+  categories: Category[]
 }
 
 export const RecipeForm = ({ categories }: Props) => {
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([])
+
   const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     try {
       const formData = new FormData(e.currentTarget)
+
+      selectedCategories.forEach((id) => {
+        formData.append('categoryIds', id.toString())
+      })
+
       await createRecipe(formData)
     } catch (error) {}
   }
@@ -48,18 +53,29 @@ export const RecipeForm = ({ categories }: Props) => {
         rows={4}
       />
 
-      <select
-        name="categoryId"
-        className="block w-full rounded-[4px] border border-gray bg-black/80 px-8 py-2 text-white outline-0"
-      >
-        <option value="">Select category</option>
+      <div>
+        <p>Categories (select multiple)</p>
 
-        {categories.map((category) => (
-          <option key={category.id.toString()} value={category.id.toString()}>
-            {category.name}
-          </option>
-        ))}
-      </select>
+        <div className="flex flex-wrap gap-2">
+          {categories.map((category) => (
+            <label key={category.id}>
+              <input
+                type="checkbox"
+                value={category.id}
+                checked={selectedCategories.includes(category.id)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setSelectedCategories([...selectedCategories, category.id])
+                  } else {
+                    setSelectedCategories(selectedCategories.filter((id) => id !== category.id))
+                  }
+                }}
+              />
+              {category.name}
+            </label>
+          ))}
+        </div>
+      </div>
 
       <input type="file" name="image" accept="image/*" className="block w-full text-white" />
 

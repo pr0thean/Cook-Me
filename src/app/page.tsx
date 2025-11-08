@@ -1,13 +1,18 @@
 import CategoriesList from '@features/categories/components/categories-list'
 import Hero from '@components/molecules/hero'
 import GuidedTour from '@features/guided-tour/guided-tour'
+import { Button } from '@components/atoms/button'
 
 export default async function Home() {
   return (
     <div className="space-y-4 pb-4 md:space-y-6 md:pb-6">
-      <Hero heading="Hero Heading" imageUrl="/assets/images/landing-page.png" />
+      <Hero heading="Cook Me" imageUrl="/assets/images/landing-page.png" />
 
       <CategoriesList />
+
+      <div className="mt-8">
+        <Button label="Browse all recipes" link="/recipes" />
+      </div>
 
       <GuidedTour />
     </div>

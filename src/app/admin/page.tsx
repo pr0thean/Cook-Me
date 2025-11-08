@@ -39,9 +39,7 @@ export default async function AdminPage() {
                 {recipe.imageUrl && (
                   <Image src={recipe.imageUrl} width={30} height={30} alt="recipe image" />
                 )}
-                <span>
-                  {recipe.title} - {recipe.category?.name}
-                </span>
+                <span>{recipe.title}</span>
               </div>
               <p className="text-xs">{recipe.description}</p>
             </div>

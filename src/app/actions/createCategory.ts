@@ -2,6 +2,7 @@
 
 import { prismaClient } from '@lib/prismaClient'
 import { uploadImage } from '@lib/storage'
+import { slugify } from '@utils/slugify'
 
 export async function createCategory(formData: FormData) {
   try {
@@ -13,10 +14,13 @@ export async function createCategory(formData: FormData) {
       return { success: false, error: 'Title is required' }
     }
 
+    const slug = slugify(name)
+
     // Create category first
     const category = await prismaClient.category.create({
       data: {
         name,
+        slug,
       },
     })
 

@@ -8,58 +8,58 @@ datasource db {
 }
 
 model Recipe {
-  id          BigInt     @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
   title       String     @unique
+  slug        String     @unique
   description String?
   ingredients Json?      @db.Json
   instruction Json?      @db.Json
   time        Int?
   difficulty  Difficulty @default(MEDIUM)
   imageUrl    String?
-  
-  categoryId  BigInt?    @map("category")
-  category    Category?  @relation(fields: [categoryId], references: [id])
-  
-  comments    Comment[]
+
+  categories Category[] // Many-to-many relation
+  comments   Comment[] // One-to-many relation
 
   @@map("recipes")
 }
 
 model Category {
-  id        BigInt   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   name      String   @unique
+  slug      String   @unique
   imageUrl  String?
-  
-  recipes   Recipe[]
+
+  recipes Recipe[] // Many-to-many relation
 
   @@map("categories")
 }
 
 model Comment {
-  id        BigInt   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   content   String
   imageUrl  String?
-  
-  recipeId  BigInt   @map("recipe_id")
-  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  
-  userId    BigInt   @map("user_id")
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  recipeId Int    @map("recipe_id") // One-to-many relation
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  userId Int  @map("user_id") // One-to-many relation
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("comments")
 }
 
 model User {
-  id        BigInt   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   name      String
   email     String   @unique
   role      Role     @default(USER)
-  
-  comments  Comment[]
+
+  comments Comment[] // One-to-many relation
 
   @@map("users")
 }

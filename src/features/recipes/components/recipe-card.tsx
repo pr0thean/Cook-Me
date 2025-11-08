@@ -10,8 +10,8 @@ type Props = {
 }
 
 const RecipeCard = ({ data }: Props) => {
-  const { imageUrl, title, difficulty, time } = data
-  const slug = title
+  const { imageUrl, title, slug, difficulty, time } = data
+
   const tags = [{ name: 'Cheap' }]
 
   const isCheap = tags?.some((tag) => tag.name === 'Cheap')

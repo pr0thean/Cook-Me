@@ -2,9 +2,9 @@ import { PageParams } from '@typings/page-params'
 import { Level } from '@features/recipes/components/level'
 import { Time } from '@features/recipes/components/time'
 
-import { getRecipes } from '@app/actions/getRecipes'
 import ContentfulImage from '@components/atoms/contentful-image'
 import CheapTip from '@features/guided-tour/components/cheap-tip'
+import { getRecipeBySlug } from '@app/actions/getRecipeBySlug'
 
 // export async function generateStaticParams() {
 //   const slugs = await getRecipesSlugs()
@@ -19,9 +19,14 @@ import CheapTip from '@features/guided-tour/components/cheap-tip'
 // }
 
 export default async function RecipePage({ params }: { params: PageParams }) {
-  const recipes = await getRecipes() // params.slug
+  const { slug } = await params
+  const recipe = await getRecipeBySlug(slug)
 
-  const { imageUrl, title, difficulty, time } = recipes[0]
+  if (!recipe) {
+    throw new Error('Recipe not found')
+  }
+
+  const { imageUrl, title, difficulty, time, ingredients, instruction } = recipe
   const tags = [{ name: 'Cheap' }]
 
   const isCheap = tags?.some((tag) => tag.name === 'Cheap')
@@ -59,9 +64,9 @@ export default async function RecipePage({ params }: { params: PageParams }) {
             )}
           </div>
 
-          <div className="document">ingredients</div>
+          <div className="document">{ingredients?.toString()}</div>
 
-          <div className="document">instruction</div>
+          <div className="document">{instruction?.toString()}</div>
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ export const CategoryForm = () => {
         placeholder="Enter name..."
         className="block w-full rounded-[4px] border border-gray bg-black/80 px-8 py-2 text-white outline-0"
       />
+
       <input type="file" name="image" accept="image/*" className="block w-full text-white" />
 
       <button

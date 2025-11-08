@@ -5,6 +5,8 @@ import Link from 'next/link'
 const CategoriesList = async () => {
   const categories = await getCategories()
 
+  console.log('CATEGORIES: ', categories)
+
   return (
     <div
       id="tour-categories"
@@ -12,7 +14,7 @@ const CategoriesList = async () => {
     >
       {categories.map((category, index) => (
         <Link
-          href={`category/${category.name}`}
+          href={`category/${category.slug}`}
           key={index}
           className="group block aspect-square rounded-md bg-gray text-white"
         >

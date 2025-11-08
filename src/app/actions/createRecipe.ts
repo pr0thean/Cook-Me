@@ -2,6 +2,7 @@
 
 import { prismaClient } from '@lib/prismaClient'
 import { uploadImage } from '@lib/storage'
+import { slugify } from '@utils/slugify'
 
 export async function createRecipe(formData: FormData) {
   try {
@@ -9,7 +10,7 @@ export async function createRecipe(formData: FormData) {
     const description = formData.get('description') as string
     const ingredients = formData.get('ingredients') as string
     const instruction = formData.get('instruction') as string
-    const categoryId = formData.get('categoryId') as string
+    const categoryIds = formData.getAll('categoryIds') as string[]
     const imageFile = formData.get('image') as File
 
     // Validate required fields
@@ -17,14 +18,19 @@ export async function createRecipe(formData: FormData) {
       return { success: false, error: 'Title is required' }
     }
 
+    const slug = slugify(title)
+
     // Create recipe first
     const recipe = await prismaClient.recipe.create({
       data: {
         title,
+        slug,
         description: description || null,
         ingredients: ingredients || undefined,
         instruction: instruction || undefined,
-        categoryId: categoryId ? BigInt(categoryId) : null,
+        categories: {
+          connect: categoryIds.map((id) => ({ id: parseInt(id) })),
+        },
       },
     })
 
