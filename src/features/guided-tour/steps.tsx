@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Step } from 'react-joyride'
+import { Step } from 'react-joyride-react19-compat'
 
 const stepOneContent = (isDesktop: boolean) => (
   <div>

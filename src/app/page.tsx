@@ -1,10 +1,6 @@
 import CategoriesList from '@features/categories/components/categories-list'
 import Hero from '@components/molecules/hero'
-import dynamic from 'next/dynamic'
-
-const GuidedTour = dynamic(() => import('@features/guided-tour/guided-tour'), {
-  ssr: false,
-})
+import GuidedTour from '@features/guided-tour/guided-tour'
 
 export default async function Home() {
   return (

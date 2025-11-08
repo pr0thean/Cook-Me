@@ -2,11 +2,12 @@ import Hero from '@components/molecules/hero'
 import RecipesList from '@features/recipes/components/recipes-list'
 import { PageParams } from '@typings/page-params'
 
-export default async function CategoryPage({ params }: PageParams) {
+export default async function CategoryPage({ params }: { params: PageParams }) {
+  const { slug } = await params
   // const category = await getCategory(params.slug)
   // const recipes = await getRecipesByCategory(params.slug)
 
-  console.log('slug', params.slug)
+  console.log('slug', slug)
   const recipes = []
 
   return (

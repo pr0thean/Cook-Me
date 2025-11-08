@@ -2,12 +2,10 @@ import Hero from '@components/molecules/hero'
 import RecipesList from '@features/recipes/components/recipes-list'
 import { FiltersContainer } from '@components/molecules/filters-container'
 import { getRecipes } from '@app/actions/getRecipes'
+import { SearchParams } from '@typings/page-params'
 
-export default async function RecipesPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | undefined }
-}) {
+export default async function RecipesPage(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams
   const { search, level, category, tag } = searchParams
   const recipes = await getRecipes()
 

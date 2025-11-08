@@ -1,4 +1,4 @@
-import { Styles } from 'react-joyride'
+import { Styles } from 'react-joyride-react19-compat'
 
 const buttonBaseStyles = (isDesktop: boolean) => ({
   padding: isDesktop ? '8px 16px' : '6px 12px',

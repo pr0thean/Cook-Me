@@ -1,7 +1,7 @@
 'use client'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useSearchParams } from 'next/navigation'
-import { FormEvent, useRef, useState } from 'react'
+import { FormEvent, RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 
 export type ClickOutsideEvent = MouseEvent | TouchEvent | FocusEvent
@@ -12,11 +12,11 @@ type Props = {
 }
 
 const HeaderSearch = ({ handleClickOutside, handleNavigate }: Props) => {
-  const ref = useRef(null)
+  const ref = useRef<HTMLFormElement>(null)
   const searchParams = useSearchParams()
   const [text, setText] = useState(searchParams.get('search') || '')
 
-  useOnClickOutside(ref, (event) => handleClickOutside(event))
+  useOnClickOutside(ref as RefObject<HTMLFormElement>, (event) => handleClickOutside(event))
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()

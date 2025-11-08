@@ -2,13 +2,9 @@ import { PageParams } from '@typings/page-params'
 import { Level } from '@features/recipes/components/level'
 import { Time } from '@features/recipes/components/time'
 
-import dynamic from 'next/dynamic'
 import { getRecipes } from '@app/actions/getRecipes'
 import ContentfulImage from '@components/atoms/contentful-image'
-
-const CheapTip = dynamic(() => import('@features/guided-tour/components/cheap-tip'), {
-  ssr: false,
-})
+import CheapTip from '@features/guided-tour/components/cheap-tip'
 
 // export async function generateStaticParams() {
 //   const slugs = await getRecipesSlugs()
@@ -22,7 +18,7 @@ const CheapTip = dynamic(() => import('@features/guided-tour/components/cheap-ti
 //   }))
 // }
 
-export default async function RecipePage({ params }: PageParams) {
+export default async function RecipePage({ params }: { params: PageParams }) {
   const recipes = await getRecipes() // params.slug
 
   const { imageUrl, title, difficulty, time } = recipes[0]

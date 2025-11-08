@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { tourSteps } from './steps'
 import { useWindowSize } from 'usehooks-ts'
-import JoyRide, { CallBackProps } from 'react-joyride'
+import JoyRide, { CallBackProps } from 'react-joyride-react19-compat'
 import { guidedTourStyles } from './styles'
 
 const GuidedTour = () => {
