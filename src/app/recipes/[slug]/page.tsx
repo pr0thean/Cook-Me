@@ -59,9 +59,9 @@ export default async function RecipePage({ params }: { params: PageParams }) {
             )}
           </div>
 
-          <div className="contentful-document">ingredients</div>
+          <div className="document">ingredients</div>
 
-          <div className="contentful-document">instruction</div>
+          <div className="document">instruction</div>
         </div>
       </div>
     </div>

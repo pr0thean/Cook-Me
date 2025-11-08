@@ -11,7 +11,7 @@ export default async function RecipesPage(props: { searchParams: SearchParams })
 
   return (
     <div>
-      <Hero image={undefined} heading="Hero heading" />
+      <Hero heading="Hero heading" imageUrl="/assets/images/all-recipes.jpeg" />
 
       <div className="mt-6 md:mt-8">
         <FiltersContainer />

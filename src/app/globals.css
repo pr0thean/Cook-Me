@@ -22,18 +22,18 @@
   box-shadow: 0px 0px 10px black;
 }
 
-.contentful-document ul {
+.document ul {
   list-style-type: disc;
   padding-left: 15px;
   margin: 8px 0;
 }
 
-.contentful-document > p {
+.document > p {
   margin: 0 0 8px;
 }
 
-.contentful-document h2,
-.contentful-document h3 {
+.document h2,
+.document h3 {
   font-size: 18px;
   font-weight: 500;
   margin-top: 16px;

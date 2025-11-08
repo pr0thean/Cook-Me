@@ -12,7 +12,7 @@ export default async function CategoryPage({ params }: { params: PageParams }) {
 
   return (
     <div className="space-y-4 md:space-y-6">
-      <Hero image={undefined} heading="Hero Heading" />
+      <Hero heading="Hero Heading" imageUrl="" />
 
       {recipes.length === 0 ? (
         <div className="text-center text-yellow">No recipes found</div>
