@@ -39,7 +39,7 @@ const HeaderSearch = ({ handleClickOutside, handleNavigate }: Props) => {
           autoFocus
           type="text"
           placeholder="Search recipes..."
-          className="block w-full border-b border-gray bg-black/80 px-10 py-3 text-white outline-0 backdrop-blur-sm"
+          className="block w-full border-b border-gray bg-black/80 px-10 py-3 text-white outline-0 backdrop-blur-xs"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />

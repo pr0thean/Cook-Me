@@ -1,6 +1,6 @@
 import { getCategoryBySlug } from '@app/actions/getCategoryBySlug'
 import Hero from '@components/molecules/hero'
-import RecipesList from '@features/recipes/components/RecipesList'
+import { RecipesList } from '@features/recipes/components/RecipesList'
 import { PageParams } from '@typings/page-params'
 
 export default async function CategoryPage({ params }: { params: PageParams }) {
@@ -18,7 +18,7 @@ export default async function CategoryPage({ params }: { params: PageParams }) {
       <Hero heading={category?.name} imageUrl={category?.imageUrl || undefined} />
 
       {recipes.length === 0 ? (
-        <div className="text-center text-yellow">No recipes found</div>
+        <div className="text-yellow text-center">No recipes found</div>
       ) : (
         <RecipesList recipes={recipes} />
       )}

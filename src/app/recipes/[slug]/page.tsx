@@ -38,7 +38,7 @@ export default async function RecipePage({ params }: { params: PageParams }) {
         {imageUrl && <ContentfulImage alt={title} src={imageUrl} priority />}
 
         {/* Custom gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/10 to-black"></div>
       </div>
 
       {/* Content container */}

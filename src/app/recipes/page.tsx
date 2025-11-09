@@ -1,5 +1,5 @@
 import Hero from '@components/molecules/hero'
-import RecipesList from '@features/recipes/components/RecipesList'
+import { RecipesList } from '@features/recipes/components/RecipesList'
 import { FiltersContainer } from '@components/molecules/filters-container'
 import { getRecipes } from '@app/actions/getRecipes'
 import { SearchParams } from '@typings/page-params'
@@ -21,7 +21,7 @@ export default async function RecipesPage(props: { searchParams: SearchParams })
 
       <div className="mt-8 md:mt-10">
         {recipes.length === 0 ? (
-          <div className="text-center text-yellow">No recipes found</div>
+          <div className="text-yellow text-center">No recipes found</div>
         ) : (
           <RecipesList recipes={recipes} />
         )}

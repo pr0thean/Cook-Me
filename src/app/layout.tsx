@@ -43,18 +43,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={clsx(
-          rubik.className,
-          permanentMarker.variable,
-          medievalSharp.variable,
-          'bg-black'
-        )}
-      >
+    <html
+      lang="en"
+      className={clsx(
+        rubik.className,
+        permanentMarker.variable,
+        medievalSharp.variable,
+        'bg-black'
+      )}
+    >
+      <body>
         <Header />
 
-        <main className="mx-auto mt-12 max-w-4xl pb-8">{children}</main>
+        <main className="mx-auto mt-16 max-w-4xl pb-8">{children}</main>
       </body>
     </html>
   )

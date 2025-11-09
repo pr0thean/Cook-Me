@@ -1,20 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
+@theme {
+  --color-white: hsl(0deg 0% 93%); /* #EDEDED */
+  --color-black: hsl(0deg 0% 15%); /* #272727 */
+  --color-gray: hsl(0deg 0% 45%); /* #747474 */
+  --color-orange: hsl(16deg 100% 59%); /* #FF652F */
+  --color-yellow: hsl(54deg 100% 50%); /* #FFE400 */
+  --color-green: hsl(156deg 79% 37%); /* #14A76C */
+  --color-blue-gray: hsl(219deg 6% 44%); /* #686D76 */
+  --color-blue-gray-dark: hsl(220deg 8% 23%); /* #373A40 */
+  --color-off-black: hsl(0deg 0% 0%);
+  --color-off-white: hsl(0deg 0% 100%);
+  --color-gold: hsl(51deg 100% 50%);
+
+  --font-hero: var(--font-permanent-marker);
+  --font-not-found: var(--font-medival-sharp);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 @layer base {
-  :root {
-    --color-white: 0deg 0% 93%;
-    --color-black: 0deg 0% 15%;
-    --color-gray: 0deg 0% 45%;
-    --color-orange: 16deg 100% 59%;
-    --color-yellow: 54deg 100% 50%;
-    --color-green: 156deg 79% 37%;
-    --color-blue-gray: 219deg 6% 44%;
-    --color-blue-gray-dark: 220deg 8% 23%;
-    --color-off-black: 0deg 0% 0%;
-    --color-off-white: 0deg 0% 100%;
-    --color-gold: 51deg 100% 50%;
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
 }
 

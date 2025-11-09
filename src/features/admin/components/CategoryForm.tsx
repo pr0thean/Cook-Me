@@ -24,7 +24,7 @@ export const CategoryForm = () => {
 
       <button
         type="submit"
-        className="disabled:bg-gray-400 rounded bg-blue-600 px-6 py-2 text-white hover:bg-blue-700"
+        className="disabled:bg-gray-400 rounded-sm bg-blue-600 px-6 py-2 text-white hover:bg-blue-700"
       >
         Create Category
       </button>
