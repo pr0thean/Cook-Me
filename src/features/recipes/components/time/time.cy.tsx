@@ -1,4 +1,4 @@
-import { Time } from './time'
+import { Time } from './Time'
 
 describe('<Time />', () => {
   it('renders green text when time <= 30', () => {

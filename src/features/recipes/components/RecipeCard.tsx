@@ -9,7 +9,7 @@ type Props = {
   data: Recipe
 }
 
-const RecipeCard = ({ data }: Props) => {
+export const RecipeCard = ({ data }: Props) => {
   const { imageUrl, title, slug, difficulty, time } = data
 
   const tags = [{ name: 'Cheap' }]
@@ -44,5 +44,3 @@ const RecipeCard = ({ data }: Props) => {
     </Link>
   )
 }
-
-export default RecipeCard

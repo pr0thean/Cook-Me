@@ -1,7 +1,7 @@
 import { getCategories } from '@app/actions/getCategories'
 import { getRecipes } from '@app/actions/getRecipes'
-import { CategoryForm } from '@features/admin/CategoryForm'
-import { RecipeForm } from '@features/admin/RecipeForm'
+import { CategoryForm } from '@features/admin/components/CategoryForm'
+import { RecipeForm } from '@features/admin/components/RecipeForm'
 import Image from 'next/image'
 
 export default async function AdminPage() {

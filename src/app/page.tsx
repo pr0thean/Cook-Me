@@ -1,6 +1,6 @@
-import CategoriesList from '@features/categories/components/categories-list'
+import CategoriesList from '@features/categories/components/CategoriesList'
 import Hero from '@components/molecules/hero'
-import GuidedTour from '@features/guided-tour/guided-tour'
+import { GuidedTour } from '@features/guided-tour/GuidedTour'
 import { Button } from '@components/atoms/button'
 
 export default async function Home() {

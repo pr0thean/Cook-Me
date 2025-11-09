@@ -3,7 +3,7 @@ import { Level } from '@features/recipes/components/level'
 import { Time } from '@features/recipes/components/time'
 
 import ContentfulImage from '@components/atoms/contentful-image'
-import CheapTip from '@features/guided-tour/components/cheap-tip'
+import { CheapTip } from '@features/guided-tour/components/CheapTip'
 import { getRecipeBySlug } from '@app/actions/getRecipeBySlug'
 
 // export async function generateStaticParams() {

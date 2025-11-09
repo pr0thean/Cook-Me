@@ -1,10 +1,10 @@
 'use client'
 
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
-import { Tip } from '@features/guided-tour/components/tip'
+import { Tip } from './Tip'
 import { useState } from 'react'
 
-const CheapTip = () => {
+export const CheapTip = () => {
   const isTipCompleted = localStorage.getItem('tour-cheap-tip-completed')
   const [showTip, setShowTip] = useState(!isTipCompleted)
 
@@ -25,5 +25,3 @@ const CheapTip = () => {
     </div>
   )
 }
-
-export default CheapTip

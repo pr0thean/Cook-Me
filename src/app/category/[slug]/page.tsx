@@ -1,6 +1,6 @@
 import { getCategoryBySlug } from '@app/actions/getCategoryBySlug'
 import Hero from '@components/molecules/hero'
-import RecipesList from '@features/recipes/components/recipes-list'
+import RecipesList from '@features/recipes/components/RecipesList'
 import { PageParams } from '@typings/page-params'
 
 export default async function CategoryPage({ params }: { params: PageParams }) {

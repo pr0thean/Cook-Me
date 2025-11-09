@@ -1,5 +1,5 @@
 import Hero from '@components/molecules/hero'
-import RecipesList from '@features/recipes/components/recipes-list'
+import RecipesList from '@features/recipes/components/RecipesList'
 import { FiltersContainer } from '@components/molecules/filters-container'
 import { getRecipes } from '@app/actions/getRecipes'
 import { SearchParams } from '@typings/page-params'

@@ -6,7 +6,7 @@ import { useWindowSize } from 'usehooks-ts'
 import JoyRide, { CallBackProps } from 'react-joyride-react19-compat'
 import { guidedTourStyles } from './styles'
 
-const GuidedTour = () => {
+export const GuidedTour = () => {
   const [run, setRun] = useState(false)
   const { width } = useWindowSize()
 
@@ -49,5 +49,3 @@ const GuidedTour = () => {
     />
   )
 }
-
-export default GuidedTour

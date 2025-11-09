@@ -1,5 +1,5 @@
 import { Difficulty } from '@prisma/client'
-import { Level } from './level'
+import { Level } from './Level'
 
 describe('<Level />', () => {
   it('renders Easy level', () => {

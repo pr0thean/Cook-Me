@@ -1,11 +1,11 @@
-import RecipeCard from '@features/recipes/components/recipe-card'
+import { RecipeCard } from '@features/recipes/components/RecipeCard'
 import { Recipe } from '@prisma/client'
 
 type Props = {
   recipes: Recipe[]
 }
 
-const RecipesList = ({ recipes }: Props) => {
+export const RecipesList = ({ recipes }: Props) => {
   return (
     <div className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 md:gap-6 md:px-6">
       {recipes.map((recipe) => (
@@ -14,5 +14,3 @@ const RecipesList = ({ recipes }: Props) => {
     </div>
   )
 }
-
-export default RecipesList
