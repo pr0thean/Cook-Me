@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Rubik, Permanent_Marker, MedievalSharp } from 'next/font/google'
+import { Rubik, Montserrat, MedievalSharp } from 'next/font/google'
 import './globals.css'
 import { Header } from '@components/layout/header'
 import clsx from 'clsx'
@@ -9,10 +9,10 @@ const rubik = Rubik({
   weight: ['400', '500', '600', '700'],
   variable: '--font-rubik',
 })
-const permanentMarker = Permanent_Marker({
+const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-permanent-marker',
+  weight: ['600'],
+  variable: '--font-montserrat',
 })
 const medievalSharp = MedievalSharp({
   subsets: ['latin'],
@@ -45,12 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx(
-        rubik.className,
-        permanentMarker.variable,
-        medievalSharp.variable,
-        'bg-black'
-      )}
+      className={clsx(rubik.className, montserrat.variable, medievalSharp.variable, 'bg-black')}
     >
       <body>
         <Header />

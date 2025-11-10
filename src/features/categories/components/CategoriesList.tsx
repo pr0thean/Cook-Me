@@ -16,7 +16,7 @@ const CategoriesList = async () => {
         <Link
           href={`category/${category.slug}`}
           key={index}
-          className="group block aspect-square rounded-md bg-gray text-white"
+          className="group bg-gray block aspect-square rounded-md text-white"
         >
           {category.imageUrl && (
             <div
@@ -31,7 +31,7 @@ const CategoriesList = async () => {
             </div>
           )}
 
-          <p className="p-[2px] text-center">{category.name}</p>
+          <p className="p-0.5 text-center">{category.name}</p>
         </Link>
       ))}
     </div>

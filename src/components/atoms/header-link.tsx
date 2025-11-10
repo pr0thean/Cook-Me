@@ -11,7 +11,7 @@ export const HeaderLink = ({ href, label, isSelected }: Props) => {
   return (
     <Link
       href={href}
-      className={clsx('text-xl font-bold hover:text-orange sm:text-2xl', {
+      className={clsx('hover:text-orange text-xl font-bold tracking-wider sm:text-2xl', {
         'text-orange': isSelected,
       })}
     >

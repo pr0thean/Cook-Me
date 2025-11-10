@@ -13,7 +13,7 @@
   --color-off-white: hsl(0deg 0% 100%);
   --color-gold: hsl(51deg 100% 50%);
 
-  --font-hero: var(--font-permanent-marker);
+  --font-hero: var(--font-montserrat);
   --font-not-found: var(--font-medival-sharp);
 }
 
@@ -60,8 +60,3 @@
   text-shadow: 2px 2px #ff652f;
 }
 
-@media (min-width: 768px) {
-  .hero-text-shadow {
-    text-shadow: 3px 3px #ff652f;
-  }
-}

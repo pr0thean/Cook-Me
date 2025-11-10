@@ -3,6 +3,9 @@ import Hero from '@components/molecules/hero'
 import { RecipesList } from '@features/recipes/components/RecipesList'
 import { PageParams } from '@typings/page-params'
 
+export const revalidate = 86400 // 24 hours
+export const dynamicParams = true
+
 export default async function CategoryPage({ params }: { params: PageParams }) {
   const { slug } = await params
   const category = await getCategoryBySlug(slug)

@@ -18,6 +18,9 @@ import { getRecipeBySlug } from '@app/actions/getRecipeBySlug'
 //   }))
 // }
 
+export const revalidate = 86400 // 24 hours
+export const dynamicParams = true
+
 export default async function RecipePage({ params }: { params: PageParams }) {
   const { slug } = await params
   const recipe = await getRecipeBySlug(slug)
@@ -52,13 +55,13 @@ export default async function RecipePage({ params }: { params: PageParams }) {
           <div className="flex justify-between font-semibold">
             {difficulty && (
               <div>
-                <div className="text-xs uppercase text-blue-gray-dark">Difficulty:</div>
+                <div className="text-blue-gray-dark text-xs uppercase">Difficulty:</div>
                 <Level level={difficulty} />
               </div>
             )}
             {time && (
               <div>
-                <div className="text-xs uppercase text-blue-gray-dark">Time:</div>
+                <div className="text-blue-gray-dark text-xs uppercase">Time:</div>
                 <Time time={time} />
               </div>
             )}
