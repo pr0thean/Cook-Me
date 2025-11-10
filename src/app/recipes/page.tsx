@@ -9,8 +9,6 @@ export default async function RecipesPage(props: { searchParams: SearchParams })
   const { search, level, category, tag } = searchParams
   const recipes = await getRecipes()
 
-  console.log('RECIPES: ', recipes)
-
   return (
     <div>
       <Hero heading="List of all recipes" imageUrl="/assets/images/all-recipes.jpeg" />

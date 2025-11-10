@@ -5,8 +5,6 @@ import Link from 'next/link'
 const CategoriesList = async () => {
   const categories = await getCategories()
 
-  console.log('CATEGORIES: ', categories)
-
   return (
     <div
       id="tour-categories"

@@ -1,10 +1,14 @@
 'use server'
 
+import { requireAdmin } from '@lib/auth'
 import { prismaClient } from '@lib/prismaClient'
 import { uploadImage } from '@lib/storage'
 import { slugify } from '@utils/slugify'
+import { revalidatePath } from 'next/cache'
 
 export async function createRecipe(formData: FormData) {
+  await requireAdmin()
+
   try {
     const title = formData.get('title') as string
     const description = formData.get('description') as string
@@ -45,7 +49,9 @@ export async function createRecipe(formData: FormData) {
       })
     }
 
-    // revalidatePath('/recipes')
+    revalidatePath('/admin')
+    revalidatePath('/recipes')
+
     return { success: true, recipeId: recipe.id.toString() }
   } catch (error) {
     console.error('Error creating recipe:', error)
