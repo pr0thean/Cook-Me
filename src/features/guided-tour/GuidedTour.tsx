@@ -1,30 +1,28 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { tourSteps } from './steps'
 import { useWindowSize } from 'usehooks-ts'
 import JoyRide, { CallBackProps } from 'react-joyride-react19-compat'
 import { guidedTourStyles } from './styles'
 
 export const GuidedTour = () => {
-  const [run, setRun] = useState(false)
+  const [run, setRun] = useState(() => {
+    if (typeof window === 'undefined') return false
+
+    const isTourCompleted = localStorage.getItem('tour-completed')
+    return !isTourCompleted
+  })
   const { width } = useWindowSize()
 
   const isDesktop = width > 768
-
-  useEffect(() => {
-    const isTourCompleted = localStorage.getItem('tour-completed')
-
-    if (!isTourCompleted) {
-      setRun(true)
-    }
-  }, [])
 
   const handleTourCallback = (data: CallBackProps) => {
     const { status } = data
 
     if (status === 'finished') {
       localStorage.setItem('tour-completed', 'true')
+      setRun(false)
     }
   }
 
