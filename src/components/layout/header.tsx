@@ -2,11 +2,12 @@
 
 import { useRouter, usePathname } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
+import { QuestionMarkCircleIcon, UserIcon } from '@heroicons/react/24/outline'
 import HeaderSearch, { ClickOutsideEvent } from '@components/molecules/header-search'
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HeaderLink } from '@components/atoms/header-link'
+import Link from 'next/link'
 
 export const Header = () => {
   const router = useRouter()
@@ -48,19 +49,28 @@ export const Header = () => {
 
   return (
     <div className="relative">
-      <header className="fixed top-0 z-30 flex w-full items-center justify-between border-b border-gray bg-black px-6 py-4 text-white">
-        <div className="hidden sm:block"></div>
-
-        <div id="tour-navigation" className="flex gap-4 sm:gap-8">
+      <header className="border-gray fixed top-0 z-30 h-16 w-full border-b bg-black px-6 py-4 text-white">
+        <div
+          id="tour-navigation"
+          className="absolute left-6 flex gap-4 sm:left-1/2 sm:-translate-x-1/2 sm:transform sm:gap-8"
+        >
           <HeaderLink href="/" label="Home" isSelected={pathname === '/'} />
           <HeaderLink href="/recipes" label="Recipes" isSelected={pathname === '/recipes'} />
           <HeaderLink href="/about" label="About" isSelected={pathname === '/about'} />
         </div>
 
-        <div className="flex gap-4">
+        <div className="absolute top-5 right-6 flex gap-4">
+          <Link href="/login">
+            <UserIcon
+              className="hover:text-orange h-5 w-5 cursor-pointer sm:h-6 sm:w-6"
+              strokeWidth={2}
+            />
+          </Link>
+
           <div id="tour-restart">
             <QuestionMarkCircleIcon
-              className="h-6 w-6 cursor-pointer hover:text-orange"
+              className="hover:text-orange h-5 w-5 cursor-pointer sm:h-6 sm:w-6"
+              strokeWidth={2}
               onClick={handleRestartTour}
             />
           </div>
@@ -68,7 +78,8 @@ export const Header = () => {
           {enableHeaderSearch && (
             <div ref={searchIconRef} id="tour-search">
               <MagnifyingGlassIcon
-                className="h-6 w-6 cursor-pointer hover:text-orange"
+                className="hover:text-orange h-5 w-5 cursor-pointer sm:h-6 sm:w-6"
+                strokeWidth={2}
                 onClick={() => setIsSearchVisible((prev) => !prev)}
                 aria-label="search-icon"
               />
@@ -86,7 +97,7 @@ export const Header = () => {
               animate="visible"
               exit="hidden"
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="fixed left-0 right-0 top-0 z-20"
+              className="fixed top-0 right-0 left-0 z-20"
             >
               <HeaderSearch
                 handleClickOutside={handleClickOutside}

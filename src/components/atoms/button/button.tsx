@@ -12,9 +12,9 @@ export const Button = ({ label, link, variant = 'primary', ...props }: Props) =>
   const buttonTag = (
     <button
       {...props}
-      className={clsx('w-full rounded-sm px-4 py-2', {
+      className={clsx('w-full cursor-pointer rounded-sm px-4 py-2', {
         'bg-orange text-off-black': variant === 'primary',
-        'bg-transparent text-yellow underline': variant === 'link',
+        'text-yellow bg-transparent underline': variant === 'link',
       })}
     >
       {label}

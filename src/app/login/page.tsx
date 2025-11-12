@@ -10,11 +10,11 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="w-full max-w-md space-y-8 rounded-xl bg-white p-10 text-center shadow-md">
         <div>
-          <h2 className="text-center text-3xl font-bold text-gray-900">Admin Login</h2>
-          <p className="mt-2 text-center text-sm text-gray-600">Sign in to manage recipes</p>
+          <h2 className="text-3xl font-bold text-black">Admin Login</h2>
+          <p className="text-gray mt-2 text-sm">Sign in to manage recipes</p>
         </div>
 
         <LoginForm />

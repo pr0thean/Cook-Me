@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { browserClient } from '@lib/supabase/browserClient'
+import { Button } from '@components/atoms/button'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')
@@ -47,7 +48,7 @@ export function LoginForm() {
         </div>
       )}
 
-      <div className="space-y-4 rounded-md shadow-sm">
+      <div className="space-y-4">
         <div>
           <label htmlFor="email" className="sr-only">
             Email address
@@ -83,15 +84,7 @@ export function LoginForm() {
         </div>
       </div>
 
-      <div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="group relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:bg-gray-400"
-        >
-          {loading ? 'Signing in...' : 'Sign in'}
-        </button>
-      </div>
+      <Button label={loading ? 'Signing in...' : 'Sign in'} type="submit" disabled={loading} />
     </form>
   )
 }
