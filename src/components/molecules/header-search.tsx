@@ -1,4 +1,5 @@
 'use client'
+import { TextInput } from '@components/atoms/TextInput'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useSearchParams } from 'next/navigation'
 import { FormEvent, RefObject, useRef, useState } from 'react'
@@ -35,15 +36,17 @@ const HeaderSearch = ({ handleClickOutside, handleNavigate }: Props) => {
   return (
     <form onSubmit={handleSubmit} ref={ref}>
       <div className="relative">
-        <input
+        <TextInput
+          name="search"
           autoFocus
           type="text"
           placeholder="Search recipes..."
-          className="block w-full border-b border-gray bg-black/80 px-10 py-3 text-white outline-0 backdrop-blur-xs"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          className="backdrop-blur-xs"
+          icon={<MagnifyingGlassIcon width={20} fill="#747474" />}
+          inputSize="lg"
         />
-        <MagnifyingGlassIcon width={20} className="absolute left-2 top-[14px]" fill="#747474" />
       </div>
     </form>
   )

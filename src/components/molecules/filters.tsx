@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { Select, SelectOption } from '@components/atoms/select'
 import { useDebounceValue } from 'usehooks-ts'
 import { useUpdateEffect } from 'react-use'
+import { TextInput } from '@components/atoms/TextInput'
 
 type Props = {
   categoryOptions: SelectOption[]
@@ -45,17 +46,16 @@ export const Filters = ({ categoryOptions, tagsOptions, levelOptions }: Props) =
 
   return (
     <div className="space-y-4 px-4">
-      <div className="relative">
-        <input
-          autoFocus
-          type="text"
-          placeholder="Search recipes..."
-          className="border-gray block w-full rounded-sm border bg-black/80 px-8 py-2 text-white outline-0"
-          defaultValue={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <MagnifyingGlassIcon width={20} className="absolute top-2.5 left-2" fill="#747474" />
-      </div>
+      <TextInput
+        name="search"
+        autoFocus
+        type="text"
+        placeholder="Search recipes..."
+        defaultValue={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+        icon={<MagnifyingGlassIcon width={20} fill="#747474" />}
+        inputSize="lg"
+      />
 
       <div className="items-baseline justify-between gap-3 space-y-4 sm:flex">
         <Select

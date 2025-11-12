@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { browserClient } from '@lib/supabase/browserClient'
 import { Button } from '@components/atoms/button'
+import { TextInput } from '@components/atoms/TextInput'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')
@@ -49,39 +50,27 @@ export function LoginForm() {
       )}
 
       <div className="space-y-4">
-        <div>
-          <label htmlFor="email" className="sr-only">
-            Email address
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-            placeholder="Email address"
-          />
-        </div>
+        <TextInput
+          name="email"
+          label="Email address"
+          type="email"
+          required
+          value={email}
+          placeholder="Email address"
+          onChange={(e) => setEmail(e.target.value)}
+          variant="secondary"
+        />
 
-        <div>
-          <label htmlFor="password" className="sr-only">
-            Password
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="relative block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
-            placeholder="Password"
-          />
-        </div>
+        <TextInput
+          name="password"
+          label="Password"
+          type="password"
+          required
+          value={password}
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          variant="secondary"
+        />
       </div>
 
       <Button label={loading ? 'Signing in...' : 'Sign in'} type="submit" disabled={loading} />
