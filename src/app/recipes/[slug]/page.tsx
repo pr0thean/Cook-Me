@@ -5,18 +5,15 @@ import { Time } from '@features/recipes/components/time'
 import { CheapTip } from '@features/guided-tour/components/CheapTip'
 import { getRecipeBySlug } from '@app/actions/getRecipeBySlug'
 import Image from 'next/image'
+import { getRecipes } from '@app/actions/getRecipes'
 
-// export async function generateStaticParams() {
-//   const slugs = await getRecipesSlugs()
+export async function generateStaticParams() {
+  const recipes = await getRecipes()
 
-//   if (slugs.isErr() || !slugs.value) {
-//     return []
-//   }
-
-//   return slugs.value.map((slug) => ({
-//     slug,
-//   }))
-// }
+  return recipes.map((recipe) => ({
+    slug: recipe.slug,
+  }))
+}
 
 export const revalidate = 86400 // 24 hours
 export const dynamicParams = true
