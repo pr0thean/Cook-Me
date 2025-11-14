@@ -2,9 +2,9 @@ import { PageParams } from '@typings/page-params'
 import { Level } from '@features/recipes/components/level'
 import { Time } from '@features/recipes/components/time'
 
-import ContentfulImage from '@components/atoms/contentful-image'
 import { CheapTip } from '@features/guided-tour/components/CheapTip'
 import { getRecipeBySlug } from '@app/actions/getRecipeBySlug'
+import Image from 'next/image'
 
 // export async function generateStaticParams() {
 //   const slugs = await getRecipesSlugs()
@@ -38,7 +38,9 @@ export default async function RecipePage({ params }: { params: PageParams }) {
     <div className="relative h-screen bg-black">
       {/* Image container */}
       <div className="absolute top-0 h-3/5 w-full">
-        {imageUrl && <ContentfulImage alt={title} src={imageUrl} priority />}
+        {imageUrl && (
+          <Image alt={title} src={imageUrl} className="h-full w-full object-cover" fill priority />
+        )}
 
         {/* Custom gradient overlay */}
         <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/10 to-black"></div>

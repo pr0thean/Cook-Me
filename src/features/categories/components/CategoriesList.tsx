@@ -1,5 +1,5 @@
 import { getCategories } from '@app/actions/getCategories'
-import ContentfulImage from '@components/atoms/contentful-image'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const CategoriesList = async () => {
@@ -21,10 +21,11 @@ const CategoriesList = async () => {
               className="relative overflow-hidden rounded-t-md"
               style={{ height: 'calc(100% - 28px)' }}
             >
-              <ContentfulImage
+              <Image
                 alt={category.name}
                 src={category.imageUrl}
-                className="transition-all duration-300 group-hover:scale-110"
+                className="h-full w-full object-cover transition-all duration-300 group-hover:scale-110"
+                fill
               />
             </div>
           )}

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ContentfulImage from '@components/atoms/contentful-image'
+import Image from 'next/image'
 import { Time } from '@features/recipes/components/time'
 import { Level } from '@features/recipes/components/level'
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
@@ -23,20 +23,27 @@ export const RecipeCard = ({ data }: Props) => {
     >
       <div className="relative h-full">
         <div className="h-full w-full">
-          {imageUrl && <ContentfulImage alt={title} src={imageUrl} className="rounded-lg" />}
+          {imageUrl && (
+            <Image
+              alt={title}
+              src={imageUrl}
+              className="h-full w-full rounded-lg object-cover"
+              fill
+            />
+          )}
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 flex h-[52px] justify-between rounded-b-lg bg-black/50 px-2 py-1 text-white backdrop-blur-xs">
+        <div className="absolute right-0 bottom-0 left-0 flex h-[52px] justify-between rounded-b-lg bg-black/50 px-2 py-1 text-white backdrop-blur-xs">
           <h2 className="mr-16 truncate text-lg">{title}</h2>
 
-          <div className="absolute bottom-0 right-0 flex flex-col space-y-1 px-2 py-1 text-right text-sm font-semibold backdrop-blur-xs">
+          <div className="absolute right-0 bottom-0 flex flex-col space-y-1 px-2 py-1 text-right text-sm font-semibold backdrop-blur-xs">
             {time && <Time time={time} isWhite />}
             {difficulty && <Level level={difficulty} isWhite />}
           </div>
         </div>
 
         {isCheap && (
-          <div className="absolute right-2 top-2">
+          <div className="absolute top-2 right-2">
             <PercentBadgeIcon width={30} fill={'#FF652F'} />
           </div>
         )}
