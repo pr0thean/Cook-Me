@@ -1,4 +1,4 @@
-import { Filters } from '@components/molecules/filters'
+import { Filters } from './Filters'
 
 export const FiltersContainer = async () => {
   const categoryOptions = [{ value: 'All', label: 'All' }]

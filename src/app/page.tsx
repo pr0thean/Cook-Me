@@ -1,5 +1,5 @@
-import CategoriesList from '@features/categories/components/CategoriesList'
-import Hero from '@components/molecules/hero'
+import { CategoriesList } from '@features/categories/components/CategoriesList'
+import { Hero } from '@components/molecules/Hero'
 // import { GuidedTour } from '@features/guided-tour/GuidedTour'
 import { Button } from '@components/atoms/button'
 

@@ -5,7 +5,7 @@ type Props = {
   imageUrl?: string
 }
 
-const Hero = ({ heading, imageUrl }: Props) => {
+export const Hero = ({ heading, imageUrl }: Props) => {
   return (
     <div className="bg-gray relative h-60 w-full md:h-96">
       {imageUrl && (
@@ -24,5 +24,3 @@ const Hero = ({ heading, imageUrl }: Props) => {
     </div>
   )
 }
-
-export default Hero

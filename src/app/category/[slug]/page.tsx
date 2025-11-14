@@ -1,5 +1,5 @@
 import { getCategoryBySlug } from '@app/actions/getCategoryBySlug'
-import Hero from '@components/molecules/hero'
+import { Hero } from '@components/molecules/Hero'
 import { RecipesList } from '@features/recipes/components/RecipesList'
 import { PageParams } from '@typings/page-params'
 

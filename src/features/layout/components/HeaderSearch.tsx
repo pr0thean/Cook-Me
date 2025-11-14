@@ -12,7 +12,7 @@ type Props = {
   handleNavigate: (params: string) => void
 }
 
-const HeaderSearch = ({ handleClickOutside, handleNavigate }: Props) => {
+export const HeaderSearch = ({ handleClickOutside, handleNavigate }: Props) => {
   const ref = useRef<HTMLFormElement>(null)
   const searchParams = useSearchParams()
   const [text, setText] = useState(searchParams.get('search') || '')
@@ -51,5 +51,3 @@ const HeaderSearch = ({ handleClickOutside, handleNavigate }: Props) => {
     </form>
   )
 }
-
-export default HeaderSearch

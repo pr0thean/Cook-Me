@@ -1,6 +1,6 @@
-import Hero from '@components/molecules/hero'
+import { Hero } from '@components/molecules/Hero'
 import { RecipesList } from '@features/recipes/components/RecipesList'
-import { FiltersContainer } from '@components/molecules/filters-container'
+import { FiltersContainer } from '@features/recipes/components/FiltersContainer'
 import { getRecipes } from '@app/actions/getRecipes'
 import { SearchParams } from '@typings/page-params'
 

@@ -2,7 +2,7 @@ import { getCategories } from '@app/actions/getCategories'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CategoriesList = async () => {
+export const CategoriesList = async () => {
   const categories = await getCategories()
 
   return (
@@ -36,5 +36,3 @@ const CategoriesList = async () => {
     </div>
   )
 }
-
-export default CategoriesList
