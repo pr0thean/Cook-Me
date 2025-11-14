@@ -6,7 +6,7 @@ import { QuestionMarkCircleIcon, UserIcon } from '@heroicons/react/24/outline'
 import HeaderSearch, { ClickOutsideEvent } from '@components/molecules/header-search'
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { HeaderLink } from '@components/atoms/header-link'
+import { HeaderLink } from '@components/atoms/HeaderLink'
 import Link from 'next/link'
 
 export const Header = () => {

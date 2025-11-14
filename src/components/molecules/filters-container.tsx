@@ -1,16 +1,15 @@
-import { SelectOption } from '@components/atoms/select'
 import { Filters } from '@components/molecules/filters'
 
 export const FiltersContainer = async () => {
-  const categoryOptions: SelectOption[] = [{ value: 'All', label: 'All' }]
+  const categoryOptions = [{ value: 'All', label: 'All' }]
 
-  const tagsOptions: SelectOption[] = [{ value: 'All', label: 'All' }]
+  const tagsOptions = [{ value: 'All', label: 'All' }]
 
-  const levelOptions: SelectOption[] = [
+  const difficultyOptions = [
     { value: 'Easy', label: 'Easy' },
     { value: 'Average', label: 'Average' },
     { value: 'Hard', label: 'Hard' },
   ]
 
-  return <Filters {...{ categoryOptions, tagsOptions, levelOptions }} />
+  return <Filters {...{ categoryOptions, tagsOptions, difficultyOptions }} />
 }

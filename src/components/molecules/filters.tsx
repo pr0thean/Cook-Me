@@ -2,25 +2,30 @@
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 
-import { Select, SelectOption } from '@components/atoms/select'
+import { Select } from '@components/atoms/select/Select'
 import { useDebounceValue } from 'usehooks-ts'
 import { useUpdateEffect } from 'react-use'
 import { TextInput } from '@components/atoms/TextInput'
 
+type SelectOption = {
+  value: string
+  label: string
+}
+
 type Props = {
   categoryOptions: SelectOption[]
   tagsOptions: SelectOption[]
-  levelOptions: SelectOption[]
+  difficultyOptions: SelectOption[]
 }
 
-export const Filters = ({ categoryOptions, tagsOptions, levelOptions }: Props) => {
+export const Filters = ({ categoryOptions, tagsOptions, difficultyOptions }: Props) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [searchText, setSearchText] = useDebounceValue(searchParams.get('search') || '', 500)
 
   const onSetFilter = (
-    type: 'search' | 'category' | 'tag' | 'level',
+    type: 'search' | 'category' | 'tag' | 'difficulty',
     value: SelectOption['value'] | null
   ) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -38,7 +43,10 @@ export const Filters = ({ categoryOptions, tagsOptions, levelOptions }: Props) =
     onSetFilter('search', searchText || null)
   }, [searchText])
 
-  const getFilterDefaultValue = (type: 'category' | 'tag' | 'level', options: SelectOption[]) => {
+  const getFilterDefaultValue = (
+    type: 'category' | 'tag' | 'difficulty',
+    options: SelectOption[]
+  ) => {
     const value = searchParams.get(type)
 
     return options.find((option) => option.value === value) || null
@@ -58,26 +66,38 @@ export const Filters = ({ categoryOptions, tagsOptions, levelOptions }: Props) =
       />
 
       <div className="items-baseline justify-between gap-3 space-y-4 sm:flex">
-        <Select
-          options={categoryOptions}
-          label={'Category'}
-          handleOnChange={(e) => onSetFilter('category', e?.value || null)}
-          value={getFilterDefaultValue('category', categoryOptions)}
-        />
+        {categoryOptions && (
+          <Select
+            name="category"
+            items={categoryOptions}
+            label="Category"
+            placeholder="Select category..."
+            onValueChange={(e) => onSetFilter('category', e || null)}
+            value={getFilterDefaultValue('category', categoryOptions)?.value}
+          />
+        )}
 
-        <Select
-          options={tagsOptions}
-          label={'Tags'}
-          handleOnChange={(e) => onSetFilter('tag', e?.value || null)}
-          value={getFilterDefaultValue('tag', tagsOptions)}
-        />
+        {tagsOptions && (
+          <Select
+            name="tag"
+            items={tagsOptions}
+            label="Tags"
+            placeholder="Select tag..."
+            onValueChange={(e) => onSetFilter('tag', e || null)}
+            value={getFilterDefaultValue('tag', tagsOptions)?.value}
+          />
+        )}
 
-        <Select
-          options={levelOptions}
-          label={'Level'}
-          handleOnChange={(e) => onSetFilter('level', e?.value || null)}
-          value={getFilterDefaultValue('level', levelOptions)}
-        />
+        {difficultyOptions && (
+          <Select
+            name="difficulty"
+            items={difficultyOptions}
+            label="Difficulty"
+            placeholder="Select difficulty..."
+            onValueChange={(e) => onSetFilter('difficulty', e || null)}
+            value={getFilterDefaultValue('difficulty', difficultyOptions)?.value}
+          />
+        )}
       </div>
     </div>
   )
