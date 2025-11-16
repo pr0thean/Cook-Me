@@ -10,7 +10,7 @@ import { twMerge } from 'tailwind-merge'
 import { useMeasureWidth } from './useMeasureWidth'
 
 const triggerVariants = cva(
-  'group w-full border rounded-sm px-3 py-2 flex items-center justify-between hover:cursor-pointer outline-none data-placeholder:text-gray',
+  'group w-full border rounded px-3 py-2 flex items-center justify-between cursor-pointer outline-none data-placeholder:text-gray',
   {
     variants: {
       variant: {

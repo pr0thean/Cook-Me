@@ -1,6 +1,9 @@
 'use client'
 
 import { createRecipe } from '@app/actions/createRecipe'
+import { Button } from '@components/atoms/button'
+import { FileInput } from '@components/atoms/FileInput'
+import { TextInput } from '@components/atoms/TextInput'
 import { Category } from '@prisma/client'
 import { useState } from 'react'
 
@@ -27,29 +30,20 @@ export const RecipeForm = ({ categories }: Props) => {
 
   return (
     <form onSubmit={handleUpload} className="space-y-2">
-      <input
-        name="title"
-        placeholder="Enter title..."
-        className="block w-full rounded-[4px] border border-gray bg-black/80 px-8 py-2 text-white outline-0"
-      />
-
-      <input
-        name="description"
-        placeholder="Enter description..."
-        className="block w-full rounded-[4px] border border-gray bg-black/80 px-8 py-2 text-white outline-0"
-      />
+      <TextInput name="title" label="Title" placeholder="Enter title..." />
+      <TextInput name="description" label="Description" placeholder="Enter description..." />
 
       <textarea
         name="ingredients"
         placeholder="Enter ingredients..."
-        className="block w-full rounded-[4px] border border-gray bg-black/80 px-8 py-2 text-white outline-0"
+        className="border-gray block w-full rounded-sm border bg-black/80 px-8 py-2 text-white outline-0"
         rows={4}
       />
 
       <textarea
         name="instruction"
         placeholder="Enter instruction..."
-        className="block w-full rounded-[4px] border border-gray bg-black/80 px-8 py-2 text-white outline-0"
+        className="border-gray block w-full rounded-sm border bg-black/80 px-8 py-2 text-white outline-0"
         rows={4}
       />
 
@@ -77,14 +71,9 @@ export const RecipeForm = ({ categories }: Props) => {
         </div>
       </div>
 
-      <input type="file" name="image" accept="image/*" className="block w-full text-white" />
+      <FileInput name="image" accept="image/*" />
 
-      <button
-        type="submit"
-        className="disabled:bg-gray-400 rounded-sm bg-blue-600 px-6 py-2 text-white hover:bg-blue-700"
-      >
-        Create Recipe
-      </button>
+      <Button type="submit" label="Create Recipe" />
     </form>
   )
 }

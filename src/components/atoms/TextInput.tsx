@@ -49,10 +49,7 @@ export const TextInput = ({
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <Label
-          htmlFor={name}
-          className="text-text-50 w-fit cursor-pointer text-xs font-medium uppercase"
-        >
+        <Label htmlFor={name} className="cursor-pointer text-sm text-white">
           {label}
         </Label>
       )}

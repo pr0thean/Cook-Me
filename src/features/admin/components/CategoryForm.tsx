@@ -1,6 +1,9 @@
 'use client'
 
 import { createCategory } from '@app/actions/createCategory'
+import { Button } from '@components/atoms/button'
+import { FileInput } from '@components/atoms/FileInput'
+import { TextInput } from '@components/atoms/TextInput'
 
 export const CategoryForm = () => {
   const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -14,20 +17,11 @@ export const CategoryForm = () => {
 
   return (
     <form onSubmit={handleUpload} className="space-y-2">
-      <input
-        name="name"
-        placeholder="Enter name..."
-        className="block w-full rounded-[4px] border border-gray bg-black/80 px-8 py-2 text-white outline-0"
-      />
+      <TextInput name="name" label="Name" placeholder="Enter name..." />
 
-      <input type="file" name="image" accept="image/*" className="block w-full text-white" />
+      <FileInput name="image" accept="image/*" />
 
-      <button
-        type="submit"
-        className="disabled:bg-gray-400 rounded-sm bg-blue-600 px-6 py-2 text-white hover:bg-blue-700"
-      >
-        Create Category
-      </button>
+      <Button type="submit" label="Create Category" />
     </form>
   )
 }
