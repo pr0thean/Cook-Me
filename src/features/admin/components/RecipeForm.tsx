@@ -4,6 +4,7 @@ import { createRecipe } from '@app/actions/createRecipe'
 import { Button } from '@components/atoms/button'
 import { FileInput } from '@components/atoms/FileInput'
 import { TextInput } from '@components/atoms/TextInput'
+import { TextEditor } from '@components/molecules/text-editor/TextEditor'
 import { Category } from '@prisma/client'
 import { useState } from 'react'
 
@@ -29,23 +30,14 @@ export const RecipeForm = ({ categories }: Props) => {
   }
 
   return (
-    <form onSubmit={handleUpload} className="space-y-2">
+    <form onSubmit={handleUpload} className="space-y-3">
       <TextInput name="title" label="Title" placeholder="Enter title..." />
+
       <TextInput name="description" label="Description" placeholder="Enter description..." />
 
-      <textarea
-        name="ingredients"
-        placeholder="Enter ingredients..."
-        className="border-gray block w-full rounded-sm border bg-black/80 px-8 py-2 text-white outline-0"
-        rows={4}
-      />
+      <TextEditor name="ingredients" label="Ingredients" placeholder="Enter ingredients..." />
 
-      <textarea
-        name="instruction"
-        placeholder="Enter instruction..."
-        className="border-gray block w-full rounded-sm border bg-black/80 px-8 py-2 text-white outline-0"
-        rows={4}
-      />
+      <TextEditor name="instruction" label="Instruction" placeholder="Enter instruction..." />
 
       <div>
         <p>Categories (select multiple)</p>

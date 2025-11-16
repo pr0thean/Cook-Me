@@ -22,20 +22,20 @@ export default async function AdminPage() {
 
       <div className="flex gap-4">
         <div className="w-2/3">
-          <h2 className="text-lg">Create Recipe</h2>
+          <h2 className="mb-2 text-lg">Create Recipe</h2>
 
           <RecipeForm categories={categories} />
         </div>
 
         <div className="w-1/3">
-          <h2 className="text-lg">Create Category</h2>
+          <h2 className="mb-2 text-lg">Create Category</h2>
 
           <CategoryForm />
         </div>
       </div>
 
       <div>
-        <h2 className="text-lg">Recipes</h2>
+        <h2 className="mb-2 text-lg">Recipes</h2>
 
         <div className="space-y-4 p-4">
           {recipes.map((recipe) => (

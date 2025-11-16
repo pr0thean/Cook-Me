@@ -1,4 +1,4 @@
-import { Label } from 'radix-ui'
+import { Label } from './Label'
 
 type Props = {
   name: string
@@ -8,16 +8,14 @@ type Props = {
 export const FileInput = ({ name, accept }: Props) => {
   return (
     <div className="flex w-full flex-col gap-1">
-      <Label.Root htmlFor={name} className="cursor-pointer text-sm text-white">
-        Upload File
-      </Label.Root>
+      <Label name={name} label="Upload File" />
 
       <input
         type="file"
         id={name}
         name={name}
         accept={accept}
-        className="placeholder:text-blue-gray bg-blue-gray-dark border-blue-gray data-placeholder:text-gray w-full cursor-pointer rounded border px-3 py-2 text-white outline-none focus:border-white data-[state=open]:border-white"
+        className="placeholder:text-blue-gray bg-blue-gray-dark border-blue-gray data-placeholder:text-gray w-full cursor-pointer rounded border px-3 py-2 text-white outline-none focus:border-white"
       />
     </div>
   )

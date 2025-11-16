@@ -16,7 +16,7 @@ export const CategoryForm = () => {
   }
 
   return (
-    <form onSubmit={handleUpload} className="space-y-2">
+    <form onSubmit={handleUpload} className="space-y-3">
       <TextInput name="name" label="Name" placeholder="Enter name..." />
 
       <FileInput name="image" accept="image/*" />

@@ -1,6 +1,6 @@
-import { Root as Label } from '@radix-ui/react-label'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { twMerge } from 'tailwind-merge'
+import { Label } from './Label'
 
 const inputVariants = cva('w-full rounded-sm border focus:outline-hidden ', {
   variants: {
@@ -48,11 +48,7 @@ export const TextInput = ({
 
   return (
     <div className="flex flex-col gap-1">
-      {label && (
-        <Label htmlFor={name} className="cursor-pointer text-sm text-white">
-          {label}
-        </Label>
-      )}
+      {label && <Label name={name} label={label} />}
 
       <div className="relative">
         <input
