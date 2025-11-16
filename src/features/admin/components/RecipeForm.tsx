@@ -1,10 +1,12 @@
 'use client'
 
 import { createRecipe } from '@app/actions/createRecipe'
+import { deleteCategory } from '@app/actions/deleteCategory'
 import { Button } from '@components/atoms/button'
 import { FileInput } from '@components/atoms/FileInput'
 import { TextInput } from '@components/atoms/TextInput'
 import { TextEditor } from '@components/molecules/text-editor/TextEditor'
+import { TrashIcon } from '@heroicons/react/24/outline'
 import { Category } from '@prisma/client'
 import { useState } from 'react'
 
@@ -46,7 +48,7 @@ export const RecipeForm = ({ categories }: Props) => {
 
         <div className="flex flex-wrap gap-3">
           {categories.map((category) => (
-            <label key={category.id} className="flex gap-1">
+            <label key={category.id} className="flex items-center gap-1">
               <input
                 type="checkbox"
                 value={category.id}
@@ -60,6 +62,10 @@ export const RecipeForm = ({ categories }: Props) => {
                 }}
               />
               {category.name}
+              <TrashIcon
+                className="h-4 w-4 cursor-pointer text-red-500"
+                onClick={() => deleteCategory(category.id)}
+              />
             </label>
           ))}
         </div>
