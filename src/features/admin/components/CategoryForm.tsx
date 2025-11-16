@@ -12,7 +12,9 @@ export const CategoryForm = () => {
     try {
       const formData = new FormData(e.currentTarget)
       await createCategory(formData)
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error creating category:', error)
+    }
   }
 
   return (
@@ -21,7 +23,9 @@ export const CategoryForm = () => {
 
       <FileInput name="image" accept="image/*" />
 
-      <Button type="submit" label="Create Category" />
+      <div className="mt-5">
+        <Button type="submit" label="Create Category" />
+      </div>
     </form>
   )
 }

@@ -26,7 +26,9 @@ export const RecipeForm = ({ categories }: Props) => {
       })
 
       await createRecipe(formData)
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error creating recipe:', error)
+    }
   }
 
   return (
@@ -35,16 +37,16 @@ export const RecipeForm = ({ categories }: Props) => {
 
       <TextInput name="description" label="Description" placeholder="Enter description..." />
 
-      <TextEditor name="ingredients" label="Ingredients" placeholder="Enter ingredients..." />
+      <TextEditor name="ingredients" label="Ingredients" />
 
-      <TextEditor name="instruction" label="Instruction" placeholder="Enter instruction..." />
+      <TextEditor name="instruction" label="Instruction" />
 
       <div>
-        <p>Categories (select multiple)</p>
+        <h2 className="mb-2 text-lg">Select category</h2>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-3">
           {categories.map((category) => (
-            <label key={category.id}>
+            <label key={category.id} className="flex gap-1">
               <input
                 type="checkbox"
                 value={category.id}
@@ -65,7 +67,9 @@ export const RecipeForm = ({ categories }: Props) => {
 
       <FileInput name="image" accept="image/*" />
 
-      <Button type="submit" label="Create Recipe" />
+      <div className="mt-5">
+        <Button type="submit" label="Create Recipe" />
+      </div>
     </form>
   )
 }

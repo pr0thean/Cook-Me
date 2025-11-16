@@ -89,13 +89,11 @@ function MenuBar({ editor }: { editor: Editor }) {
 type Props = {
   name: string
   label?: string
-  placeholder?: string
 }
 
-export const TextEditor = ({ name, label, placeholder }: Props) => {
+export const TextEditor = ({ name, label }: Props) => {
   const editor = useEditor({
     extensions: [StarterKit],
-    content: `${placeholder || 'Start typing...'}`,
     // Don't render immediately on the server to avoid SSR issues
     immediatelyRender: false,
   })
@@ -112,11 +110,7 @@ export const TextEditor = ({ name, label, placeholder }: Props) => {
 
       <div className="border-blue-gray w-full rounded border text-white">
         <MenuBar editor={editor} />
-        <EditorContent
-          editor={editor}
-          placeholder={placeholder}
-          className="bg-gray-light m-2 p-1 text-black outline-none"
-        />
+        <EditorContent editor={editor} className="bg-gray-light m-2 p-1 text-black outline-none" />
         <input type="hidden" id={name} name={name} value={htmlContent} />
       </div>
     </div>
