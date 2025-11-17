@@ -13,6 +13,7 @@ export async function getRecipesByCategory(categorySlug: string) {
     },
     include: {
       categories: true,
+      tags: true,
     },
   })
 

@@ -21,6 +21,7 @@ model Recipe {
 
   categories Category[] // Many-to-many relation
   comments   Comment[] // One-to-many relation
+  tags       Tag[] // Many-to-many relation
 
   @@map("recipes")
 }
@@ -35,6 +36,15 @@ model Category {
   recipes Recipe[] // Many-to-many relation
 
   @@map("categories")
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  name      String   @unique
+  recipes   Recipe[] // Many-to-many relation
+
+  @@map("tags")
 }
 
 model Comment {

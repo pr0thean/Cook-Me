@@ -5,6 +5,7 @@ import { prismaClient } from 'lib/prismaClient'
 import { uploadImage } from 'lib/storage'
 import { slugify } from 'utils/slugify'
 import { revalidatePath } from 'next/cache'
+import { Difficulty } from '@prisma/client'
 
 export async function createRecipe(formData: FormData) {
   await requireAdmin()
@@ -14,7 +15,10 @@ export async function createRecipe(formData: FormData) {
     const description = formData.get('description') as string
     const ingredientsRaw = formData.get('ingredients') as string
     const instructionRaw = formData.get('instruction') as string
+    const difficulty = formData.get('difficulty') as string
+    const time = formData.get('time') as string
     const categoryIds = formData.getAll('categoryIds') as string[]
+    const tagIds = formData.getAll('tagIds') as string[]
     const imageFile = formData.get('image') as File
 
     // Validate required fields
@@ -34,6 +38,11 @@ export async function createRecipe(formData: FormData) {
         description: description,
         ingredients: ingredients,
         instruction: instruction,
+        time: parseInt(time),
+        difficulty: difficulty as Difficulty,
+        tags: {
+          connect: tagIds.map((id) => ({ id: parseInt(id) })),
+        },
         categories: {
           connect: categoryIds.map((id) => ({ id: parseInt(id) })),
         },

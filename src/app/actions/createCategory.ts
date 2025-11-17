@@ -15,7 +15,7 @@ export async function createCategory(formData: FormData) {
 
     // Validate required fields
     if (!name) {
-      return { success: false, error: 'Title is required' }
+      return { success: false, error: 'Name is required' }
     }
 
     const slug = slugify(name)
@@ -40,6 +40,7 @@ export async function createCategory(formData: FormData) {
     }
 
     revalidatePath('/admin')
+    revalidatePath('/recipes')
     revalidatePath('/')
 
     return { success: true, categoryId: category.id.toString() }

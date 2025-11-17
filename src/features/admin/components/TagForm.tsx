@@ -1,19 +1,18 @@
 'use client'
 
-import { createCategory } from 'app/actions/createCategory'
+import { createTag } from 'app/actions/createTag'
 import { Button } from 'components/atoms/button'
-import { FileInput } from 'components/atoms/FileInput'
 import { TextInput } from 'components/atoms/TextInput'
 
-export const CategoryForm = () => {
+export const TagForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     try {
       const formData = new FormData(e.currentTarget)
-      await createCategory(formData)
+      await createTag(formData)
     } catch (error) {
-      console.error('Error creating category:', error)
+      console.error('Error creating tag:', error)
     }
   }
 
@@ -21,10 +20,8 @@ export const CategoryForm = () => {
     <form onSubmit={handleSubmit} className="space-y-3">
       <TextInput name="name" label="Name" placeholder="Enter name..." />
 
-      <FileInput name="image" accept="image/*" />
-
       <div className="mt-5">
-        <Button type="submit" label="Create Category" />
+        <Button type="submit" label="Create Tag" />
       </div>
     </form>
   )

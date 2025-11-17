@@ -62,7 +62,7 @@ export const Filters = ({ categoryOptions, tagsOptions, difficultyOptions }: Pro
       />
 
       <div className="items-baseline justify-between gap-3 space-y-4 sm:flex">
-        {categoryOptions && (
+        {categoryOptions.length > 0 && (
           <Select
             name="category"
             items={categoryOptions}
@@ -73,7 +73,7 @@ export const Filters = ({ categoryOptions, tagsOptions, difficultyOptions }: Pro
           />
         )}
 
-        {tagsOptions && (
+        {tagsOptions.length > 0 && (
           <Select
             name="tag"
             items={tagsOptions}
@@ -84,7 +84,7 @@ export const Filters = ({ categoryOptions, tagsOptions, difficultyOptions }: Pro
           />
         )}
 
-        {difficultyOptions && (
+        {difficultyOptions.length > 0 && (
           <Select
             name="difficulty"
             items={difficultyOptions}

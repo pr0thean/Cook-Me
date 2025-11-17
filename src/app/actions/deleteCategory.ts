@@ -13,7 +13,8 @@ export async function deleteCategory(categoryId: number) {
     })
 
     revalidatePath('/admin')
-    revalidatePath('/categories')
+    revalidatePath('/recipes')
+    revalidatePath('/')
 
     return { success: true }
   } catch (error) {

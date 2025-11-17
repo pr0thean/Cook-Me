@@ -1,11 +1,23 @@
+import { getCategories } from 'app/actions/getCategories'
 import { Filters } from './Filters'
+import { getTags } from 'app/actions/getTags'
+import { SelectOption } from 'types/select-option'
 
 export const FiltersContainer = async () => {
-  const categoryOptions = [{ value: 'All', label: 'All' }]
+  const categories = await getCategories()
+  const tags = await getTags()
 
-  const tagsOptions = [{ value: 'All', label: 'All' }]
+  const categoryOptions: SelectOption[] = categories.map((category) => ({
+    value: category.slug,
+    label: category.name,
+  }))
 
-  const difficultyOptions = [
+  const tagsOptions: SelectOption[] = tags.map((tag) => ({
+    value: tag.name,
+    label: tag.name,
+  }))
+
+  const difficultyOptions: SelectOption[] = [
     { value: 'Easy', label: 'Easy' },
     { value: 'Average', label: 'Average' },
     { value: 'Hard', label: 'Hard' },
