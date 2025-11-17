@@ -1,8 +1,8 @@
-import { Hero } from '@components/molecules/Hero'
-import { RecipesList } from '@features/recipes/components/RecipesList'
-import { FiltersContainer } from '@features/recipes/components/FiltersContainer'
-import { getRecipes } from '@app/actions/getRecipes'
-import { SearchParams } from '@typings/page-params'
+import { Hero } from 'components/molecules/Hero'
+import { RecipesList } from 'features/recipes/components/RecipesList'
+import { FiltersContainer } from 'features/recipes/components/FiltersContainer'
+import { getRecipes } from 'app/actions/getRecipes'
+import { SearchParams } from 'types/page-params'
 
 export default async function RecipesPage(props: { searchParams: SearchParams }) {
   const searchParams = await props.searchParams

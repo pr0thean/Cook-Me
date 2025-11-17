@@ -1,7 +1,7 @@
-import { CategoriesList } from '@features/categories/components/CategoriesList'
-import { Hero } from '@components/molecules/Hero'
-// import { GuidedTour } from '@features/guided-tour/GuidedTour'
-import { Button } from '@components/atoms/button'
+import { CategoriesList } from 'features/categories/components/CategoriesList'
+import { Hero } from 'components/molecules/Hero'
+// import { GuidedTour } from 'features/guided-tour/GuidedTour'
+import { Button } from 'components/atoms/button'
 
 export default async function Home() {
   return (

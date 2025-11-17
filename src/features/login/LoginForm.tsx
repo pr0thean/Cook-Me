@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { browserClient } from '@lib/supabase/browserClient'
-import { Button } from '@components/atoms/button'
-import { TextInput } from '@components/atoms/TextInput'
+import { browserClient } from 'lib/supabase/browserClient'
+import { Button } from 'components/atoms/button'
+import { TextInput } from 'components/atoms/TextInput'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')

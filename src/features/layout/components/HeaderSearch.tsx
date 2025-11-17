@@ -1,5 +1,5 @@
 'use client'
-import { TextInput } from '@components/atoms/TextInput'
+import { TextInput } from 'components/atoms/TextInput'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useSearchParams } from 'next/navigation'
 import { FormEvent, RefObject, useRef, useState } from 'react'

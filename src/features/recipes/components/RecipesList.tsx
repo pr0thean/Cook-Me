@@ -1,4 +1,4 @@
-import { RecipeCard } from '@features/recipes/components/RecipeCard'
+import { RecipeCard } from 'features/recipes/components/RecipeCard'
 import { Recipe } from '@prisma/client'
 
 type Props = {

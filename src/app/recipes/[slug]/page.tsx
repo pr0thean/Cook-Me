@@ -1,11 +1,13 @@
-import { PageParams } from '@typings/page-params'
-import { Level } from '@features/recipes/components/level'
-import { Time } from '@features/recipes/components/time'
+import { PageParams } from 'types/page-params'
+import { Level } from 'features/recipes/components/level'
+import { Time } from 'features/recipes/components/time'
 
-import { CheapTip } from '@features/guided-tour/components/CheapTip'
-import { getRecipeBySlug } from '@app/actions/getRecipeBySlug'
+import { CheapTip } from 'features/guided-tour/components/CheapTip'
+import { getRecipeBySlug } from 'app/actions/getRecipeBySlug'
 import Image from 'next/image'
-import { getRecipes } from '@app/actions/getRecipes'
+import { getRecipes } from 'app/actions/getRecipes'
+import { RichTextViewer } from 'components/molecules/text-editor/RichTextViewer'
+import { Content } from '@tiptap/react'
 
 export async function generateStaticParams() {
   const recipes = await getRecipes()
@@ -45,13 +47,13 @@ export default async function RecipePage({ params }: { params: PageParams }) {
 
       {/* Content container */}
       <div className="relative z-10 flex justify-center">
-        <div className="page-content-shadow mt-[300px] w-11/12 space-y-4 rounded-t-xl bg-white p-5 text-black md:space-y-6 md:p-10">
-          <div className="flex justify-between">
+        <div className="page-content-shadow mt-[300px] w-11/12 rounded-t-xl bg-white p-5 text-black md:p-10">
+          <div className="mb-4 flex justify-between md:mb-6">
             <h1 className="text-xl font-semibold">{title}</h1>
             {isCheap && <CheapTip />}
           </div>
 
-          <div className="flex justify-between font-semibold">
+          <div className="mb-4 flex justify-between font-semibold md:mb-6">
             {difficulty && (
               <div>
                 <div className="text-blue-gray-dark text-xs uppercase">Difficulty:</div>
@@ -66,9 +68,9 @@ export default async function RecipePage({ params }: { params: PageParams }) {
             )}
           </div>
 
-          <div className="document">{ingredients?.toString()}</div>
+          {ingredients && <RichTextViewer content={ingredients as Content} />}
 
-          <div className="document">{instruction?.toString()}</div>
+          {instruction && <RichTextViewer content={instruction as Content} />}
         </div>
       </div>
     </div>

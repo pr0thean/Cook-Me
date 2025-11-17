@@ -3,10 +3,10 @@
 import { useRouter, usePathname } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { QuestionMarkCircleIcon, UserIcon } from '@heroicons/react/24/outline'
-import { HeaderSearch, ClickOutsideEvent } from '@features/layout/components/HeaderSearch'
+import { HeaderSearch, ClickOutsideEvent } from 'features/layout/components/HeaderSearch'
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { HeaderLink } from '@components/atoms/HeaderLink'
+import { HeaderLink } from 'components/atoms/HeaderLink'
 import Link from 'next/link'
 
 export const Header = () => {

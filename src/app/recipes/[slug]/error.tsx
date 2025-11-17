@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 
-import { Button } from '@components/atoms/button'
+import { Button } from 'components/atoms/button'
 
 export default function ErrorBoundary() {
   return (
@@ -15,7 +15,7 @@ export default function ErrorBoundary() {
         style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }}
       />
       <div className="absolute top-1/2 flex -translate-y-1/2 flex-col items-center gap-4">
-        <p className="text-center font-not-found text-3xl tracking-widest text-yellow">
+        <p className="font-not-found text-yellow text-center text-3xl tracking-widest">
           Recipe not found
         </p>
         <Button label="Go to home page" link="/" variant="link" />

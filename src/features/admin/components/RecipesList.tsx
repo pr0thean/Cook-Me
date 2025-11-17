@@ -1,6 +1,6 @@
 'use client'
-import { deleteRecipe } from '@app/actions/deleteRecipe'
-import { getRecipes } from '@app/actions/getRecipes'
+import { deleteRecipe } from 'app/actions/deleteRecipe'
+import { getRecipes } from 'app/actions/getRecipes'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { Recipe } from '@prisma/client'
 import Image from 'next/image'

@@ -1,9 +1,9 @@
 'use client'
 
-import { createCategory } from '@app/actions/createCategory'
-import { Button } from '@components/atoms/button'
-import { FileInput } from '@components/atoms/FileInput'
-import { TextInput } from '@components/atoms/TextInput'
+import { createCategory } from 'app/actions/createCategory'
+import { Button } from 'components/atoms/button'
+import { FileInput } from 'components/atoms/FileInput'
+import { TextInput } from 'components/atoms/TextInput'
 
 export const CategoryForm = () => {
   const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {

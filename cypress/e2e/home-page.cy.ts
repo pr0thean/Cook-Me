@@ -1,4 +1,4 @@
-import { fixtures } from '@mocks/utils/fixtures'
+import { fixtures } from 'mocks/utils/fixtures'
 import { viewports } from '../utils'
 
 // https://github.com/mswjs/msw/issues/1644

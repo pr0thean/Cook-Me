@@ -1,9 +1,10 @@
 'use client'
 
-import { Label } from '@components/atoms/Label'
+import { Label } from 'components/atoms/Label'
 import './tiptap.css'
 import { Editor, EditorContent, useEditor, useEditorState } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import { useEffect, useRef } from 'react'
 
 type MenuButton = {
   label: string
@@ -92,17 +93,30 @@ type Props = {
 }
 
 export const TextEditor = ({ name, label }: Props) => {
+  const hiddenInputRef = useRef<HTMLInputElement>(null)
+
   const editor = useEditor({
     extensions: [StarterKit],
+    content: '',
     // Don't render immediately on the server to avoid SSR issues
     immediatelyRender: false,
+    onUpdate: ({ editor }) => {
+      if (hiddenInputRef.current) {
+        hiddenInputRef.current.value = JSON.stringify(editor.getJSON())
+      }
+    },
   })
+
+  // Set initial value
+  useEffect(() => {
+    if (editor && hiddenInputRef.current) {
+      hiddenInputRef.current.value = JSON.stringify(editor.getJSON())
+    }
+  }, [editor])
 
   if (!editor) {
     return null
   }
-
-  const htmlContent = editor.getHTML()
 
   return (
     <div>
@@ -110,8 +124,12 @@ export const TextEditor = ({ name, label }: Props) => {
 
       <div className="border-blue-gray w-full rounded border text-white">
         <MenuBar editor={editor} />
-        <EditorContent editor={editor} className="bg-gray-light m-2 p-1 text-black outline-none" />
-        <input type="hidden" id={name} name={name} value={htmlContent} />
+        <EditorContent
+          id={name}
+          editor={editor}
+          className="bg-gray-light m-2 p-1 text-black outline-none"
+        />
+        <input type="hidden" name={name} ref={hiddenInputRef} />
       </div>
     </div>
   )

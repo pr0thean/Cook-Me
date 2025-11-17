@@ -1,9 +1,9 @@
 'use server'
 
-import { requireAdmin } from '@lib/auth'
-import { prismaClient } from '@lib/prismaClient'
-import { uploadImage } from '@lib/storage'
-import { slugify } from '@utils/slugify'
+import { requireAdmin } from 'lib/auth'
+import { prismaClient } from 'lib/prismaClient'
+import { uploadImage } from 'lib/storage'
+import { slugify } from 'utils/slugify'
 import { revalidatePath } from 'next/cache'
 
 export async function createRecipe(formData: FormData) {
@@ -12,8 +12,8 @@ export async function createRecipe(formData: FormData) {
   try {
     const title = formData.get('title') as string
     const description = formData.get('description') as string
-    const ingredients = formData.get('ingredients') as string
-    const instruction = formData.get('instruction') as string
+    const ingredientsRaw = formData.get('ingredients') as string
+    const instructionRaw = formData.get('instruction') as string
     const categoryIds = formData.getAll('categoryIds') as string[]
     const imageFile = formData.get('image') as File
 
@@ -23,15 +23,17 @@ export async function createRecipe(formData: FormData) {
     }
 
     const slug = slugify(title)
+    const ingredients = JSON.parse(ingredientsRaw)
+    const instruction = JSON.parse(instructionRaw)
 
     // Create recipe first
     const recipe = await prismaClient.recipe.create({
       data: {
         title,
         slug,
-        description: description || null,
-        ingredients: ingredients || undefined,
-        instruction: instruction || undefined,
+        description: description,
+        ingredients: ingredients,
+        instruction: instruction,
         categories: {
           connect: categoryIds.map((id) => ({ id: parseInt(id) })),
         },

@@ -1,4 +1,4 @@
-import { getCategories } from '@app/actions/getCategories'
+import { getCategories } from 'app/actions/getCategories'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -14,7 +14,7 @@ export const CategoriesList = async () => {
         <Link
           href={`category/${category.slug}`}
           key={index}
-          className="group bg-gray block aspect-square rounded-md text-white"
+          className="group bg-blue-gray block aspect-square rounded-md text-white"
         >
           {category.imageUrl && (
             <div

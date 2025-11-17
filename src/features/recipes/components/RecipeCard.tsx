@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Time } from '@features/recipes/components/time'
-import { Level } from '@features/recipes/components/level'
+import { Time } from 'features/recipes/components/time'
+import { Level } from 'features/recipes/components/level'
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
 import { Recipe } from '@prisma/client'
 
