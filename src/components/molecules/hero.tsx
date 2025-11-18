@@ -14,6 +14,7 @@ export const Hero = ({ heading, imageUrl }: Props) => {
           src={imageUrl}
           className="h-full w-full object-cover opacity-50"
           fill
+          sizes="(max-width: 768px) 100vw, 900px"
           priority
         />
       )}

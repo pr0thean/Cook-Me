@@ -21,8 +21,8 @@ function MenuBar({ editor }: { editor: Editor }) {
         isBold: ctx.editor.isActive('bold') ?? false,
         isItalic: ctx.editor.isActive('italic') ?? false,
         isParagraph: ctx.editor.isActive('paragraph') ?? false,
-        isHeading1: ctx.editor.isActive('heading', { level: 1 }) ?? false,
         isHeading2: ctx.editor.isActive('heading', { level: 2 }) ?? false,
+        isHeading3: ctx.editor.isActive('heading', { level: 3 }) ?? false,
         isBulletList: ctx.editor.isActive('bulletList') ?? false,
         isOrderedList: ctx.editor.isActive('orderedList') ?? false,
       }
@@ -46,14 +46,14 @@ function MenuBar({ editor }: { editor: Editor }) {
       isActive: editorState.isParagraph,
     },
     {
-      label: 'H1',
-      action: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
-      isActive: editorState.isHeading1,
-    },
-    {
       label: 'H2',
       action: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
       isActive: editorState.isHeading2,
+    },
+    {
+      label: 'H3',
+      action: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
+      isActive: editorState.isHeading3,
     },
     {
       label: 'Bullet list',
@@ -67,9 +67,9 @@ function MenuBar({ editor }: { editor: Editor }) {
     },
   ]
 
-  const baseButtonClass = 'p-2 border-r border-b border-blue-gray bg-blue-gray-dark cursor-pointer'
-  const inactiveButtonClass = 'font-normal'
-  const activeButtonClass = 'font-semibold'
+  const baseButtonClass = 'p-2 border-r border-b border-blue-gray cursor-pointer'
+  const inactiveButtonClass = 'font-normal bg-blue-gray-dark'
+  const activeButtonClass = 'font-semibold bg-black'
 
   return (
     <div className="flex flex-wrap text-sm">

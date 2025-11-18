@@ -8,7 +8,7 @@ import { TextInput } from 'components/atoms/TextInput'
 import { TextEditor } from 'components/molecules/text-editor/TextEditor'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { Category, Difficulty, Tag } from '@prisma/client'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Select } from 'components/atoms/select/Select'
 
 const difficultyOptions: { label: string; value: Difficulty }[] = [
@@ -22,13 +22,19 @@ type Props = {
   tags: Tag[]
 }
 
+// TODO: implement react-hook-form
 export const RecipeForm = ({ categories, tags }: Props) => {
+  const formRef = useRef<HTMLFormElement>(null)
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
   const [selectedTags, setSelectedTags] = useState<number[]>([])
   const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.MEDIUM)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsSubmitting(true)
+    setError(null)
 
     try {
       const formData = new FormData(e.currentTarget)
@@ -37,14 +43,30 @@ export const RecipeForm = ({ categories, tags }: Props) => {
         formData.append('categoryIds', id.toString())
       })
 
-      await createRecipe(formData)
+      selectedTags.forEach((id) => {
+        formData.append('tagIds', id.toString())
+      })
+
+      const result = await createRecipe(formData)
+
+      if (result.success) {
+        formRef.current?.reset()
+        setSelectedCategories([])
+        setSelectedTags([])
+        setDifficulty(Difficulty.MEDIUM)
+      } else {
+        setError(result.error)
+      }
     } catch (error) {
       console.error('Error creating recipe:', error)
+      setError('An unexpected error occurred.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
       <TextInput name="title" label="Title" placeholder="Enter title..." />
 
       <TextInput name="description" label="Description" placeholder="Enter description..." />
@@ -127,8 +149,18 @@ export const RecipeForm = ({ categories, tags }: Props) => {
       <FileInput name="image" accept="image/*" />
 
       <div className="mt-5">
-        <Button type="submit" label="Create Recipe" />
+        <Button
+          type="submit"
+          label={isSubmitting ? 'Creating...' : 'Create Recipe'}
+          disabled={isSubmitting}
+        />
       </div>
+
+      {error && (
+        <div className="rounded-md border border-red-500 bg-red-500/10 p-4">
+          <p className="text-sm text-red-500">{error}</p>
+        </div>
+      )}
     </form>
   )
 }

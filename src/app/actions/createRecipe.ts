@@ -7,8 +7,15 @@ import { slugify } from 'utils/slugify'
 import { revalidatePath } from 'next/cache'
 import { Difficulty } from '@prisma/client'
 
-export async function createRecipe(formData: FormData) {
-  await requireAdmin()
+type CreateRecipeResult = { success: true } | { success: false; error: string }
+
+export async function createRecipe(formData: FormData): Promise<CreateRecipeResult> {
+  try {
+    await requireAdmin()
+  } catch (error) {
+    console.error('Authorization error:', error)
+    return { success: false, error: 'Unauthorized' }
+  }
 
   try {
     const title = formData.get('title') as string
@@ -27,8 +34,16 @@ export async function createRecipe(formData: FormData) {
     }
 
     const slug = slugify(title)
-    const ingredients = JSON.parse(ingredientsRaw)
-    const instruction = JSON.parse(instructionRaw)
+
+    let ingredients, instruction
+
+    try {
+      ingredients = JSON.parse(ingredientsRaw)
+      instruction = JSON.parse(instructionRaw)
+    } catch (error) {
+      console.error('Parsing json error:', error)
+      return { success: false, error: 'Invalid content format' }
+    }
 
     // Create recipe first
     const recipe = await prismaClient.recipe.create({
@@ -51,19 +66,24 @@ export async function createRecipe(formData: FormData) {
 
     // Upload image if provided
     if (imageFile && imageFile.size > 0) {
-      const { url } = await uploadImage(imageFile, recipe.id.toString(), 'recipes-images')
+      try {
+        const { url } = await uploadImage(imageFile, recipe.id.toString(), 'recipes-images')
 
-      // Update recipe with image URL
-      await prismaClient.recipe.update({
-        where: { id: recipe.id },
-        data: { imageUrl: url },
-      })
+        // Update recipe with image URL
+        await prismaClient.recipe.update({
+          where: { id: recipe.id },
+          data: { imageUrl: url },
+        })
+      } catch (error) {
+        console.error('Error uploading image:', error)
+        return { success: false, error: 'Error uploading image' }
+      }
     }
 
     revalidatePath('/admin')
     revalidatePath('/recipes')
 
-    return { success: true, recipeId: recipe.id.toString() }
+    return { success: true }
   } catch (error) {
     console.error('Error creating recipe:', error)
     return { success: false, error: 'Failed to create recipe' }

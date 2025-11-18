@@ -3,16 +3,14 @@ import Image from 'next/image'
 import { Time } from 'features/recipes/components/time'
 import { Level } from 'features/recipes/components/level'
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
-import { Recipe } from '@prisma/client'
+import { Recipe } from 'types/prisma-types'
 
 type Props = {
   data: Recipe
 }
 
 export const RecipeCard = ({ data }: Props) => {
-  const { imageUrl, title, slug, difficulty, time } = data
-
-  const tags = [{ name: 'Cheap' }]
+  const { imageUrl, title, slug, difficulty, time, tags } = data
 
   const isCheap = tags?.some((tag) => tag.name === 'Cheap')
 
@@ -29,6 +27,7 @@ export const RecipeCard = ({ data }: Props) => {
               src={imageUrl}
               className="h-full w-full rounded-lg object-cover"
               fill
+              sizes="(max-width: 768px) 50vw, 412px"
             />
           )}
         </div>

@@ -28,8 +28,7 @@ export default async function RecipePage({ params }: { params: PageParams }) {
     throw new Error('Recipe not found')
   }
 
-  const { imageUrl, title, difficulty, time, ingredients, instruction } = recipe
-  const tags = [{ name: 'Cheap' }]
+  const { imageUrl, title, difficulty, time, ingredients, instruction, tags } = recipe
 
   const isCheap = tags?.some((tag) => tag.name === 'Cheap')
 

@@ -2,9 +2,9 @@
 import { deleteRecipe } from 'app/actions/deleteRecipe'
 import { getRecipes } from 'app/actions/getRecipes'
 import { TrashIcon } from '@heroicons/react/24/outline'
-import { Recipe } from '@prisma/client'
 import Image from 'next/image'
 import { useState } from 'react'
+import { Recipe } from 'types/prisma-types'
 
 export const RecipesList = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([])
