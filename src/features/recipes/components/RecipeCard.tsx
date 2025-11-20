@@ -33,7 +33,7 @@ export const RecipeCard = ({ data }: Props) => {
         </div>
 
         <div className="absolute right-0 bottom-0 left-0 flex h-[52px] justify-between rounded-b-lg bg-black/50 px-2 py-1 text-white backdrop-blur-xs">
-          <h2 className="mr-16 truncate text-lg">{title}</h2>
+          <h2 className="mt-2 mr-16 truncate text-xl">{title}</h2>
 
           <div className="absolute right-0 bottom-0 flex flex-col space-y-1 px-2 py-1 text-right text-sm font-semibold backdrop-blur-xs">
             {time && <Time time={time} isWhite />}

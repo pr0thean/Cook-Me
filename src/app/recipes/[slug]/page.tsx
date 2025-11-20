@@ -46,9 +46,9 @@ export default async function RecipePage({ params }: { params: PageParams }) {
 
       {/* Content container */}
       <div className="relative z-10 flex justify-center">
-        <div className="page-content-shadow mt-[300px] w-11/12 rounded-t-xl bg-white p-5 text-black md:p-10">
+        <div className="page-content-shadow mt-[300px] mb-8 w-11/12 rounded-xl bg-white p-5 text-black md:p-10">
           <div className="mb-4 flex justify-between md:mb-6">
-            <h1 className="text-xl font-semibold">{title}</h1>
+            <h1 className="text-2xl font-semibold">{title}</h1>
             {isCheap && <CheapTip />}
           </div>
 
