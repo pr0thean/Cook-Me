@@ -6,8 +6,7 @@ import { SearchParams } from 'types/page-params'
 
 export default async function RecipesPage(props: { searchParams: SearchParams }) {
   const searchParams = await props.searchParams
-  const { search, level, category, tag } = searchParams
-  const recipes = await getRecipes()
+  const recipes = await getRecipes(searchParams)
 
   return (
     <div>

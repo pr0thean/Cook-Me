@@ -19,7 +19,7 @@ export const FiltersContainer = async () => {
 
   const difficultyOptions: SelectOption[] = [
     { value: 'Easy', label: 'Easy' },
-    { value: 'Average', label: 'Average' },
+    { value: 'Medium', label: 'Medium' },
     { value: 'Hard', label: 'Hard' },
   ]
 
