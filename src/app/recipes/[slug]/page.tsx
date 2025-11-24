@@ -28,7 +28,7 @@ export default async function RecipePage({ params }: { params: PageParams }) {
     throw new Error('Recipe not found')
   }
 
-  const { imageUrl, title, difficulty, time, ingredients, instruction, tags } = recipe
+  const { imageUrl, title, difficulty, time, ingredients, instruction, tags, description } = recipe
 
   const isCheap = tags?.some((tag) => tag.name === 'Cheap')
 
@@ -66,6 +66,12 @@ export default async function RecipePage({ params }: { params: PageParams }) {
               </div>
             )}
           </div>
+
+          {description && (
+            <p className="border-orange text-blue-gray bg-gray-lighter rounded-md border-l-4 px-5 py-4 italic">
+              {description}
+            </p>
+          )}
 
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold">Ingredients</h2>

@@ -3,6 +3,7 @@
 @theme {
   --color-white: hsl(0deg 0% 93%); /* #EDEDED */
   --color-black: hsl(0deg 0% 15%); /* #272727 */
+  --color-gray-lighter: hsl(0deg 0% 90%); /* #e3e2e2 */
   --color-gray-light: hsl(0deg 0% 80%); /* #cccccc */
   --color-gray: hsl(0deg 0% 74%); /* #747474 */
   --color-orange: hsl(16deg 100% 59%); /* #FF652F */
