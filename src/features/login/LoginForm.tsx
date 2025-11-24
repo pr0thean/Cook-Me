@@ -35,6 +35,7 @@ export function LoginForm() {
       router.push('/admin')
       router.refresh()
     } catch (err) {
+      console.error(err)
       setError('An unexpected error occurred')
     } finally {
       setLoading(false)
@@ -43,12 +44,6 @@ export function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-      {error && (
-        <div className="rounded-md bg-red-50 p-4">
-          <p className="text-sm text-red-800">{error}</p>
-        </div>
-      )}
-
       <div className="space-y-4">
         <TextInput
           name="email"
@@ -74,6 +69,8 @@ export function LoginForm() {
       </div>
 
       <Button label={loading ? 'Signing in...' : 'Sign in'} type="submit" disabled={loading} />
+
+      {error && <p className="text-sm text-red-800">{error}</p>}
     </form>
   )
 }

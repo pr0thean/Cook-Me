@@ -11,10 +11,10 @@ export default async function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-md space-y-8 rounded-xl bg-white p-10 text-center shadow-md">
+      <div className="mx-4 w-full space-y-8 rounded-xl bg-white p-10 text-center shadow-md md:max-w-md">
         <div>
           <h2 className="text-3xl font-bold text-black">Admin Login</h2>
-          <p className="text-gray mt-2 text-sm">Sign in to manage recipes</p>
+          <p className="text-blue-gray mt-2 text-sm">Sign in to manage recipes</p>
         </div>
 
         <LoginForm />
