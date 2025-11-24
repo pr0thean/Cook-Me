@@ -1,11 +1,11 @@
-import { CheckIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { SelectProps } from '@radix-ui/react-select'
 import { cva, type VariantProps } from 'class-variance-authority'
 import clsx from 'clsx'
 import { ScrollArea } from 'radix-ui'
 import { Select as SelectPrimitive } from 'radix-ui'
 import { Label } from 'radix-ui'
-import { useRef, useState } from 'react'
+import { useRef, useState, MouseEvent, KeyboardEvent } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { useMeasureWidth } from './useMeasureWidth'
 
@@ -31,16 +31,29 @@ type SelectItemProps<T> = {
 
 type TriggerVariantProps = VariantProps<typeof triggerVariants>
 
-interface Props<T extends string> extends Omit<SelectProps, 'onValueChange'>, TriggerVariantProps {
+interface BaseProps<T extends string>
+  extends Omit<SelectProps, 'onValueChange'>,
+    TriggerVariantProps {
   name: string
   items: SelectItemProps<T>[]
-  onValueChange: (value: T) => void
   label?: string
   placeholder?: string
   value?: T
   triggerClass?: string
   contentClass?: string
 }
+
+interface PropsWithCLear<T extends string> extends BaseProps<T> {
+  onValueChange: (value: T | null) => void
+  allowClear: true
+}
+
+interface PropsWithoutClear<T extends string> extends BaseProps<T> {
+  onValueChange: (value: T) => void
+  allowClear: false
+}
+
+type Props<T extends string> = PropsWithCLear<T> | PropsWithoutClear<T>
 
 export function Select<T extends string>({
   name,
@@ -51,6 +64,7 @@ export function Select<T extends string>({
   variant,
   triggerClass,
   contentClass,
+  allowClear,
   onValueChange,
   ...props
 }: Props<T>) {
@@ -61,6 +75,13 @@ export function Select<T extends string>({
 
   const triggerClassName = twMerge(triggerVariants({ variant }), triggerClass)
 
+  const handleClear = (e: MouseEvent | KeyboardEvent) => {
+    if (allowClear) {
+      e.stopPropagation()
+      ;(onValueChange as (value: T | null) => void)(null)
+    }
+  }
+
   return (
     <div className="flex w-full flex-col gap-1">
       {label && (
@@ -69,7 +90,11 @@ export function Select<T extends string>({
         </Label.Root>
       )}
 
-      <SelectPrimitive.Root value={value} onValueChange={onValueChange} {...props}>
+      <SelectPrimitive.Root
+        value={value || ''}
+        onValueChange={(val) => onValueChange(val as T)}
+        {...props}
+      >
         <SelectPrimitive.Trigger
           id={name}
           name={name}
@@ -81,9 +106,31 @@ export function Select<T extends string>({
             <SelectPrimitive.Value aria-label={value || placeholder} placeholder={placeholder} />
           </span>
 
-          <SelectPrimitive.Icon className="text-blue-gray ml-4 transition-transform duration-250 group-data-[state=open]:rotate-180">
-            <ChevronDownIcon width={13} strokeWidth={4} />
-          </SelectPrimitive.Icon>
+          <div className="ml-4 flex items-center gap-2">
+            {allowClear && value && (
+              <div
+                onClick={handleClear}
+                onMouseDown={(e) => e.stopPropagation()}
+                onPointerDown={(e) => e.stopPropagation()}
+                className="text-blue-gray cursor-pointer transition-colors hover:text-white"
+                role="button"
+                tabIndex={0}
+                aria-label="Clear selection"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleClear(e)
+                  }
+                }}
+              >
+                <XMarkIcon width={16} strokeWidth={3} />
+              </div>
+            )}
+
+            <SelectPrimitive.Icon className="text-blue-gray transition-transform duration-250 group-data-[state=open]:rotate-180">
+              <ChevronDownIcon width={13} strokeWidth={4} />
+            </SelectPrimitive.Icon>
+          </div>
         </SelectPrimitive.Trigger>
 
         <SelectPrimitive.Portal>

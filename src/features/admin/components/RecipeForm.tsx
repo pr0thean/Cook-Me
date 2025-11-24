@@ -82,6 +82,7 @@ export const RecipeForm = ({ categories, tags }: Props) => {
           label="Difficulty"
           onValueChange={setDifficulty}
           value={difficulty}
+          allowClear={false}
         />
         {/* Hidden input to include difficulty in FormData */}
         <input type="hidden" name="difficulty" value={difficulty} />
