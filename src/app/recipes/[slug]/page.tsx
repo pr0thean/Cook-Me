@@ -46,13 +46,13 @@ export default async function RecipePage({ params }: { params: PageParams }) {
 
       {/* Content container */}
       <div className="relative z-10 flex justify-center">
-        <div className="page-content-shadow mt-[300px] mb-8 w-11/12 rounded-xl bg-white p-5 text-black md:p-10">
-          <div className="mb-4 flex justify-between md:mb-6">
-            <h1 className="text-2xl font-semibold">{title}</h1>
+        <div className="page-content-shadow mt-[300px] mb-8 w-11/12 space-y-6 rounded-xl bg-white p-5 text-black md:space-y-8 md:p-10">
+          <div className="flex justify-between md:mb-6">
+            <h1 className="text-3xl font-semibold">{title}</h1>
             {isCheap && <CheapTip />}
           </div>
 
-          <div className="mb-4 flex justify-between font-semibold md:mb-6">
+          <div className="flex justify-between font-semibold md:mb-6">
             {difficulty && (
               <div>
                 <div className="text-blue-gray-dark text-xs uppercase">Difficulty:</div>
@@ -67,9 +67,15 @@ export default async function RecipePage({ params }: { params: PageParams }) {
             )}
           </div>
 
-          {ingredients && <RichTextViewer content={ingredients as Content} />}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">Ingredients</h2>
+            {ingredients && <RichTextViewer content={ingredients as Content} />}
+          </div>
 
-          {instruction && <RichTextViewer content={instruction as Content} />}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">Instruction</h2>
+            {instruction && <RichTextViewer content={instruction as Content} />}
+          </div>
         </div>
       </div>
     </div>

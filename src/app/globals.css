@@ -6,6 +6,7 @@
   --color-gray-light: hsl(0deg 0% 80%); /* #cccccc */
   --color-gray: hsl(0deg 0% 74%); /* #747474 */
   --color-orange: hsl(16deg 100% 59%); /* #FF652F */
+  --color-orange-dark: hsl(16deg 100% 52%); /* #ff4b0a */
   --color-yellow: hsl(54deg 100% 50%); /* #FFE400 */
   --color-green: hsl(156deg 79% 37%); /* #14A76C */
   --color-blue-gray: hsl(219deg 6% 44%); /* #686D76 */

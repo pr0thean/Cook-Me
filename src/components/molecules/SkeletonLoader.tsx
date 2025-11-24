@@ -59,6 +59,7 @@ const SkeletonLoader = ({ type }: Props) => {
     )
   }
 
+  // recipe
   return (
     <div className="relative min-h-screen">
       <div className="bg-gray h-96 animate-pulse bg-linear-to-b from-transparent via-black/10 to-black" />

@@ -13,7 +13,7 @@ export const Button = ({ label, link, variant = 'primary', ...props }: Props) =>
     <button
       {...props}
       className={clsx('w-full cursor-pointer rounded-sm px-4 py-2', {
-        'bg-orange text-off-black': variant === 'primary',
+        'bg-orange hover:bg-orange-dark text-off-black': variant === 'primary',
         'text-yellow bg-transparent underline': variant === 'link',
       })}
     >
