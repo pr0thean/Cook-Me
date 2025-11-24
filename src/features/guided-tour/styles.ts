@@ -5,7 +5,7 @@ const buttonBaseStyles = (isDesktop: boolean) => ({
   borderRadius: '50px',
   fontSize: '12px',
   fontWeight: isDesktop ? '700' : '600',
-  outlineColor: 'hsl(var(--color-black))',
+  outlineColor: 'var(--color-black)',
 })
 
 export const guidedTourStyles = (isDesktop: boolean): Partial<Styles> => {
@@ -37,8 +37,8 @@ export const guidedTourStyles = (isDesktop: boolean): Partial<Styles> => {
     },
     buttonNext: {
       ...buttonBaseStyles(isDesktop),
-      backgroundColor: 'hsl(var(--color-white))',
-      color: 'hsl(var(--color-black))',
+      backgroundColor: 'var(--color-white)',
+      color: 'var(--color-black)',
     },
     buttonBack: {
       ...buttonBaseStyles(isDesktop),
@@ -51,15 +51,15 @@ export const guidedTourStyles = (isDesktop: boolean): Partial<Styles> => {
       display: 'none',
     },
     beaconOuter: {
-      border: '2px solid hsl(var(--color-orange))',
-      backgroundColor: 'hsl(var(--color-orange))',
+      border: '2px solid (var(--color-orange)',
+      backgroundColor: 'var(--color-orange)',
     },
     options: {
-      arrowColor: 'hsl(var(--color-orange))',
-      backgroundColor: 'hsl(var(--color-orange))',
+      arrowColor: 'var(--color-orange)',
+      backgroundColor: 'var(--color-orange)',
       overlayColor: 'rgba(0, 0, 0, 0.7)',
-      primaryColor: 'hsl(var(--color-black))',
-      textColor: 'hsl(var(--color-black))',
+      primaryColor: 'var(--color-black)',
+      textColor: 'var(--color-black)',
       beaconSize: 24,
       zIndex: 100,
     },

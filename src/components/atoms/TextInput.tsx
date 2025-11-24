@@ -48,8 +48,14 @@ export const TextInput = ({
   const errorId = `${name}-error`
 
   return (
-    <div className="flex flex-col gap-1">
-      {label && <Label name={name} label={label} />}
+    <div className="flex flex-col gap-1 text-left">
+      {label && (
+        <Label
+          name={name}
+          label={label}
+          className={variant === 'primary' ? 'text-white' : 'text-black'}
+        />
+      )}
 
       <div className="relative">
         <input

@@ -11,7 +11,7 @@ const stepOneContent = (isDesktop: boolean) => (
       width={isDesktop ? 250 : 150}
       height={isDesktop ? 250 : 150}
     />
-    <h1 className="mb-[6px] mt-5 font-bold md:mt-9 md:text-xl">
+    <h1 className="mt-5 mb-1.5 font-bold md:mt-9 md:text-xl">
       Welcome to <span className="text-orange">Cook Me</span>!
     </h1>
     <div className="text-xs md:text-base">
@@ -33,12 +33,12 @@ export const tourSteps = (isDesktop: boolean): Step[] => [
     },
     styles: {
       tooltip: {
-        backgroundColor: 'hsl(var(--color-white))',
-        color: 'hsl(var(--color-black))',
+        backgroundColor: 'var(--color-white)',
+        color: 'var(--color-black)',
       },
       buttonNext: {
-        backgroundColor: 'hsl(var(--color-black))',
-        color: 'hsl(var(--color-white))',
+        backgroundColor: 'var(--color-black)',
+        color: 'var(--color-white)',
       },
       tooltipFooter: {
         flexDirection: 'row-reverse',

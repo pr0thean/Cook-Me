@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Time } from 'features/recipes/components/time'
-import { Level } from 'features/recipes/components/level'
+import { Difficulty } from 'features/recipes/components/difficulty'
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
 import { Recipe } from 'types/prisma-types'
 
@@ -37,7 +37,7 @@ export const RecipeCard = ({ data }: Props) => {
 
           <div className="absolute right-0 bottom-0 flex flex-col space-y-1 px-2 py-1 text-right text-sm font-semibold backdrop-blur-xs">
             {time && <Time time={time} isWhite />}
-            {difficulty && <Level level={difficulty} isWhite />}
+            {difficulty && <Difficulty difficulty={difficulty} isWhite />}
           </div>
         </div>
 

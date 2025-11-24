@@ -1,5 +1,5 @@
 import { PageParams } from 'types/page-params'
-import { Level } from 'features/recipes/components/level'
+import { Difficulty } from 'features/recipes/components/difficulty'
 import { Time } from 'features/recipes/components/time'
 
 import { CheapTip } from 'features/guided-tour/components/CheapTip'
@@ -56,7 +56,7 @@ export default async function RecipePage({ params }: { params: PageParams }) {
             {difficulty && (
               <div>
                 <div className="text-blue-gray-dark text-xs uppercase">Difficulty:</div>
-                <Level level={difficulty} />
+                <Difficulty difficulty={difficulty} />
               </div>
             )}
             {time && (

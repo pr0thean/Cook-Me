@@ -1,28 +1,35 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import { tourSteps } from './steps'
 import { useWindowSize } from 'usehooks-ts'
 import JoyRide, { CallBackProps } from 'react-joyride-react19-compat'
 import { guidedTourStyles } from './styles'
 
+const emptySubscribe = () => () => {}
+
 export const GuidedTour = () => {
-  const [run, setRun] = useState(() => {
-    if (typeof window === 'undefined') return false
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  )
+  const shouldRunTour = useSyncExternalStore(
+    emptySubscribe,
+    () => !localStorage.getItem('tour-completed'),
+    () => false
+  )
+  const [dismissed, setDismissed] = useState(false)
 
-    const isTourCompleted = localStorage.getItem('tour-completed')
-    return !isTourCompleted
-  })
   const { width } = useWindowSize()
-
   const isDesktop = width > 768
 
   const handleTourCallback = (data: CallBackProps) => {
     const { status } = data
 
-    if (status === 'finished') {
+    if (status === 'finished' || status === 'skipped') {
       localStorage.setItem('tour-completed', 'true')
-      setRun(false)
+      setDismissed(true)
     }
   }
 
@@ -32,6 +39,12 @@ export const GuidedTour = () => {
     skip: 'Skip',
     back: 'Back',
   }
+
+  if (!isClient) {
+    return null
+  }
+
+  const run = shouldRunTour && !dismissed
 
   return (
     <JoyRide
