@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { twMerge } from 'tailwind-merge'
 import { Label } from './Label'
+import clsx from 'clsx'
 
 const inputVariants = cva('w-full rounded-sm border focus:outline-hidden ', {
   variants: {
@@ -37,7 +38,7 @@ export const TextInput = ({
   label,
   error,
   variant,
-  inputSize,
+  inputSize = 'md',
   onChange,
   className,
   icon,
@@ -61,7 +62,16 @@ export const TextInput = ({
           {...props}
         />
 
-        {icon && <div className="absolute top-3.5 left-2.5">{icon}</div>}
+        {icon && (
+          <div
+            className={clsx('absolute left-2.5', {
+              'top-2.75': inputSize === 'md',
+              'top-3.5': inputSize === 'lg',
+            })}
+          >
+            {icon}
+          </div>
+        )}
       </div>
 
       {error && (

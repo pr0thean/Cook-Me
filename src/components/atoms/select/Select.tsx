@@ -153,7 +153,7 @@ export function Select<T extends string>({
                         key={item.value}
                         value={item.value}
                         className={clsx(
-                          'bg-blue-gray-dark hover:bg-gray flex items-center justify-between px-3 py-2 transition-colors outline-none hover:cursor-default',
+                          'bg-blue-gray-dark hover:bg-blue-gray flex items-center justify-between px-3 py-2 transition-colors outline-none hover:cursor-default',
                           {
                             'text-white': value !== item.value,
                             'text-orange font-semibold': value === item.value,

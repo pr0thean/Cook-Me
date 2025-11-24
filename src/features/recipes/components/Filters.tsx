@@ -97,7 +97,6 @@ export const Filters = ({ categoryOptions, tagsOptions, difficultyOptions }: Pro
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           icon={<MagnifyingGlassIcon width={20} fill="#747474" />}
-          inputSize="lg"
         />
 
         {searchInput && (

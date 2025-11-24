@@ -20,7 +20,7 @@ export const RecipeCard = ({ data }: Props) => {
       className="block h-56 rounded-lg transition-shadow duration-300 hover:shadow-[0_0_5px_2px_rgba(255,101,47,1)]" // orange
     >
       <div className="relative h-full">
-        <div className="h-full w-full">
+        <div className="relative h-full w-full">
           {imageUrl && (
             <Image
               alt={title}
