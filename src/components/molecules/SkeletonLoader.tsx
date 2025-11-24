@@ -11,7 +11,7 @@ const SkeletonLoader = ({ type }: Props) => {
         <div className="bg-gray h-64 animate-pulse md:h-96" />
 
         <div className="grid grid-cols-2 gap-4 p-4 md:grid-cols-4 md:gap-6 md:p-6">
-          {[...Array(4)].map((_, index) => (
+          {[...Array(8)].map((_, index) => (
             <div key={index} className="bg-gray aspect-square animate-pulse rounded-sm" />
           ))}
         </div>

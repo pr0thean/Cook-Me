@@ -10,7 +10,7 @@ export default async function Home() {
 
       <CategoriesList />
 
-      <div className="mx-auto mt-8 w-1/2">
+      <div className="mx-auto mt-8 w-fit sm:w-1/2">
         <Button label="Browse all recipes" link="/recipes" />
       </div>
 

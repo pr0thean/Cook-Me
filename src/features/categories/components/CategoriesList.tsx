@@ -26,6 +26,7 @@ export const CategoriesList = async () => {
                 src={category.imageUrl}
                 className="h-full w-full object-cover transition-all duration-300 group-hover:scale-110"
                 fill
+                sizes="200px"
               />
             </div>
           )}
