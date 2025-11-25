@@ -1,7 +1,7 @@
 'use client'
 
 import { createCategory } from 'app/actions/createCategory'
-import { Button } from 'components/atoms/button'
+import { Button } from 'components/atoms/Button'
 import { FileInput } from 'components/atoms/FileInput'
 import { TextInput } from 'components/atoms/TextInput'
 

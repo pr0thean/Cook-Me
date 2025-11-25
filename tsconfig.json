@@ -12,7 +12,6 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "types": ["cypress", "@testing-library/cypress"],
     "plugins": [
       {
         "name": "next"

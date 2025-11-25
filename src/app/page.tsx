@@ -1,7 +1,7 @@
 import { CategoriesList } from 'features/categories/components/CategoriesList'
 import { Hero } from 'components/molecules/Hero'
 import { GuidedTour } from 'features/guided-tour/GuidedTour'
-import { Button } from 'components/atoms/button'
+import { Button } from 'components/atoms/Button'
 import Statistics from 'features/statistics/components/Statistics'
 
 export default async function Home() {

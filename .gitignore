@@ -6,8 +6,6 @@
 .pnp.js
 .yarn/install-state.gz
 
-# testing
-/coverage
 
 # next.js
 /.next/
@@ -38,3 +36,11 @@ next-env.d.ts
 
 # prisma
 /src/generated/prisma
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

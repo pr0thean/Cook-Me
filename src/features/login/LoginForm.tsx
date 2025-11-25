@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { browserClient } from 'lib/supabase/browserClient'
-import { Button } from 'components/atoms/button'
+import { Button } from 'components/atoms/Button'
 import { TextInput } from 'components/atoms/TextInput'
 
 export function LoginForm() {

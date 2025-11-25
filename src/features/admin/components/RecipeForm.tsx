@@ -2,7 +2,7 @@
 
 import { createRecipe } from 'app/actions/createRecipe'
 import { deleteCategory } from 'app/actions/deleteCategory'
-import { Button } from 'components/atoms/button'
+import { Button } from 'components/atoms/Button'
 import { FileInput } from 'components/atoms/FileInput'
 import { TextInput } from 'components/atoms/TextInput'
 import { TextEditor } from 'components/molecules/text-editor/TextEditor'
