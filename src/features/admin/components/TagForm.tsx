@@ -1,8 +1,8 @@
 'use client'
 
-import { createTag } from 'app/actions/createTag'
-import { Button } from 'components/atoms/Button'
-import { TextInput } from 'components/atoms/TextInput'
+import { createTag } from '@/app/actions/createTag'
+import { Button } from '@/components/atoms/Button'
+import { TextInput } from '@/components/atoms/TextInput'
 
 export const TagForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

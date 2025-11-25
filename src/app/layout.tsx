@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Rubik, Montserrat, MedievalSharp } from 'next/font/google'
 import './globals.css'
-import { Header } from 'features/layout/components/Header'
+import { Header } from '@/features/layout/components/Header'
 import clsx from 'clsx'
 
 const rubik = Rubik({

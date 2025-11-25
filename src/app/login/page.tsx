@@ -1,5 +1,5 @@
-import { LoginForm } from 'features/login/LoginForm'
-import { getCurrentUser } from 'lib/auth'
+import { LoginForm } from '@/features/login/LoginForm'
+import { getCurrentUser } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 
 export default async function LoginPage() {

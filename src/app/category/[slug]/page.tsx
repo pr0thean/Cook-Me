@@ -1,7 +1,7 @@
-import { getCategoryBySlug } from 'app/actions/getCategoryBySlug'
-import { Hero } from 'components/molecules/Hero'
-import { RecipesList } from 'features/recipes/components/RecipesList'
-import { PageParams } from 'types/page-params'
+import { getCategoryBySlug } from '@/app/actions/getCategoryBySlug'
+import { Hero } from '@/components/molecules/Hero'
+import { RecipesList } from '@/features/recipes/components/RecipesList'
+import { PageParams } from '@/types/page-params'
 
 export const revalidate = 86400 // 24 hours
 export const dynamicParams = true

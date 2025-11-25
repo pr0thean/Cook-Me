@@ -1,9 +1,9 @@
 'use server'
 
-import { requireAdmin } from 'lib/auth'
-import { prismaClient } from 'lib/prismaClient'
-import { uploadImage } from 'lib/storage'
-import { slugify } from 'utils/slugify'
+import { requireAdmin } from '@/lib/auth'
+import { prismaClient } from '@/lib/prismaClient'
+import { uploadImage } from '@/lib/storage'
+import { slugify } from '@/utils/slugify'
 import { revalidatePath } from 'next/cache'
 
 export async function createCategory(formData: FormData) {

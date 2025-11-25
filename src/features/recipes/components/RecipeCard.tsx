@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Time } from 'features/recipes/components/time'
-import { Difficulty } from 'features/recipes/components/difficulty'
+import { Time } from '@/features/recipes/components/time'
+import { Difficulty } from '@/features/recipes/components/difficulty'
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
-import { Recipe } from 'types/prisma-types'
+import { Recipe } from '@/types/prisma-types'
 
 type Props = {
   data: Recipe

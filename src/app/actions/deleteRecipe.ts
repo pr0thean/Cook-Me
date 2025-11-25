@@ -1,7 +1,7 @@
 'use server'
 
-import { requireAdmin } from 'lib/auth'
-import { prismaClient } from 'lib/prismaClient'
+import { requireAdmin } from '@/lib/auth'
+import { prismaClient } from '@/lib/prismaClient'
 import { revalidatePath } from 'next/cache'
 
 export async function deleteRecipe(recipeId: number) {

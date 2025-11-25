@@ -1,12 +1,12 @@
-import { PageParams } from 'types/page-params'
-import { Difficulty } from 'features/recipes/components/difficulty'
-import { Time } from 'features/recipes/components/time'
+import { PageParams } from '@/types/page-params'
+import { Difficulty } from '@/features/recipes/components/difficulty'
+import { Time } from '@/features/recipes/components/time'
 
-import { CheapTip } from 'features/guided-tour/components/CheapTip'
-import { getRecipeBySlug } from 'app/actions/getRecipeBySlug'
+import { CheapTip } from '@/features/guided-tour/components/CheapTip'
+import { getRecipeBySlug } from '@/app/actions/getRecipeBySlug'
 import Image from 'next/image'
-import { getRecipes } from 'app/actions/getRecipes'
-import { RichTextViewer } from 'components/molecules/text-editor/RichTextViewer'
+import { getRecipes } from '@/app/actions/getRecipes'
+import { RichTextViewer } from '@/components/molecules/text-editor/RichTextViewer'
 import { Content } from '@tiptap/react'
 
 export async function generateStaticParams() {

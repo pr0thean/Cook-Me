@@ -1,5 +1,5 @@
-import { getStatisticsData } from 'app/actions/getStatisticsData'
-import { RecipesList } from 'features/recipes/components/RecipesList'
+import { getStatisticsData } from '@/app/actions/getStatisticsData'
+import { RecipesList } from '@/features/recipes/components/RecipesList'
 import StatisticsCard from './StatisticsCard'
 
 export default async function Statistics() {

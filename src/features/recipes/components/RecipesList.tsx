@@ -1,5 +1,5 @@
-import { RecipeCard } from 'features/recipes/components/RecipeCard'
-import { Recipe } from 'types/prisma-types'
+import { RecipeCard } from '@/features/recipes/components/RecipeCard'
+import { Recipe } from '@/types/prisma-types'
 
 type Props = {
   recipes: Recipe[]

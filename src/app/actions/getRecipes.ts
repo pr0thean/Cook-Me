@@ -1,7 +1,7 @@
 'use server'
 
 import { Difficulty } from '@prisma/client'
-import { prismaClient } from 'lib/prismaClient'
+import { prismaClient } from '@/lib/prismaClient'
 
 interface GetRecipesParams {
   search?: string

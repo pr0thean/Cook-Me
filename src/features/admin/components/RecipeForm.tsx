@@ -1,15 +1,15 @@
 'use client'
 
-import { createRecipe } from 'app/actions/createRecipe'
-import { deleteCategory } from 'app/actions/deleteCategory'
-import { Button } from 'components/atoms/Button'
-import { FileInput } from 'components/atoms/FileInput'
-import { TextInput } from 'components/atoms/TextInput'
-import { TextEditor } from 'components/molecules/text-editor/TextEditor'
+import { createRecipe } from '@/app/actions/createRecipe'
+import { deleteCategory } from '@/app/actions/deleteCategory'
+import { Button } from '@/components/atoms/Button'
+import { FileInput } from '@/components/atoms/FileInput'
+import { TextInput } from '@/components/atoms/TextInput'
+import { TextEditor } from '@/components/molecules/text-editor/TextEditor'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { Category, Difficulty, Tag } from '@prisma/client'
 import { useRef, useState } from 'react'
-import { Select } from 'components/atoms/select/Select'
+import { Select } from '@/components/atoms/select/Select'
 
 const difficultyOptions: { label: string; value: Difficulty }[] = [
   { label: 'Easy', value: Difficulty.EASY },

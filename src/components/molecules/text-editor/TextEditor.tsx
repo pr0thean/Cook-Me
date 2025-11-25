@@ -1,6 +1,6 @@
 'use client'
 
-import { Label } from 'components/atoms/Label'
+import { Label } from '@/components/atoms/Label'
 import './tiptap.css'
 import { Editor, EditorContent, useEditor, useEditorState } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'

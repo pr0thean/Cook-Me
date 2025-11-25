@@ -1,11 +1,11 @@
-import { getCategories } from 'app/actions/getCategories'
-import { getTags } from 'app/actions/getTags'
-import { CategoryForm } from 'features/admin/components/CategoryForm'
-import { RecipeForm } from 'features/admin/components/RecipeForm'
-import { RecipesList } from 'features/admin/components/RecipesList'
-import { TagForm } from 'features/admin/components/TagForm'
-import { SignOutButton } from 'features/login/SignOutButton'
-import { requireAdmin } from 'lib/auth'
+import { getCategories } from '@/app/actions/getCategories'
+import { getTags } from '@/app/actions/getTags'
+import { CategoryForm } from '@/features/admin/components/CategoryForm'
+import { RecipeForm } from '@/features/admin/components/RecipeForm'
+import { RecipesList } from '@/features/admin/components/RecipesList'
+import { TagForm } from '@/features/admin/components/TagForm'
+import { SignOutButton } from '@/features/login/SignOutButton'
+import { requireAdmin } from '@/lib/auth'
 
 export default async function AdminPage() {
   await requireAdmin()

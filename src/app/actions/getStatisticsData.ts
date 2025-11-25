@@ -1,6 +1,6 @@
 'use server'
 
-import { prismaClient } from 'lib/prismaClient'
+import { prismaClient } from '@/lib/prismaClient'
 
 export async function getStatisticsData() {
   const [recentRecipes, categoryStats, totalRecipes, totalCategories] = await Promise.all([

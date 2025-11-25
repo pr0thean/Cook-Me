@@ -4,9 +4,9 @@ import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
 import { useDebounceValue } from 'usehooks-ts'
 import { useUpdateEffect } from 'react-use'
-import { TextInput } from 'components/atoms/TextInput'
-import { Select } from 'components/atoms/select/Select'
-import { SelectOption } from 'types/select-option'
+import { TextInput } from '@/components/atoms/TextInput'
+import { Select } from '@/components/atoms/select/Select'
+import { SelectOption } from '@/types/select-option'
 import { useOptimistic, useState, useTransition } from 'react'
 
 type Props = {
