@@ -1,7 +1,0 @@
-query getPage($slug: String!) {
-  landingPageCollection(where: { slug: $slug }, limit: 1) {
-    items {
-      ...Page
-    }
-  }
-}

@@ -6,8 +6,6 @@
 .pnp.js
 .yarn/install-state.gz
 
-# testing
-/coverage
 
 # next.js
 /.next/
@@ -36,10 +34,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-#contetful
-contentful/export.json
-src/types/contentful/generated-types
+# prisma
+/src/generated/prisma
 
-# graphql
-*.schema.json
-src/services/contentful/generated-types.ts
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

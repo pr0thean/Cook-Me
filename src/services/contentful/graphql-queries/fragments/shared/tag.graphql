@@ -1,3 +1,0 @@
-fragment Tag on Tag {
-  name
-}

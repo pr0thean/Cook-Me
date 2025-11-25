@@ -1,6 +1,0 @@
-fragment Hero on Hero {
-  heading
-  image {
-    ...Image
-  }
-}

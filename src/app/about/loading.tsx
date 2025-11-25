@@ -1,4 +1,4 @@
-import SkeletonLoader from '@components/layout/skeleton-loader'
+import SkeletonLoader from '@/components/molecules/SkeletonLoader'
 
 export default function Loading() {
   return <SkeletonLoader type="page" />

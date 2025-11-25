@@ -1,34 +1,29 @@
-import Hero from '@components/molecules/hero'
-import RecipesList from '@features/recipes/components/recipes-list'
-import { getCategories } from '@features/categories/operations/get-categories'
-import { getRecipesByCategory } from '@features/recipes/operations/get-recipes-by-category'
-import { PageParams } from '@typings/page-params'
+import { getCategoryBySlug } from '@/app/actions/getCategoryBySlug'
+import { Hero } from '@/components/molecules/Hero'
+import { RecipesList } from '@/features/recipes/components/RecipesList'
+import { PageParams } from '@/types/page-params'
 
-export default async function CategoryPage({ params }: PageParams) {
-  const categories = await getCategories(params.slug)
-  const recipes = await getRecipesByCategory(params.slug)
+export const revalidate = 86400 // 24 hours
+export const dynamicParams = true
 
-  if (recipes.isErr()) {
-    throw new Error('Failed to load recipes')
+export default async function CategoryPage({ params }: { params: PageParams }) {
+  const { slug } = await params
+  const category = await getCategoryBySlug(slug)
+
+  if (!category) {
+    throw new Error('Category not found')
   }
 
-  let hero
-
-  if (categories.isOk() && categories.value) {
-    hero = {
-      image: categories.value[0].image,
-      heading: categories.value[0].title,
-    }
-  }
+  const recipes = category?.recipes || []
 
   return (
     <div className="space-y-4 md:space-y-6">
-      {hero && <Hero image={hero.image} heading={hero.heading} />}
+      <Hero heading={category?.name} imageUrl={category?.imageUrl || undefined} />
 
-      {!recipes.value ? (
-        <div className="text-center text-yellow">No recipes found</div>
+      {recipes.length === 0 ? (
+        <div className="text-yellow text-center">No recipes found</div>
       ) : (
-        <RecipesList recipes={recipes.value} />
+        <RecipesList recipes={recipes} />
       )}
     </div>
   )

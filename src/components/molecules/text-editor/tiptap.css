@@ -1,0 +1,37 @@
+.tiptap {
+  :first-child {
+    margin-top: 0;
+  }
+
+  /* List styles */
+  ul {
+    padding: 0 1rem;
+    list-style: disc;
+
+    li p {
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
+    }
+  }
+
+
+  /* Heading styles */
+  h2,
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+}
+
+.tiptap.ProseMirror {
+  outline: none;
+}

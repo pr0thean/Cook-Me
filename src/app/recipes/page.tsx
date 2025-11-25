@@ -1,41 +1,26 @@
-import Hero from '@components/molecules/hero'
-import { getPage } from '@features/pages/operations/get-page'
-import { getRecipes } from '@features/recipes/operations/get-recipes'
-import RecipesList from '@features/recipes/components/recipes-list'
-import { FiltersContainer } from '@components/molecules/filters-container'
+import { Hero } from '@/components/molecules/Hero'
+import { RecipesList } from '@/features/recipes/components/RecipesList'
+import { FiltersContainer } from '@/features/recipes/components/FiltersContainer'
+import { getRecipes } from '@/app/actions/getRecipes'
+import { SearchParams } from '@/types/page-params'
 
-export default async function RecipesPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | undefined }
-}) {
-  const page = await getPage('recipes')
-  const { search, level, category, tag } = searchParams
-  const recipes = await getRecipes(search, level, category, tag)
-
-  if (recipes.isErr()) {
-    throw new Error('Failed to load recipes')
-  }
-
-  let hero
-
-  if (page.isOk() && page.value) {
-    hero = page.value[0].hero
-  }
+export default async function RecipesPage(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams
+  const recipes = await getRecipes(searchParams)
 
   return (
     <div>
-      {hero && <Hero image={hero.image} heading={hero.heading} />}
+      <Hero heading="List of all recipes" imageUrl="/assets/images/all-recipes.jpeg" />
 
       <div className="mt-6 md:mt-8">
         <FiltersContainer />
       </div>
 
       <div className="mt-8 md:mt-10">
-        {!recipes.value ? (
-          <div className="text-center text-yellow">No recipes found</div>
+        {recipes.length === 0 ? (
+          <div className="text-yellow text-center">No recipes found</div>
         ) : (
-          <RecipesList recipes={recipes.value} />
+          <RecipesList recipes={recipes} />
         )}
       </div>
     </div>

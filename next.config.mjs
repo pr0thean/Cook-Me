@@ -4,13 +4,15 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'images.ctfassets.net',
+                hostname: 'oftavkrverzqlgjmvjii.supabase.co'
             }
         ]
     },
     experimental: {
-        instrumentationHook: true,
-      },
+        serverActions: {
+            bodySizeLimit: '3MB',
+        },
+    },
 };
 
 export default nextConfig;

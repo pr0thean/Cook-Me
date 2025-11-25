@@ -6,102 +6,56 @@ on:
       - main
 
 env:
-  CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
-  CONTENTFUL_CODEGEN_TOKEN: ${{ secrets.CONTENTFUL_CODEGEN_TOKEN }}
-  CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
-  NEXT_PUBLIC_API_MOCKING: true
+    DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+    NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
 
 jobs:
-  install-and-build:
+  test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
-      - name: Cancel Previous Runs 🛑
-        uses: styfle/cancel-workflow-action@0.11.0
-
       - name: Checkout 🛎
         uses: actions/checkout@v4
 
-      - name: Setup node ⎔
+      - name: Setup Node ⎔
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: 'npm'
 
-      - name: Cache dependencies 📁
-        uses: actions/cache@v4
-        id: npm-cache
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}-cypress-${{ hashFiles('**/package.json') }}
-
-      - name: Install NPM dependencies 📦
-        if: steps.npm-cache.outputs.cache-hit != 'true'
+      - name: Install dependencies 📦
         run: npm ci
+
+      - name: Cache Playwright browsers 🎭
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.OS }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Playwright browsers 🌐
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright deps (if cached) 🔧
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
 
       - name: Build project 👷‍♀️
         run: npm run build
 
-      - name: Upload build artifacts 🏺
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: .next
-          include-hidden-files: true
-          if-no-files-found: error
-
-  run-tests:
-    needs: install-and-build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@v4
-
-      - name: Setup node ⎔
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Cache dependencies 📁
-        uses: actions/cache@v4
-        with:
-          path: |
-            **/node_modules
-            ~/.cache/Cypress
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}-cypress-${{ hashFiles('**/package.json') }}
-
-      - name: Download build artifacts 📥
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: .next
-
-      - name: Verify Cypress 🔍
-        run: npx cypress verify
-
       - name: Run Component tests 🧪
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          component: true
-          browser: chrome
+        run: npm run test:component
 
-      - name: Run E2E tests 🌳
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          start: npm run start
-          wait-on: http://localhost:3000
-          config: baseUrl=http://localhost:3000
-          browser: chrome
-          spec: cypress/e2e/*
+      - name: Run E2E tests 🧪
+        run: npm run test:e2e
 
-      - name: Upload Cypress failure screenshots 📸
+      - name: Upload test report 📊
         uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-          if-no-files-found: ignore
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

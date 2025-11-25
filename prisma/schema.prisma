@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  title       String     @unique
+  slug        String     @unique
+  description String?
+  ingredients Json?      @db.Json
+  instruction Json?      @db.Json
+  time        Int?
+  difficulty  Difficulty @default(MEDIUM)
+  imageUrl    String?
+
+  categories Category[] // Many-to-many relation
+  comments   Comment[] // One-to-many relation
+  tags       Tag[] // Many-to-many relation
+
+  @@map("recipes")
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  name      String   @unique
+  slug      String   @unique
+  imageUrl  String?
+
+  recipes Recipe[] // Many-to-many relation
+
+  @@map("categories")
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  name      String   @unique
+  recipes   Recipe[] // Many-to-many relation
+
+  @@map("tags")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  content   String
+  imageUrl  String?
+
+  recipeId Int    @map("recipe_id") // One-to-many relation
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  userId Int  @map("user_id") // One-to-many relation
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  name      String
+  email     String   @unique
+  role      Role     @default(USER)
+
+  comments Comment[] // One-to-many relation
+
+  @@map("users")
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+
+  @@map("difficulty")
+}
+
+enum Role {
+  USER
+  ADMIN
+
+  @@map("role")
+}
