@@ -19,7 +19,7 @@ export const Hero = ({ heading, imageUrl }: Props) => {
         />
       )}
 
-      <h1 className="hero-text-shadow font-hero text-off-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform px-2 pb-1 text-center text-2xl font-bold whitespace-nowrap backdrop-blur-xs md:text-5xl">
+      <h1 className="hero-text-shadow font-hero text-off-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform px-2 pb-1 text-center text-3xl font-bold whitespace-nowrap backdrop-blur-xs sm:text-4xl md:text-5xl">
         {heading}
       </h1>
     </div>
