@@ -1,75 +1,65 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { RecipeCard } from './RecipeCard'
 import { getRecipes } from '@/app/actions/getRecipes'
-import { Recipe } from '@/types/prisma-types'
 import { Spinner } from '@/components/atoms/Spinner'
-
-interface RecipesListInfiniteProps {
-  initialRecipes: Recipe[]
-  initialCursor: number | null
-}
+import { useInfiniteQuery } from '@tanstack/react-query'
+import SkeletonLoader from '@/components/molecules/SkeletonLoader'
 
 const RECIPES_PER_PAGE = 10
 
-export const RecipesListInfinite = ({
-  initialRecipes,
-  initialCursor,
-}: RecipesListInfiniteProps) => {
+export const RecipesListInfinite = () => {
   const searchParams = useSearchParams()
 
-  const [recipes, setRecipes] = useState<Recipe[]>(initialRecipes)
-  const [cursor, setCursor] = useState<number | null>(initialCursor)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const search = searchParams.get('search') || undefined
+  const difficulty = searchParams.get('difficulty') || undefined
+  const category = searchParams.get('category') || undefined
+  const tag = searchParams.get('tag') || undefined
 
-  const hasNextPage = cursor !== null
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isError, error } =
+    useInfiniteQuery({
+      queryKey: ['recipes', { search, difficulty, category, tag }],
+      queryFn: async ({ pageParam }) => {
+        return getRecipes({
+          searchParams: { search, difficulty, category, tag },
+          cursor: pageParam,
+          take: RECIPES_PER_PAGE,
+        })
+      },
+      initialPageParam: undefined as number | undefined,
+      getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    })
 
-  // Reset when filters change
-  useEffect(() => {
-    setRecipes(initialRecipes)
-    setCursor(initialCursor)
-    setError(null)
-  }, [initialRecipes, initialCursor])
+  const recipes = data?.pages.flatMap((page) => page.recipes) ?? []
 
-  const loadMore = useCallback(async () => {
-    if (!cursor) return
-
-    setIsLoading(true)
-    setError(null)
-
-    try {
-      const result = await getRecipes({
-        searchParams: {
-          search: searchParams.get('search') || undefined,
-          difficulty: searchParams.get('difficulty') || undefined,
-          category: searchParams.get('category') || undefined,
-          tag: searchParams.get('tag') || undefined,
-        },
-        cursor,
-        take: RECIPES_PER_PAGE,
-      })
-
-      setRecipes((prev) => [...prev, ...result.recipes])
-      setCursor(result.nextCursor)
-    } catch (err) {
-      console.error('Error loading more recipes:', err)
-      setError('Error loading more recipes')
-    } finally {
-      setIsLoading(false)
+  const loadMore = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage()
     }
-  }, [cursor, searchParams])
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
   const [sentryRef] = useInfiniteScroll({
     loading: isLoading,
     hasNextPage,
     onLoadMore: loadMore,
-    disabled: Boolean(error),
+    disabled: isError,
     rootMargin: '0px 0px 400px 0px',
   })
+
+  if (isLoading) {
+    return <SkeletonLoader type="recipes-list" />
+  }
+
+  if (isError) {
+    return <div className="text-center text-red-500">Error loading recipes: {error?.message}</div>
+  }
+
+  if (recipes.length === 0) {
+    return <div className="text-yellow text-center">No recipes found</div>
+  }
 
   return (
     <div>
@@ -91,9 +81,7 @@ export const RecipesListInfinite = ({
         </div>
       )}
 
-      {error && <div className="mt-8 text-center text-red-500">{error}</div>}
-
-      {!hasNextPage && !isLoading && recipes.length > 0 && (
+      {!hasNextPage && !isFetchingNextPage && recipes.length > 0 && (
         <p className="mt-8 text-center text-gray-500">You&apos;ve reached the end!</p>
       )}
     </div>

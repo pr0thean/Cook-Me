@@ -1,7 +1,7 @@
 import React from 'react'
 
 type Props = {
-  type: 'frontpage' | 'page' | 'category' | 'recipes' | 'recipe'
+  type: 'frontpage' | 'page' | 'category' | 'recipes' | 'recipes-list' | 'recipe'
 }
 
 const SkeletonLoader = ({ type }: Props) => {
@@ -55,6 +55,16 @@ const SkeletonLoader = ({ type }: Props) => {
             <div key={index} className="bg-gray h-48 animate-pulse rounded-sm" />
           ))}
         </div>
+      </div>
+    )
+  }
+
+  if (type === 'recipes-list') {
+    return (
+      <div className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 md:gap-6 md:px-6">
+        {[...Array(8)].map((_, index) => (
+          <div key={index} className="bg-gray h-48 animate-pulse rounded-sm" />
+        ))}
       </div>
     )
   }
