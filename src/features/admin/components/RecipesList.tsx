@@ -11,8 +11,8 @@ export const RecipesList = () => {
 
   const fetchRecipes = async () => {
     try {
-      const data = await getRecipes()
-      setRecipes(data)
+      const result = await getRecipes()
+      setRecipes(result.recipes)
     } catch (error) {
       console.error('Error fetching recipes:', error)
     }

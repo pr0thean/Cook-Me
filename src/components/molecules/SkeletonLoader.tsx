@@ -1,7 +1,7 @@
 import React from 'react'
 
 type Props = {
-  type: 'frontpage' | 'page' | 'category' | 'recipes' | 'recipe'
+  type: 'frontpage' | 'page' | 'category' | 'recipes' | 'recipes-list' | 'recipe'
 }
 
 const SkeletonLoader = ({ type }: Props) => {
@@ -10,10 +10,20 @@ const SkeletonLoader = ({ type }: Props) => {
       <div className="min-h-screen">
         <div className="bg-gray h-64 animate-pulse md:h-96" />
 
-        <div className="grid grid-cols-2 gap-4 p-4 md:grid-cols-4 md:gap-6 md:p-6">
+        <div className="grid grid-cols-2 gap-4 p-4 sm:p-6 md:grid-cols-4 md:gap-6">
           {[...Array(8)].map((_, index) => (
             <div key={index} className="bg-gray aspect-square animate-pulse rounded-sm" />
           ))}
+        </div>
+
+        <div className="bg-gray mx-4 mt-10 mb-10 h-10 w-full animate-pulse rounded-xs sm:mx-auto sm:w-1/2" />
+
+        <div className="space-y-6 px-4 sm:px-6 md:space-y-10">
+          <div className="grid grid-cols-3 gap-4">
+            {[...Array(3)].map((_, index) => (
+              <div key={index} className="bg-gray h-24 animate-pulse rounded-sm" />
+            ))}
+          </div>
         </div>
       </div>
     )
@@ -45,6 +55,16 @@ const SkeletonLoader = ({ type }: Props) => {
             <div key={index} className="bg-gray h-48 animate-pulse rounded-sm" />
           ))}
         </div>
+      </div>
+    )
+  }
+
+  if (type === 'recipes-list') {
+    return (
+      <div className="grid grid-cols-1 gap-4 px-4 md:grid-cols-2 md:gap-6 md:px-6">
+        {[...Array(8)].map((_, index) => (
+          <div key={index} className="bg-gray h-48 animate-pulse rounded-sm" />
+        ))}
       </div>
     )
   }

@@ -10,7 +10,7 @@ import { RichTextViewer } from '@/components/molecules/text-editor/RichTextViewe
 import { Content } from '@tiptap/react'
 
 export async function generateStaticParams() {
-  const recipes = await getRecipes()
+  const { recipes } = await getRecipes()
 
   return recipes.map((recipe) => ({
     slug: recipe.slug,

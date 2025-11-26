@@ -1,13 +1,8 @@
 import { Hero } from '@/components/molecules/Hero'
-import { RecipesList } from '@/features/recipes/components/RecipesList'
 import { FiltersContainer } from '@/features/recipes/components/FiltersContainer'
-import { getRecipes } from '@/app/actions/getRecipes'
-import { SearchParams } from '@/types/page-params'
+import { RecipesListInfinite } from '@/features/recipes/components/RecipesListInfinite'
 
-export default async function RecipesPage(props: { searchParams: SearchParams }) {
-  const searchParams = await props.searchParams
-  const recipes = await getRecipes(searchParams)
-
+export default async function RecipesPage() {
   return (
     <div>
       <Hero heading="List of all recipes" imageUrl="/assets/images/all-recipes.jpeg" />
@@ -17,11 +12,7 @@ export default async function RecipesPage(props: { searchParams: SearchParams })
       </div>
 
       <div className="mt-8 md:mt-10">
-        {recipes.length === 0 ? (
-          <div className="text-yellow text-center">No recipes found</div>
-        ) : (
-          <RecipesList recipes={recipes} />
-        )}
+        <RecipesListInfinite />
       </div>
     </div>
   )

@@ -51,11 +51,10 @@ export default function AboutPage() {
           <ul>
             <li>Built with Next.js and TypeScript for a fast, modern web experience</li>
             <li>Styled using Tailwind CSS for a clean, responsive design</li>
-            <li>
-              Content managed through Contentful CMS, making it easy to keep recipes up-to-date
-            </li>
-            <li>GraphQL for efficient data querying</li>
-            <li>Rigorously tested using Cypress for both end-to-end and component testing</li>
+            <li>Data stored in Supabase</li>
+            <li>Prisma for efficient database operations</li>
+            <li>TanStack Query to query databse in an optimal way</li>
+            <li>Rigorously tested using Playwright for both end-to-end and component testing</li>
           </ul>
 
           <h2>Join Me on This Culinary Adventure</h2>
