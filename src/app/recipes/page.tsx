@@ -1,12 +1,23 @@
 import { Hero } from '@/components/molecules/Hero'
-import { RecipesList } from '@/features/recipes/components/RecipesList'
 import { FiltersContainer } from '@/features/recipes/components/FiltersContainer'
 import { getRecipes } from '@/app/actions/getRecipes'
 import { SearchParams } from '@/types/page-params'
+import { RecipesListInfinite } from '@/features/recipes/components/RecipesListInfinite'
+
+const RECIPES_PER_PAGE = 10
 
 export default async function RecipesPage(props: { searchParams: SearchParams }) {
   const searchParams = await props.searchParams
-  const recipes = await getRecipes(searchParams)
+
+  const { recipes, nextCursor } = await getRecipes({
+    searchParams: {
+      search: searchParams.search,
+      difficulty: searchParams.difficulty,
+      category: searchParams.category,
+      tag: searchParams.tag,
+    },
+    take: RECIPES_PER_PAGE,
+  })
 
   return (
     <div>
@@ -20,7 +31,7 @@ export default async function RecipesPage(props: { searchParams: SearchParams })
         {recipes.length === 0 ? (
           <div className="text-yellow text-center">No recipes found</div>
         ) : (
-          <RecipesList recipes={recipes} />
+          <RecipesListInfinite initialRecipes={recipes} initialCursor={nextCursor} />
         )}
       </div>
     </div>
