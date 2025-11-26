@@ -25,4 +25,5 @@ This website serves as a digital cookbook, allowing me to keep all my cherished 
 - Tailwindcss
 - Supabase (Database + Auth)
 - Prisma (Database CRUD operations)
+- TanStack Query (caching recipes page)
 - Playwright (E2E and Component Testing)

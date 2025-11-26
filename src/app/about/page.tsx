@@ -53,6 +53,7 @@ export default function AboutPage() {
             <li>Styled using Tailwind CSS for a clean, responsive design</li>
             <li>Data stored in Supabase</li>
             <li>Prisma for efficient database operations</li>
+            <li>TanStack Query to query databse in an optimal way</li>
             <li>Rigorously tested using Playwright for both end-to-end and component testing</li>
           </ul>
 
