@@ -70,10 +70,5 @@
     "rimraf": "^6.1.2",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3"
-  },
-  "msw": {
-    "workerDirectory": [
-      "public"
-    ]
   }
 }
