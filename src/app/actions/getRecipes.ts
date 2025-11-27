@@ -15,7 +15,6 @@ interface GetRecipesParams {
 }
 
 export async function getRecipes(params?: GetRecipesParams) {
-  console.log('getRecipes')
   const { searchParams, cursor, take } = params || {}
   const { search, difficulty, category, tag } = searchParams || {}
 
