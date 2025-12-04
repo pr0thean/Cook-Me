@@ -10,11 +10,16 @@ import { RichTextViewer } from '@/components/molecules/text-editor/RichTextViewe
 import { Content } from '@tiptap/react'
 
 export async function generateStaticParams() {
-  const { recipes } = await getRecipes()
+  try {
+    const { recipes } = await getRecipes()
 
-  return recipes.map((recipe) => ({
-    slug: recipe.slug,
-  }))
+    return recipes.map((recipe) => ({
+      slug: recipe.slug,
+    }))
+  } catch (error) {
+    console.warn('Could not fetch recipes for static generation:', error)
+    return []
+  }
 }
 
 export const revalidate = 86400 // 24 hours
