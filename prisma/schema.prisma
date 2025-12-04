@@ -18,10 +18,9 @@ model Recipe {
   time        Int?
   difficulty  Difficulty @default(MEDIUM)
   imageUrl    String?
-
-  categories Category[] // Many-to-many relation
-  comments   Comment[] // One-to-many relation
-  tags       Tag[] // Many-to-many relation
+  comments    Comment[]
+  categories  Category[] @relation("CategoryToRecipe")
+  tags        Tag[]      @relation("RecipeToTag")
 
   @@map("recipes")
 }
@@ -32,8 +31,7 @@ model Category {
   name      String   @unique
   slug      String   @unique
   imageUrl  String?
-
-  recipes Recipe[] // Many-to-many relation
+  recipes   Recipe[] @relation("CategoryToRecipe")
 
   @@map("categories")
 }
@@ -42,7 +40,7 @@ model Tag {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   name      String   @unique
-  recipes   Recipe[] // Many-to-many relation
+  recipes   Recipe[] @relation("RecipeToTag")
 
   @@map("tags")
 }
@@ -52,24 +50,21 @@ model Comment {
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   content   String
   imageUrl  String?
-
-  recipeId Int    @map("recipe_id") // One-to-many relation
-  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-
-  userId Int  @map("user_id") // One-to-many relation
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipeId  Int      @map("recipe_id")
+  userId    Int      @map("user_id")
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("comments")
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
   name      String
-  email     String   @unique
-  role      Role     @default(USER)
-
-  comments Comment[] // One-to-many relation
+  email     String    @unique
+  role      Role      @default(USER)
+  comments  Comment[]
 
   @@map("users")
 }
