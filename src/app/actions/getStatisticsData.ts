@@ -5,7 +5,7 @@ import { prismaClient } from '@/lib/prismaClient'
 export async function getStatisticsData() {
   const [recentRecipes, categoryStats, totalRecipes, totalCategories] = await Promise.all([
     // Get 4 most recent recipes
-    await prismaClient.recipe.findMany({
+    prismaClient.recipe.findMany({
       take: 4,
       orderBy: {
         createdAt: 'desc',
@@ -16,7 +16,7 @@ export async function getStatisticsData() {
     }),
 
     // Get most popular category (category with most recipes)
-    await prismaClient.category.findMany({
+    prismaClient.category.findMany({
       include: {
         _count: {
           select: {

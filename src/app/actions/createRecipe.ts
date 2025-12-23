@@ -80,6 +80,7 @@ export async function createRecipe(formData: FormData): Promise<CreateRecipeResu
       }
     }
 
+    revalidatePath('/')
     revalidatePath('/admin')
     revalidatePath('/recipes')
 

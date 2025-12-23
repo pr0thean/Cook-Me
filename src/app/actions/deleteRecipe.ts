@@ -12,6 +12,7 @@ export async function deleteRecipe(recipeId: number) {
       where: { id: recipeId },
     })
 
+    revalidatePath('/')
     revalidatePath('/admin')
     revalidatePath('/recipes')
 

@@ -39,9 +39,9 @@ export async function createCategory(formData: FormData) {
       })
     }
 
+    revalidatePath('/')
     revalidatePath('/admin')
     revalidatePath('/recipes')
-    revalidatePath('/')
 
     return { success: true, categoryId: category.id.toString() }
   } catch (error) {
