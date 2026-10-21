@@ -5,7 +5,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { QuestionMarkCircleIcon, UserIcon } from '@heroicons/react/24/outline'
 import { HeaderSearch, ClickOutsideEvent } from '@/features/layout/components/HeaderSearch'
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 import { HeaderLink } from '@/components/atoms/HeaderLink'
 import Link from 'next/link'
 

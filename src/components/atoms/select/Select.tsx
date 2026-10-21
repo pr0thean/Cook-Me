@@ -32,8 +32,7 @@ type SelectItemProps<T> = {
 type TriggerVariantProps = VariantProps<typeof triggerVariants>
 
 interface BaseProps<T extends string>
-  extends Omit<SelectProps, 'onValueChange'>,
-    TriggerVariantProps {
+  extends Omit<SelectProps, 'onValueChange'>, TriggerVariantProps {
   name: string
   items: SelectItemProps<T>[]
   label?: string

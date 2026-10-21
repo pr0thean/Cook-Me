@@ -5,7 +5,7 @@ import { prismaClient } from '@/lib/prismaClient'
 import { uploadImage } from '@/lib/storage'
 import { slugify } from '@/utils/slugify'
 import { revalidatePath } from 'next/cache'
-import { Difficulty } from '@prisma/client'
+import { Difficulty } from '@/generated/prisma/client'
 
 type CreateRecipeResult = { success: true } | { success: false; error: string }
 
