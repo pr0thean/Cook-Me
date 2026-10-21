@@ -1,4 +1,4 @@
-import { Difficulty as DifficultyType } from '@prisma/client'
+import { Difficulty as DifficultyType } from '@/generated/prisma/browser'
 import clsx from 'clsx'
 
 export const Difficulty = ({

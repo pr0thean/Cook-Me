@@ -1,5 +1,5 @@
 {
   "permissions": {
-    "deny": ["Bash(curl *)", "Read(./.env)", "Read(./.env.*)"]
+    "deny": ["Bash(curl *)", "Read(./.env)", "Read(./.env.*)", "Edit(./.env)", "Edit(./.env.*)"]
   }
 }

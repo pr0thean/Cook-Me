@@ -14,6 +14,12 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
+    // Playwright build output
+    'playwright/.cache/**',
+    'playwright-report/**',
+    'test-results/**',
+    // Prisma generated client
+    'src/generated/**',
   ]),
 ])
  

@@ -9,7 +9,7 @@ type Props = {
 
 export const Tip = ({ text, onClose }: Props) => {
   return (
-    <div className="flex items-center gap-1 rounded-full bg-orange px-2 py-1 text-sm text-black">
+    <div className="bg-orange flex items-center gap-1 rounded-full px-2 py-1 text-sm text-black">
       <SparklesIcon width={14} fill="hsl(var(--color-gold))" />
 
       <span>Tip: </span>
