@@ -6,7 +6,11 @@
     "name": "Jakub Wolak",
     "email": "kuba.wolak@gmail.com"
   },
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
