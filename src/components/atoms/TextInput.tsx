@@ -81,7 +81,11 @@ export const TextInput = ({
       </div>
 
       {error && (
-        <span id={errorId} role="alert" className="text-sm text-red-100">
+        <span
+          id={errorId}
+          role="alert"
+          className={clsx('text-sm', variant === 'secondary' ? 'text-red-700' : 'text-red-300')}
+        >
           {error}
         </span>
       )}

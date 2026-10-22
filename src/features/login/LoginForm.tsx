@@ -1,58 +1,35 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { browserClient } from '@/lib/supabase/browserClient'
+import { useActionState, useState } from 'react'
+import { signIn } from '@/app/actions/signIn'
 import { Button } from '@/components/atoms/Button'
 import { TextInput } from '@/components/atoms/TextInput'
+import type { SignInState } from '@/utils/form-validation'
+
+type Field = 'email' | 'password'
 
 export function LoginForm() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [state, action, pending] = useActionState(signIn, undefined)
+  // Remembers which submit result each field was edited after, so its error hides until the next submit
+  const [editedAfter, setEditedAfter] = useState<Partial<Record<Field, SignInState>>>({})
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setLoading(true)
+  const fieldError = (field: Field) =>
+    editedAfter[field] === state ? undefined : state?.fieldErrors?.[field]?.[0]
 
-    try {
-      const supabase = browserClient()
-
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
-
-      if (error) {
-        setError(error.message)
-        return
-      }
-
-      // Redirect to admin
-      router.push('/admin')
-      router.refresh()
-    } catch (err) {
-      console.error(err)
-      setError('An unexpected error occurred')
-    } finally {
-      setLoading(false)
-    }
-  }
+  const markEdited = (field: Field) => () => setEditedAfter((prev) => ({ ...prev, [field]: state }))
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form action={action} noValidate className="space-y-6">
       <div className="space-y-4">
         <TextInput
           name="email"
           label="Email address"
           type="email"
-          required
-          value={email}
+          autoComplete="email"
+          defaultValue={state?.values?.email}
           placeholder="Email address"
-          onChange={(e) => setEmail(e.target.value)}
+          error={fieldError('email')}
+          onChange={markEdited('email')}
           variant="secondary"
         />
 
@@ -60,17 +37,21 @@ export function LoginForm() {
           name="password"
           label="Password"
           type="password"
-          required
-          value={password}
+          autoComplete="current-password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          error={fieldError('password')}
+          onChange={markEdited('password')}
           variant="secondary"
         />
       </div>
 
-      <Button label={loading ? 'Signing in...' : 'Sign in'} type="submit" disabled={loading} />
+      <Button label={pending ? 'Signing in...' : 'Sign in'} type="submit" disabled={pending} />
 
-      {error && <p className="text-sm text-red-800">{error}</p>}
+      {state?.formError && (
+        <p role="alert" className="text-sm text-red-800">
+          {state.formError}
+        </p>
+      )}
     </form>
   )
 }
