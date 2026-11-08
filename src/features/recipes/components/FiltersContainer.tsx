@@ -1,10 +1,7 @@
-'use client'
-
-import { getCategories } from '@/app/actions/getCategories'
-import { Filters } from './Filters'
-import { getTags } from '@/app/actions/getTags'
+import { getCategories } from '@/lib/data/categories'
+import { getTags } from '@/lib/data/tags'
 import { SelectOption } from '@/types/select-option'
-import { useQuery } from '@tanstack/react-query'
+import { Filters } from './Filters'
 
 const difficultyOptions: SelectOption[] = [
   { value: 'Easy', label: 'Easy' },
@@ -12,16 +9,8 @@ const difficultyOptions: SelectOption[] = [
   { value: 'Hard', label: 'Hard' },
 ]
 
-export const FiltersContainer = () => {
-  const { data: categories = [] } = useQuery({
-    queryKey: ['categories'],
-    queryFn: () => getCategories(),
-  })
-
-  const { data: tags = [] } = useQuery({
-    queryKey: ['tags'],
-    queryFn: () => getTags(),
-  })
+export const FiltersContainer = async () => {
+  const [categories, tags] = await Promise.all([getCategories(), getTags()])
 
   const categoryOptions: SelectOption[] = categories.map((category) => ({
     value: category.slug,

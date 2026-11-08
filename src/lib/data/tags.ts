@@ -1,9 +1,7 @@
-'use server'
+import 'server-only'
 
 import { prismaClient } from '@/lib/prismaClient'
 
 export async function getTags() {
-  const tags = await prismaClient.tag.findMany()
-
-  return tags
+  return prismaClient.tag.findMany()
 }

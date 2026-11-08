@@ -1,4 +1,4 @@
-import { getCategoryBySlug } from '@/app/actions/getCategoryBySlug'
+import { getCategoryBySlug } from '@/lib/data/categories'
 import { Hero } from '@/components/molecules/Hero'
 import { RecipesList } from '@/features/recipes/components/RecipesList'
 import { PageParams } from '@/types/page-params'

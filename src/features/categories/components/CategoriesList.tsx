@@ -1,4 +1,4 @@
-import { getCategories } from '@/app/actions/getCategories'
+import { getCategories } from '@/lib/data/categories'
 import Image from 'next/image'
 import Link from 'next/link'
 

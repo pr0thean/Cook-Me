@@ -4,12 +4,26 @@ import { useCallback } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { RecipeCard } from './RecipeCard'
-import { getRecipes } from '@/app/actions/getRecipes'
+import type { RecipesPage } from '@/lib/data/recipes'
 import { Spinner } from '@/components/atoms/Spinner'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import SkeletonLoader from '@/components/molecules/SkeletonLoader'
 
 const RECIPES_PER_PAGE = 10
+
+async function fetchRecipesPage(params: Record<string, string | number | undefined>) {
+  const query = new URLSearchParams()
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined) query.set(key, String(value))
+  }
+
+  const res = await fetch(`/api/recipes?${query}`)
+  if (!res.ok) {
+    throw new Error(`Failed to load recipes (${res.status})`)
+  }
+
+  return (await res.json()) as RecipesPage
+}
 
 export const RecipesListInfinite = () => {
   const searchParams = useSearchParams()
@@ -22,13 +36,15 @@ export const RecipesListInfinite = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isError, error } =
     useInfiniteQuery({
       queryKey: ['recipes', { search, difficulty, category, tag }],
-      queryFn: async ({ pageParam }) => {
-        return getRecipes({
-          searchParams: { search, difficulty, category, tag },
+      queryFn: ({ pageParam }) =>
+        fetchRecipesPage({
+          search,
+          difficulty,
+          category,
+          tag,
           cursor: pageParam,
           take: RECIPES_PER_PAGE,
-        })
-      },
+        }),
       initialPageParam: undefined as number | undefined,
       getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
     })

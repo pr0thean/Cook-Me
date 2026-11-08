@@ -3,19 +3,14 @@ import { Difficulty } from '@/features/recipes/components/difficulty'
 import { Time } from '@/features/recipes/components/time'
 
 import { CheapTip } from '@/features/guided-tour/components/CheapTip'
-import { getRecipeBySlug } from '@/app/actions/getRecipeBySlug'
+import { getRecipeBySlug, getRecipeSlugs } from '@/lib/data/recipes'
 import Image from 'next/image'
-import { getRecipes } from '@/app/actions/getRecipes'
 import { RichTextViewer } from '@/components/molecules/text-editor/RichTextViewer'
 import { Content } from '@tiptap/react'
 
 export async function generateStaticParams() {
   try {
-    const { recipes } = await getRecipes()
-
-    return recipes.map((recipe) => ({
-      slug: recipe.slug,
-    }))
+    return await getRecipeSlugs()
   } catch (error) {
     console.warn('Could not fetch recipes for static generation:', error)
     return []
