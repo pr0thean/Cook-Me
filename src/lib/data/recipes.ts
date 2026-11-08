@@ -1,22 +1,37 @@
-'use server'
+import 'server-only'
 
-import { Difficulty } from '@/generated/prisma/client'
+import { Difficulty, Prisma } from '@/generated/prisma/client'
 import { prismaClient } from '@/lib/prismaClient'
 
+// Only the fields RecipeCard renders; keeps list payloads small and free of Dates
+export const recipeCardSelect = {
+  id: true,
+  slug: true,
+  title: true,
+  imageUrl: true,
+  difficulty: true,
+  time: true,
+  tags: { select: { name: true } },
+} satisfies Prisma.RecipeSelect
+
+export type RecipeCardData = Prisma.RecipeGetPayload<{ select: typeof recipeCardSelect }>
+
+export interface RecipeFilters {
+  search?: string
+  difficulty?: string
+  category?: string
+  tag?: string
+}
+
 interface GetRecipesParams {
-  searchParams?: {
-    search?: string
-    difficulty?: string
-    category?: string
-    tag?: string
-  }
+  filters?: RecipeFilters
   cursor?: number
   take?: number
 }
 
 export async function getRecipes(params?: GetRecipesParams) {
-  const { searchParams, cursor, take } = params || {}
-  const { search, difficulty, category, tag } = searchParams || {}
+  const { filters, cursor, take } = params || {}
+  const { search, difficulty, category, tag } = filters || {}
 
   const recipes = await prismaClient.recipe.findMany({
     ...(take && { take: take + 1 }), // Fetch one extra to check if there's more
@@ -50,9 +65,7 @@ export async function getRecipes(params?: GetRecipesParams) {
       }),
     },
 
-    include: {
-      tags: true,
-    },
+    select: recipeCardSelect,
 
     orderBy: {
       createdAt: 'desc',
@@ -73,4 +86,19 @@ export async function getRecipes(params?: GetRecipesParams) {
     recipes: data,
     nextCursor: hasMore ? data[data.length - 1].id : null,
   }
+}
+
+export type RecipesPage = Awaited<ReturnType<typeof getRecipes>>
+
+export async function getRecipeSlugs() {
+  return prismaClient.recipe.findMany({ select: { slug: true } })
+}
+
+export async function getRecipeBySlug(slug: string) {
+  return prismaClient.recipe.findUnique({
+    where: { slug },
+    include: {
+      tags: true,
+    },
+  })
 }

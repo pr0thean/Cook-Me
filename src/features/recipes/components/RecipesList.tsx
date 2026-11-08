@@ -1,8 +1,8 @@
 import { RecipeCard } from '@/features/recipes/components/RecipeCard'
-import { Recipe } from '@/types/prisma-types'
+import type { RecipeCardData } from '@/lib/data/recipes'
 
 type Props = {
-  recipes: Recipe[]
+  recipes: RecipeCardData[]
 }
 
 export const RecipesList = ({ recipes }: Props) => {

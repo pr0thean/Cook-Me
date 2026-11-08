@@ -3,10 +3,10 @@ import Image from 'next/image'
 import { Time } from '@/features/recipes/components/time'
 import { Difficulty } from '@/features/recipes/components/difficulty'
 import { PercentBadgeIcon } from '@heroicons/react/24/outline'
-import { Recipe } from '@/types/prisma-types'
+import type { RecipeCardData } from '@/lib/data/recipes'
 
 type Props = {
-  data: Recipe
+  data: RecipeCardData
 }
 
 export const RecipeCard = ({ data }: Props) => {

@@ -1,4 +1,4 @@
-import { getStatisticsData } from '@/app/actions/getStatisticsData'
+import { getStatisticsData } from '@/lib/data/statistics'
 import { RecipesList } from '@/features/recipes/components/RecipesList'
 import StatisticsCard from './StatisticsCard'
 

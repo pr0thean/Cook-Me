@@ -1,5 +1,5 @@
-import { getCategories } from '@/app/actions/getCategories'
-import { getTags } from '@/app/actions/getTags'
+import { getCategories } from '@/lib/data/categories'
+import { getTags } from '@/lib/data/tags'
 import { CategoryForm } from '@/features/admin/components/CategoryForm'
 import { RecipeForm } from '@/features/admin/components/RecipeForm'
 import { RecipesList } from '@/features/admin/components/RecipesList'

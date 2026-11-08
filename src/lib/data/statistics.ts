@@ -1,6 +1,7 @@
-'use server'
+import 'server-only'
 
 import { prismaClient } from '@/lib/prismaClient'
+import { recipeCardSelect } from './recipes'
 
 export async function getStatisticsData() {
   const [recentRecipes, categoryStats, totalRecipes, totalCategories] = await Promise.all([
@@ -10,9 +11,7 @@ export async function getStatisticsData() {
       orderBy: {
         createdAt: 'desc',
       },
-      include: {
-        tags: true,
-      },
+      select: recipeCardSelect,
     }),
 
     // Get most popular category (category with most recipes)

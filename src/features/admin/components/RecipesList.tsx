@@ -1,17 +1,17 @@
 'use client'
 import { deleteRecipe } from '@/app/actions/deleteRecipe'
-import { getRecipes } from '@/app/actions/getRecipes'
+import { getAdminRecipes } from '@/app/actions/getAdminRecipes'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { useState } from 'react'
-import { Recipe } from '@/types/prisma-types'
+import type { RecipeCardData } from '@/lib/data/recipes'
 
 export const RecipesList = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([])
+  const [recipes, setRecipes] = useState<RecipeCardData[]>([])
 
   const fetchRecipes = async () => {
     try {
-      const result = await getRecipes()
+      const result = await getAdminRecipes()
       setRecipes(result.recipes)
     } catch (error) {
       console.error('Error fetching recipes:', error)
