@@ -1,4 +1,5 @@
-import { serverClient } from './supabase/serverClient'
+import 'server-only'
+import { adminClient } from './supabase/adminClient'
 
 type Bucket = 'recipes-images' | 'categories-images'
 
@@ -8,7 +9,7 @@ export function getImageUrl(path: string, bucket: Bucket) {
 }
 
 export async function uploadImage(file: File, sourceId: string, bucket: Bucket) {
-  const supabase = await serverClient()
+  const supabase = adminClient()
 
   // Generate unique filename
   const fileExt = file.name.split('.').pop()
@@ -34,7 +35,7 @@ export async function uploadImage(file: File, sourceId: string, bucket: Bucket) 
 }
 
 export async function deleteImage(path: string, bucket: Bucket) {
-  const supabase = await serverClient()
+  const supabase = adminClient()
 
   const { error } = await supabase.storage.from(bucket).remove([path])
 

@@ -1,12 +1,15 @@
 import { LoginForm } from '@/features/login/LoginForm'
 import { getCurrentUser } from '@/lib/auth'
+import { defaultPathForRole, safeNextPath } from '@/utils/auth-redirect'
 import { redirect } from 'next/navigation'
+import type { SearchParams } from '@/types/page-params'
 
-export default async function LoginPage() {
+export default async function AuthPage({ searchParams }: { searchParams: SearchParams }) {
+  const next = safeNextPath((await searchParams).next) // page to send the user back to after they sign in
   const user = await getCurrentUser()
 
   if (user) {
-    redirect('/admin')
+    redirect(next ?? defaultPathForRole(user.role))
   }
 
   return (
@@ -17,7 +20,7 @@ export default async function LoginPage() {
           <p className="text-blue-gray mt-2 text-sm">Sign in to manage recipes</p>
         </div>
 
-        <LoginForm />
+        <LoginForm next={next} />
       </div>
     </div>
   )

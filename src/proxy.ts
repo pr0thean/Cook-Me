@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import { authUrl } from '@/utils/auth-redirect'
 
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next({
@@ -33,7 +34,9 @@ export async function proxy(request: NextRequest) {
   // Protect /admin routes
   if (request.nextUrl.pathname.startsWith('/admin')) {
     if (!user) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      const { pathname, search } = request.nextUrl
+
+      return NextResponse.redirect(new URL(authUrl(pathname + search), request.url))
     }
   }
 

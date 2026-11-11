@@ -7,3 +7,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Rules
 
 - No .env access — never read or edit .env files in Cook-Me by any means (Bash cat/grep/sed included)
+
+## Code style
+
+- **Function doc comments**: Use `/** ... */` JSDoc-style comments above functions, not `//`, so they show up in hover popups. `//` is still fine for explaining individual lines.
