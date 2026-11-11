@@ -8,7 +8,7 @@ import type { SignInState } from '@/utils/form-validation'
 
 type Field = 'email' | 'password'
 
-export function LoginForm() {
+export function LoginForm({ next }: { next?: string }) {
   const [state, action, pending] = useActionState(signIn, undefined)
   // Remembers which submit result each field was edited after, so its error hides until the next submit
   const [editedAfter, setEditedAfter] = useState<Partial<Record<Field, SignInState>>>({})
@@ -20,6 +20,8 @@ export function LoginForm() {
 
   return (
     <form action={action} noValidate className="space-y-6">
+      {next && <input type="hidden" name="next" value={next} />}
+
       <div className="space-y-4">
         <TextInput
           name="email"

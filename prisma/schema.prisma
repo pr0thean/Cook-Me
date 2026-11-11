@@ -59,12 +59,19 @@ model Comment {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
-  name      String
-  email     String    @unique
-  role      Role      @default(USER)
-  comments  Comment[]
+  id              Int        @id @default(autoincrement())
+  createdAt       DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  /// Supabase auth user id (auth.users.id) — the link between the auth user and this row
+  authId          String     @unique @map("auth_id") @db.Uuid
+  name            String
+  email           String     @unique
+  role            Role       @default(USER)
+  status          UserStatus @default(PENDING)
+  approvedAt      DateTime?  @map("approved_at") @db.Timestamptz(6)
+  joinReason      String?    @map("join_reason")
+  /// Admin only: when the admin last opened the posts list (drives the "new posts" badge)
+  lastSeenPostsAt DateTime?  @map("last_seen_posts_at") @db.Timestamptz(6)
+  comments        Comment[]
 
   @@map("users")
 }
@@ -82,4 +89,12 @@ enum Role {
   ADMIN
 
   @@map("role")
+}
+
+enum UserStatus {
+  PENDING
+  APPROVED
+  BANNED
+
+  @@map("user_status")
 }

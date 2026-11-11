@@ -1,8 +1,10 @@
+import { cache } from 'react'
 import { redirect } from 'next/navigation'
 import { serverClient } from './supabase/serverClient'
 import { prismaClient } from './prismaClient'
+import { authUrl } from '@/utils/auth-redirect'
 
-export async function getCurrentUser() {
+export const getCurrentUser = cache(async () => {
   const supabase = await serverClient()
 
   const {
@@ -11,29 +13,33 @@ export async function getCurrentUser() {
 
   if (!user) return null
 
-  // Get user with role from your database
-  const dbUser = await prismaClient.user.findUnique({
-    where: { email: user.email! },
+  return prismaClient.user.findUnique({
+    where: { authId: user.id },
   })
+})
 
-  return dbUser
-}
-
-export async function requireAuth() {
+/**
+ * @param next path to return to after signing in (e.g. the current page)
+ */
+export async function requireAuth(next?: string) {
   const user = await getCurrentUser()
 
   if (!user) {
-    redirect('/login')
+    redirect(authUrl(next))
   }
 
   return user
 }
 
-export async function requireAdmin() {
-  const user = await requireAuth()
+/**
+ * @param next path to return to after signing in (e.g. the current page)
+ */
+export async function requireAdmin(next?: string) {
+  const user = await requireAuth(next)
 
+  // Signed in but not an admin: sending them to /auth would bounce them straight back
   if (user.role !== 'ADMIN') {
-    redirect('/login')
+    redirect('/')
   }
 
   return user

@@ -8,7 +8,7 @@ import { SignOutButton } from '@/features/login/SignOutButton'
 import { requireAdmin } from '@/lib/auth'
 
 export default async function AdminPage() {
-  await requireAdmin()
+  await requireAdmin('/admin')
 
   const categories = await getCategories()
   const tags = await getTags()

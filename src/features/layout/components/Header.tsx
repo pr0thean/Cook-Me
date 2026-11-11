@@ -75,7 +75,7 @@ export const Header = () => {
         </div>
 
         <div className="absolute top-5 right-6 flex gap-4">
-          <Link href="/login">
+          <Link href="/auth">
             <UserIcon
               className="hover:text-orange h-5 w-5 cursor-pointer sm:h-6 sm:w-6"
               strokeWidth={2}
