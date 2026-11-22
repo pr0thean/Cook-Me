@@ -40,12 +40,31 @@ export async function createCategory(formData: FormData) {
     }
 
     revalidatePath('/')
-    revalidatePath('/admin')
+    revalidatePath('/admin/recipes')
     revalidatePath('/recipes')
 
     return { success: true, categoryId: category.id.toString() }
   } catch (error) {
     console.error('Error creating category:', error)
     return { success: false, error: 'Failed to create category' }
+  }
+}
+
+export async function deleteCategory(categoryId: number) {
+  await requireAdmin()
+
+  try {
+    await prismaClient.category.delete({
+      where: { id: categoryId },
+    })
+
+    revalidatePath('/')
+    revalidatePath('/admin/recipes')
+    revalidatePath('/recipes')
+
+    return { success: true }
+  } catch (error) {
+    console.error('Error deleting category:', error)
+    return { success: false, error: 'Failed to delete category' }
   }
 }

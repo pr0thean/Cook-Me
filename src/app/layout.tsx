@@ -3,6 +3,7 @@ import { Rubik, Montserrat, MedievalSharp } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/features/layout/components/Header'
 import clsx from 'clsx'
+import { QueryProvider } from '@/features/providers/QueryProvider'
 
 const rubik = Rubik({
   subsets: ['latin'],
@@ -48,9 +49,11 @@ export default function RootLayout({
       className={clsx(rubik.className, montserrat.variable, medievalSharp.variable, 'bg-black')}
     >
       <body>
-        <Header />
+        <QueryProvider>
+          <Header />
 
-        <main className="mx-auto mt-16 max-w-4xl pb-8">{children}</main>
+          <main className="mx-auto max-w-4xl pt-16 pb-8">{children}</main>
+        </QueryProvider>
       </body>
     </html>
   )

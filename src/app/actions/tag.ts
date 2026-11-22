@@ -21,7 +21,7 @@ export async function createTag(formData: FormData) {
       },
     })
 
-    revalidatePath('/admin')
+    revalidatePath('/admin/recipes')
     revalidatePath('/recipes')
 
     return { success: true, categoryId: tag.id.toString() }

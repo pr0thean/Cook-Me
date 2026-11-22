@@ -43,6 +43,8 @@ export async function proxy(request: NextRequest) {
   return response
 }
 
+// Besides guarding /admin, the proxy refreshes the session cookies (Server Components can't write
+// cookies), so it runs on the pages that read the session while rendering
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/account/:path*', '/auth'],
 }
