@@ -1,6 +1,6 @@
 'use client'
-import { deleteRecipe } from '@/app/actions/deleteRecipe'
-import { getAdminRecipes } from '@/app/actions/getAdminRecipes'
+import { deleteRecipe } from '@/app/actions/recipe'
+import { getAdminRecipes } from '@/app/actions/recipe'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { useState } from 'react'

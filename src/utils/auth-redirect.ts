@@ -1,4 +1,7 @@
 export const AUTH_PATH = '/auth'
+export const ACCOUNT_PATH = '/account'
+
+export type AuthMode = 'login' | 'signup'
 
 /**
  * Only same-origin relative paths are allowed, so `?next=` can't be used as an open redirect
@@ -11,12 +14,30 @@ export function safeNextPath(value: unknown): string | undefined {
   return value
 }
 
-export function authUrl(next?: string) {
+/**
+ * Builds a link to the auth page.
+ * @param next path to return to after signing in
+ * @param mode which form to show (login is the default, so it's left out of the URL)
+ */
+export function authUrl(next?: string, mode: AuthMode = 'login') {
+  const params = new URLSearchParams()
   const safeNext = safeNextPath(next)
 
-  return safeNext ? `${AUTH_PATH}?next=${encodeURIComponent(safeNext)}` : AUTH_PATH
+  if (mode === 'signup') params.set('mode', 'signup')
+  if (safeNext) params.set('next', safeNext)
+
+  const query = params.toString()
+
+  return query ? `${AUTH_PATH}?${query}` : AUTH_PATH
 }
 
 export function defaultPathForRole(role: 'USER' | 'ADMIN' | undefined) {
   return role === 'ADMIN' ? '/admin' : '/'
+}
+
+/** Pages that require a signed-in user; signing out on one of them sends the user home */
+export function isProtectedPath(pathname: string) {
+  return ['/admin', ACCOUNT_PATH].some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`)
+  )
 }

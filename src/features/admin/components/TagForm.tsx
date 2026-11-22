@@ -1,6 +1,6 @@
 'use client'
 
-import { createTag } from '@/app/actions/createTag'
+import { createTag } from '@/app/actions/tag'
 import { Button } from '@/components/atoms/Button'
 import { TextInput } from '@/components/atoms/TextInput'
 

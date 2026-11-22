@@ -1,7 +1,7 @@
 'use client'
 
-import { createRecipe } from '@/app/actions/createRecipe'
-import { deleteCategory } from '@/app/actions/deleteCategory'
+import { createRecipe } from '@/app/actions/recipe'
+import { deleteCategory } from '@/app/actions/category'
 import { Button } from '@/components/atoms/Button'
 import { FileInput } from '@/components/atoms/FileInput'
 import { TextInput } from '@/components/atoms/TextInput'

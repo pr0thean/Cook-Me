@@ -6,16 +6,12 @@ import { uploadImage } from '@/lib/storage'
 import { slugify } from '@/utils/slugify'
 import { revalidatePath } from 'next/cache'
 import { Difficulty } from '@/generated/prisma/client'
+import { getRecipes } from '@/lib/data/recipes'
 
 type CreateRecipeResult = { success: true } | { success: false; error: string }
 
 export async function createRecipe(formData: FormData): Promise<CreateRecipeResult> {
-  try {
-    await requireAdmin()
-  } catch (error) {
-    console.error('Authorization error:', error)
-    return { success: false, error: 'Unauthorized' }
-  }
+  await requireAdmin()
 
   try {
     const title = formData.get('title') as string
@@ -81,7 +77,7 @@ export async function createRecipe(formData: FormData): Promise<CreateRecipeResu
     }
 
     revalidatePath('/')
-    revalidatePath('/admin')
+    revalidatePath('/admin/recipes')
     revalidatePath('/recipes')
 
     return { success: true }
@@ -89,4 +85,30 @@ export async function createRecipe(formData: FormData): Promise<CreateRecipeResu
     console.error('Error creating recipe:', error)
     return { success: false, error: 'Failed to create recipe' }
   }
+}
+
+export async function deleteRecipe(recipeId: number) {
+  await requireAdmin()
+
+  try {
+    await prismaClient.recipe.delete({
+      where: { id: recipeId },
+    })
+
+    revalidatePath('/')
+    revalidatePath('/admin/recipes')
+    revalidatePath('/recipes')
+
+    return { success: true }
+  } catch (error) {
+    console.error('Error deleting recipe:', error)
+    return { success: false, error: 'Failed to delete recipe' }
+  }
+}
+
+// TODO: temporary — remove with the admin page redesign (fetch on the server instead)
+export async function getAdminRecipes() {
+  await requireAdmin()
+
+  return getRecipes()
 }

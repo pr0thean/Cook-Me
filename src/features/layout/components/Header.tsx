@@ -2,12 +2,12 @@
 
 import { useRouter, usePathname } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import { QuestionMarkCircleIcon, UserIcon } from '@heroicons/react/24/outline'
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 import { HeaderSearch, ClickOutsideEvent } from '@/features/layout/components/HeaderSearch'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { HeaderLink } from '@/components/atoms/HeaderLink'
-import Link from 'next/link'
+import { UserMenu } from '@/features/auth/UserMenu'
 
 export const Header = () => {
   const router = useRouter()
@@ -75,12 +75,7 @@ export const Header = () => {
         </div>
 
         <div className="absolute top-5 right-6 flex gap-4">
-          <Link href="/auth">
-            <UserIcon
-              className="hover:text-orange h-5 w-5 cursor-pointer sm:h-6 sm:w-6"
-              strokeWidth={2}
-            />
-          </Link>
+          <UserMenu />
 
           <button
             id="tour-restart"
