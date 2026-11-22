@@ -5,7 +5,7 @@ test.describe(`Login Page`, () => {
     await page.addInitScript(() => {
       window.localStorage.setItem('tour-completed', 'true')
     })
-    await page.goto('/login')
+    await page.goto('/auth')
   })
 
   test('should show field errors on empty submit', async ({ page }) => {
