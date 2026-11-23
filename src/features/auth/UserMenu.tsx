@@ -7,7 +7,7 @@ import { UserIcon } from '@heroicons/react/24/outline'
 import { DropdownMenu } from 'radix-ui'
 import { signOut } from '@/app/actions/auth'
 import { ACCOUNT_PATH, AUTH_PATH, authUrl, isProtectedPath } from '@/utils/auth-redirect'
-import { useRefreshViewer, useViewer } from './viewer'
+import { useRefetchViewerOnNavigation, useRefreshViewer, useViewer } from './viewer'
 
 const iconClass = 'hover:text-orange h-5 w-5 cursor-pointer sm:h-6 sm:w-6'
 const itemClass =
@@ -23,6 +23,8 @@ export function UserMenu() {
   const { data: viewer, isPending } = useViewer()
   const refreshViewer = useRefreshViewer()
   const [isSigningOut, startSignOut] = useTransition()
+
+  useRefetchViewerOnNavigation()
 
   if (isPending || !viewer) {
     // Don't send the user back to /auth itself after signing in
