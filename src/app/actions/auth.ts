@@ -3,7 +3,13 @@
 import * as z from 'zod'
 import { serverClient } from '@/lib/supabase/serverClient'
 import { prismaClient } from '@/lib/prismaClient'
-import { defaultPathForRole, safeNextPath } from '@/utils/auth-redirect'
+import {
+  ACCOUNT_PATH,
+  AUTH_PATH,
+  defaultPathForRole,
+  isEmailLinkType,
+  safeNextPath,
+} from '@/utils/auth-redirect'
 import {
   loginSchema,
   type SignInState,
@@ -224,4 +230,37 @@ export async function resetPassword(
   }
 
   return { redirectTo: defaultPathForRole(user.role) }
+}
+
+export type EmailLinkState = { redirectTo?: string; error?: string } | undefined
+
+/**
+ * Uses the one-time token from an email link (sign-up confirmation or password reset) and signs
+ * the user in. Runs only when the user presses the button on `/auth/confirm`: email scanners
+ * (e.g. Microsoft Defender) open links before delivery, and verifying on page load would let
+ * them use up the token.
+ */
+export async function verifyEmailLink(
+  _prevState: EmailLinkState,
+  formData: FormData
+): Promise<EmailLinkState> {
+  const tokenHash = formData.get('token_hash')
+  const type = formData.get('type')
+
+  if (typeof tokenHash !== 'string' || !tokenHash || !isEmailLinkType(type)) {
+    return { error: 'This link is invalid.' }
+  }
+
+  const supabase = await serverClient()
+  const { error } = await supabase.auth.verifyOtp({ type, token_hash: tokenHash })
+
+  if (error) {
+    console.warn('Email link verification failed:', error.code ?? error.message)
+    return { error: 'This link is invalid or has expired.' }
+  }
+
+  return {
+    redirectTo:
+      type === 'recovery' ? `${AUTH_PATH}?dialog=reset-password` : `${ACCOUNT_PATH}?confirmed=1`,
+  }
 }

@@ -41,3 +41,11 @@ export function isProtectedPath(pathname: string) {
     (path) => pathname === path || pathname.startsWith(`${path}/`)
   )
 }
+
+/** Email link types handled by `/auth/confirm` (sign-up confirmation and password reset) */
+export const EMAIL_LINK_TYPES = ['email', 'signup', 'recovery'] as const
+export type EmailLinkType = (typeof EMAIL_LINK_TYPES)[number]
+
+export function isEmailLinkType(value: unknown): value is EmailLinkType {
+  return EMAIL_LINK_TYPES.includes(value as EmailLinkType)
+}
