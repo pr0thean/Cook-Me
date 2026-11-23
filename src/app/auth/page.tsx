@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 }
 
 const ERROR_MESSAGES: Record<string, string> = {
-  'invalid-link': 'This link is invalid or has expired. Please try again.',
   'reset-expired': 'Your password reset link has expired. Use "Forgot password?" to get a new one.',
 }
 
@@ -22,7 +21,7 @@ const ERROR_MESSAGES: Record<string, string> = {
  * - `?mode=signup` shows the sign-up form (login is the default)
  * - `?next=/path` returns the user there after signing in
  * - `?dialog=reset-password` opens the set-new-password dialog (where reset email links land)
- * - `?error=…` shows a message, e.g. after an expired email link
+ * - `?error=…` shows a message (currently only `reset-expired`)
  */
 export default async function AuthPage({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams
