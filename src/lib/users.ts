@@ -2,6 +2,12 @@ import 'server-only'
 import { headers } from 'next/headers'
 import { adminClient } from './supabase/adminClient'
 import { prismaClient } from './prismaClient'
+import {
+  deletePostImageFiles,
+  getPostImagePaths,
+  getRecipeSlugsPostedOnBy,
+  revalidatePostPages,
+} from './posts'
 
 /**
  * URL that Supabase email links (sign-up confirmation, password reset) point back to.
@@ -19,10 +25,16 @@ export async function authConfirmUrl() {
 
 /**
  * Permanently removes an account: the Supabase auth user first (so a failure leaves everything intact),
- * then the DB row, which cascades to the user's content.
- * TODO(Phase 2): also delete the user's post images from storage.
+ * then the DB row, which cascades to the user's posts, and finally the post images in storage.
+ * Revalidates the recipe pages the user posted on.
  */
 export async function deleteUserAccount(user: { id: number; authId: string }) {
+  // Read before the cascade removes the rows
+  const [imagePaths, recipeSlugs] = await Promise.all([
+    getPostImagePaths({ post: { userId: user.id } }),
+    getRecipeSlugsPostedOnBy(user.id),
+  ])
+
   const { error } = await adminClient().auth.admin.deleteUser(user.authId)
 
   // Already gone from auth (e.g. deleted in the dashboard): still remove the DB row
@@ -31,6 +43,9 @@ export async function deleteUserAccount(user: { id: number; authId: string }) {
   }
 
   await prismaClient.user.delete({ where: { id: user.id } })
+
+  await deletePostImageFiles(imagePaths)
+  revalidatePostPages(recipeSlugs)
 }
 
 /** Whether the user clicked the confirmation link in their sign-up email */

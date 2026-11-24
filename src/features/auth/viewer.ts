@@ -4,13 +4,18 @@ import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import type { Role, UserStatus } from '@/generated/prisma/client'
+import { useIsHydrated } from '@/hooks/useIsHydrated'
 
 export type Viewer = {
+  /** DB user id, to tell which posts are the viewer's own */
+  id: number
   name: string
   role: Role
   status: UserStatus
   /** Admins only (0 for everyone else) */
   pendingUsersCount: number
+  /** Admins only: posts by others since the admin last opened `/admin/posts` */
+  newPostsCount: number
 } | null
 
 export const VIEWER_QUERY_KEY = ['viewer'] as const
@@ -25,14 +30,25 @@ async function fetchViewer(): Promise<Viewer> {
   return viewer
 }
 
-/** The signed-in user (or `null`), read from `/api/me` */
+/**
+ * The signed-in user (or `null`), read from `/api/me`.
+ * Reports "still loading" until the component has hydrated: the server never knows the viewer, and
+ * parts of a streamed page can hydrate after `/api/me` has already answered, so using the cached
+ * viewer straight away would make the first client render differ from the server HTML.
+ */
 export function useViewer() {
-  return useQuery({
+  const isHydrated = useIsHydrated()
+  const query = useQuery({
     queryKey: VIEWER_QUERY_KEY,
     queryFn: fetchViewer,
     staleTime: 60 * 1000,
     refetchOnWindowFocus: true, // picks up approval, ban or a sign-out in another tab
   })
+
+  return {
+    data: isHydrated ? query.data : undefined,
+    isPending: !isHydrated || query.isPending,
+  }
 }
 
 /**

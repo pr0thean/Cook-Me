@@ -7,6 +7,8 @@ import { getRecipeBySlug, getRecipeSlugs } from '@/lib/data/recipes'
 import Image from 'next/image'
 import { RichTextViewer } from '@/components/molecules/text-editor/RichTextViewer'
 import { Content } from '@tiptap/react'
+import { PostsSection } from '@/features/posts/components/PostsSection'
+import { countRecipePosts, getRecipePosts } from '@/lib/data/posts'
 
 export async function generateStaticParams() {
   try {
@@ -17,7 +19,7 @@ export async function generateStaticParams() {
   }
 }
 
-export const revalidate = 86400 // 24 hours
+export const revalidate = 86400 // 24 hours; post changes revalidate the page on demand
 export const dynamicParams = true
 
 export default async function RecipePage({ params }: { params: PageParams }) {
@@ -27,6 +29,12 @@ export default async function RecipePage({ params }: { params: PageParams }) {
   if (!recipe) {
     throw new Error('Recipe not found')
   }
+
+  // The public part of the posts section is cached with the page (nothing viewer-specific here)
+  const [postCount, firstPostsPage] = await Promise.all([
+    countRecipePosts(recipe.id),
+    getRecipePosts(recipe.id),
+  ])
 
   const { imageUrl, title, difficulty, time, ingredients, instruction, tags, description } = recipe
 
@@ -82,6 +90,13 @@ export default async function RecipePage({ params }: { params: PageParams }) {
             <h2 className="text-2xl font-semibold">Instruction</h2>
             {instruction && <RichTextViewer content={instruction as Content} />}
           </div>
+
+          <PostsSection
+            recipeId={recipe.id}
+            recipeSlug={recipe.slug}
+            count={postCount}
+            firstPage={firstPostsPage}
+          />
         </div>
       </div>
     </div>

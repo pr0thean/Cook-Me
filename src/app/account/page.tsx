@@ -15,17 +15,17 @@ export const metadata: Metadata = {
 const STATUS_INFO: Record<UserStatus, { label: string; text: string; className: string }> = {
   PENDING: {
     label: 'Awaiting approval',
-    text: 'Every new account is approved by hand to keep spam out. You can browse as usual; posting unlocks once you are approved.',
+    text: 'Every new account is approved by hand to keep spam out. You can browse as usual; commenting unlocks once you are approved.',
     className: 'bg-yellow/20 border-yellow',
   },
   APPROVED: {
     label: 'Approved',
-    text: 'You can share photos and notes under any recipe.',
+    text: 'You can comment and share photos under any recipe.',
     className: 'bg-green/10 border-green',
   },
   BANNED: {
     label: 'Suspended',
-    text: 'Your account has been suspended and your posts are hidden.',
+    text: 'Your account has been suspended and your comments are hidden.',
     className: 'bg-red-50 border-red-700',
   },
 }

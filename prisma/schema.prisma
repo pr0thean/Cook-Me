@@ -8,19 +8,20 @@ datasource db {
 }
 
 model Recipe {
-  id          Int        @id @default(autoincrement())
-  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
-  title       String     @unique
-  slug        String     @unique
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  title       String      @unique
+  slug        String      @unique
   description String?
-  ingredients Json?      @db.Json
-  instruction Json?      @db.Json
+  ingredients Json?       @db.Json
+  instruction Json?       @db.Json
   time        Int?
-  difficulty  Difficulty @default(MEDIUM)
+  difficulty  Difficulty  @default(MEDIUM)
   imageUrl    String?
-  comments    Comment[]
-  categories  Category[] @relation("CategoryToRecipe")
-  tags        Tag[]      @relation("RecipeToTag")
+  posts       Post[]
+  postImages  PostImage[]
+  categories  Category[]  @relation("CategoryToRecipe")
+  tags        Tag[]       @relation("RecipeToTag")
 
   @@map("recipes")
 }
@@ -45,17 +46,47 @@ model Tag {
   @@map("tags")
 }
 
-model Comment {
+/// A user's post under a recipe: text and/or up to 3 photos (`PostImage`)
+model Post {
+  id        Int         @id @default(autoincrement())
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  /// Plain text (max 1000 characters); null for a photo-only post
+  content   String?
+  /// Hidden by the admin: invisible to everyone, including the author
+  hidden    Boolean     @default(false)
+  /// Set when the author edits the text
+  editedAt  DateTime?   @map("edited_at") @db.Timestamptz(6)
+  recipeId  Int         @map("recipe_id")
+  userId    Int         @map("user_id")
+  recipe    Recipe      @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  images    PostImage[]
+
+  @@index([recipeId, createdAt])
+  @@index([userId, createdAt])
+  @@index([createdAt])
+  @@map("posts")
+}
+
+/// A photo of a post. Stores `recipeId` and `createdAt` too, so photo feeds don't need to join posts to sort/filter.
+model PostImage {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  content   String
-  imageUrl  String?
+  postId    Int      @map("post_id")
   recipeId  Int      @map("recipe_id")
-  userId    Int      @map("user_id")
+  /// Order within the post (0-2)
+  position  Int
+  /// Object path in the `post-images` bucket: `{recipeId}/{postId}/{position}.{ext}`
+  path      String
+  width     Int
+  height    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("comments")
+  @@unique([postId, position])
+  @@index([recipeId, createdAt])
+  @@index([createdAt])
+  @@map("post_images")
 }
 
 model User {
@@ -71,7 +102,7 @@ model User {
   joinReason      String?    @map("join_reason")
   /// Admin only: when the admin last opened the posts list (drives the "new posts" badge)
   lastSeenPostsAt DateTime?  @map("last_seen_posts_at") @db.Timestamptz(6)
-  comments        Comment[]
+  posts           Post[]
 
   @@map("users")
 }

@@ -29,7 +29,7 @@ export function DisplayNameForm({ currentName }: { currentName: string }) {
     <form action={action} noValidate className="space-y-3 sm:max-w-sm">
       <TextInput
         name="name"
-        label="Display name (shown next to your posts)"
+        label="Display name (shown next to your comments)"
         autoComplete="nickname"
         maxLength={DISPLAY_NAME_MAX_LENGTH}
         defaultValue={state?.values?.name ?? currentName}

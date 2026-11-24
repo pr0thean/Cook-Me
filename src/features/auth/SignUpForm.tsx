@@ -28,7 +28,7 @@ export function SignUpForm() {
           your account.
         </p>
         <p className="text-blue-gray text-sm">
-          After confirming, your account waits for a quick manual approval before you can post.
+          After confirming, your account waits for a quick manual approval before you can comment.
         </p>
       </div>
     )
@@ -64,7 +64,7 @@ export function SignUpForm() {
 
         <TextInput
           name="name"
-          label="Display name (shown next to your posts)"
+          label="Display name (shown next to your comments)"
           autoComplete="nickname"
           maxLength={DISPLAY_NAME_MAX_LENGTH}
           defaultValue={state?.values?.name}
@@ -100,7 +100,7 @@ export function SignUpForm() {
               <Link href="/privacy" target="_blank" className="underline">
                 privacy policy
               </Link>
-              . I understand that photos and text I post are public.
+              . I understand that my comments and photos are public.
             </span>
           </label>
 

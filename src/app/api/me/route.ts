@@ -1,5 +1,6 @@
 import { getCurrentUser } from '@/lib/auth'
 import { countPendingUsers } from '@/lib/data/users'
+import { countNewPosts } from '@/lib/data/posts'
 import type { Viewer } from '@/features/auth/viewer'
 
 /**
@@ -9,11 +10,18 @@ import type { Viewer } from '@/features/auth/viewer'
 export async function GET() {
   const user = await getCurrentUser()
 
+  const isAdmin = user?.role === 'ADMIN'
+
+  const [pendingUsersCount, newPostsCount] =
+    user && isAdmin ? await Promise.all([countPendingUsers(), countNewPosts(user)]) : [0, 0]
+
   const viewer: Viewer = user && {
+    id: user.id,
     name: user.name,
     role: user.role,
     status: user.status,
-    pendingUsersCount: user.role === 'ADMIN' ? await countPendingUsers() : 0,
+    pendingUsersCount,
+    newPostsCount,
   }
 
   return Response.json({ viewer }, { headers: { 'Cache-Control': 'private, no-store' } })

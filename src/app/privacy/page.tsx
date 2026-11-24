@@ -27,15 +27,15 @@ export default function PrivacyPage() {
             Nobody, including the admin, can read it.
           </li>
           <li>
-            <strong>Display name</strong>: shown publicly next to your posts. You can change it at
-            any time.
+            <strong>Display name</strong>: shown publicly next to your comments. You can change it
+            at any time.
           </li>
           <li>
             <strong>Why you want to join</strong> (optional): seen only by the admin, to approve new
             accounts.
           </li>
           <li>
-            <strong>Posts and photos</strong>: the text and photos you share under recipes are{' '}
+            <strong>Comments and photos</strong>: the text and photos you share under recipes are{' '}
             <strong>public</strong>. Photos are re-encoded in your browser before upload, which
             removes hidden metadata such as GPS location.
           </li>
@@ -44,20 +44,20 @@ export default function PrivacyPage() {
         <h2>Why</h2>
         <p>
           The data is used only to run the community features of this site: signing in, approving
-          accounts, showing your posts and keeping out spam. It is not sold, shared for marketing or
-          used for advertising, and there are no analytics or tracking cookies.
+          accounts, showing your comments and keeping out spam. It is not sold, shared for marketing
+          or used for advertising, and there are no analytics or tracking cookies.
         </p>
 
         <h2>Where it is stored</h2>
         <p>
-          Accounts, posts and photos are stored with Supabase, the database, authentication and file
-          hosting provider this site runs on. The site sets only the cookies needed to keep you
+          Accounts, comments and photos are stored with Supabase, the database, authentication and
+          file hosting provider this site runs on. The site sets only the cookies needed to keep you
           signed in.
         </p>
 
         <h2>How long</h2>
         <p>
-          Your data is kept for as long as you have an account. A post is removed as soon as you
+          Your data is kept for as long as you have an account. A comment is removed as soon as you
           delete it.
         </p>
 
@@ -67,8 +67,8 @@ export default function PrivacyPage() {
           <Link href="/account" className="underline">
             My account
           </Link>{' '}
-          page. This permanently removes your email, display name, and all your posts and photos.
-          You can also edit or delete individual posts yourself.
+          page. This permanently removes your email, display name, and all your comments and photos.
+          You can also edit or delete individual comments yourself.
         </p>
       </div>
     </div>

@@ -56,7 +56,7 @@ export function UserActions({ userId, userName, status, emailConfirmed }: Props)
         label: 'Ban',
         run: banUser,
         tone: 'danger',
-        confirm: `Ban ${userName}? All their posts will be hidden until you unban them.`,
+        confirm: `Ban ${userName}? All their comments will be hidden until you unban them.`,
       },
     ],
     BANNED: [
@@ -65,7 +65,7 @@ export function UserActions({ userId, userName, status, emailConfirmed }: Props)
         label: 'Delete',
         run: deleteUser,
         tone: 'danger',
-        confirm: `Permanently delete ${userName}'s account and all their posts? This cannot be undone.`,
+        confirm: `Permanently delete ${userName}'s account and all their comments? This cannot be undone.`,
       },
     ],
   }

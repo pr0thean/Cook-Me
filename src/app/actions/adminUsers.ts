@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { requireAdmin } from '@/lib/auth'
 import { prismaClient } from '@/lib/prismaClient'
 import { deleteUserAccount, isEmailConfirmed } from '@/lib/users'
+import { getRecipeSlugsPostedOnBy, revalidatePostPages } from '@/lib/posts'
 import type { UserStatus } from '@/generated/prisma/client'
 
 type Result = { success: true } | { success: false; error: string }
@@ -37,6 +38,11 @@ function revalidateUsers() {
   revalidatePath('/admin', 'layout')
 }
 
+/** A ban or unban changes which posts are visible, so refresh every page the user posted on */
+async function revalidateUserPosts(userId: number) {
+  revalidatePostPages(await getRecipeSlugsPostedOnBy(userId))
+}
+
 export async function approveUser(userId: number): Promise<Result> {
   await requireAdmin()
 
@@ -66,7 +72,7 @@ export async function banUser(userId: number): Promise<Result> {
 
   await prismaClient.user.update({ where: { id: user.id }, data: { status: 'BANNED' } })
 
-  // TODO(Phase 2): revalidate every recipe the user posted on, plus Inspirations and the home page
+  await revalidateUserPosts(user.id)
   revalidateUsers()
   return { success: true }
 }
@@ -80,7 +86,7 @@ export async function unbanUser(userId: number): Promise<Result> {
 
   await prismaClient.user.update({ where: { id: user.id }, data: { status: 'APPROVED' } })
 
-  // TODO(Phase 2): revalidate every recipe the user posted on, plus Inspirations and the home page
+  await revalidateUserPosts(user.id)
   revalidateUsers()
   return { success: true }
 }
