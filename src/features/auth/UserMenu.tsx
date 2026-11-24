@@ -15,7 +15,7 @@ const itemClass =
 
 /**
  * Header user icon: a sign-in link when signed out, otherwise a dropdown with the account links.
- * Admins get a dot on the icon while users are waiting for approval.
+ * Admins get a dot on the icon while users are waiting for approval or there are new posts.
  */
 export function UserMenu() {
   const pathname = usePathname()
@@ -38,7 +38,14 @@ export function UserMenu() {
   }
 
   const isAdmin = viewer.role === 'ADMIN'
-  const hasAdminBadge = isAdmin && viewer.pendingUsersCount > 0
+  const adminBadgeCount = isAdmin ? viewer.pendingUsersCount + viewer.newPostsCount : 0
+  const hasAdminBadge = adminBadgeCount > 0
+  const adminBadgeLabel = [
+    viewer.pendingUsersCount > 0 && `${viewer.pendingUsersCount} users awaiting approval`,
+    viewer.newPostsCount > 0 && `${viewer.newPostsCount} new comments`,
+  ]
+    .filter(Boolean)
+    .join(', ')
 
   const handleSignOut = () =>
     startSignOut(async () => {
@@ -51,7 +58,7 @@ export function UserMenu() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
-        aria-label={hasAdminBadge ? 'Account menu (users awaiting approval)' : 'Account menu'}
+        aria-label={hasAdminBadge ? `Account menu (${adminBadgeLabel})` : 'Account menu'}
         className="relative cursor-pointer outline-none"
       >
         <UserIcon className={iconClass} strokeWidth={2} />
@@ -86,9 +93,9 @@ export function UserMenu() {
                 {hasAdminBadge && (
                   <span
                     className="bg-orange text-off-black rounded-full px-2 text-xs font-semibold"
-                    aria-label={`${viewer.pendingUsersCount} users awaiting approval`}
+                    aria-label={adminBadgeLabel}
                   >
-                    {viewer.pendingUsersCount}
+                    {adminBadgeCount}
                   </span>
                 )}
               </Link>

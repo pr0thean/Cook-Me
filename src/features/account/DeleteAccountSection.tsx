@@ -33,7 +33,7 @@ export function DeleteAccountSection() {
   return (
     <div className="space-y-3">
       <p className="text-blue-gray-dark text-sm">
-        Permanently deletes your account, along with all your posts and photos.
+        Permanently deletes your account, along with all your comments and photos.
       </p>
 
       <button type="button" onClick={() => setIsOpen(true)} className={dangerButtonClass}>
@@ -44,7 +44,7 @@ export function DeleteAccountSection() {
         open={isOpen}
         onOpenChange={(open) => !isDeleting && setIsOpen(open)}
         title="Delete your account?"
-        description="Your account, posts and photos will be removed permanently. This cannot be undone."
+        description="Your account, comments and photos will be removed permanently. This cannot be undone."
       >
         <div className="flex justify-end gap-3">
           <button

@@ -7,6 +7,7 @@ import { slugify } from '@/utils/slugify'
 import { revalidatePath } from 'next/cache'
 import { Difficulty } from '@/generated/prisma/client'
 import { getRecipes } from '@/lib/data/recipes'
+import { deletePostImageFiles, getPostImagePaths, revalidatePostPages } from '@/lib/posts'
 
 type CreateRecipeResult = { success: true } | { success: false; error: string }
 
@@ -91,11 +92,17 @@ export async function deleteRecipe(recipeId: number) {
   await requireAdmin()
 
   try {
-    await prismaClient.recipe.delete({
+    // Read before the cascade removes the rows
+    const postImagePaths = await getPostImagePaths({ recipeId })
+
+    const recipe = await prismaClient.recipe.delete({
       where: { id: recipeId },
+      select: { slug: true },
     })
 
-    revalidatePath('/')
+    await deletePostImageFiles(postImagePaths)
+
+    revalidatePostPages([recipe.slug])
     revalidatePath('/admin/recipes')
     revalidatePath('/recipes')
 

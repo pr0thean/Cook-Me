@@ -1,13 +1,6 @@
 -- Phase 0 (community posts): link users to Supabase auth by id and add approval fields.
 --
--- Run once in the Supabase SQL editor BEFORE `npm run db:push`.
--- `db push` can't add the required `auth_id` column to a table that already has rows,
--- so this script adds it, backfills it from auth.users (matched by email), then makes it required.
 -- Afterwards `npm run db:push` should report that the database is already in sync.
---
--- Optional preview — every row should have a non-null auth_id:
---   SELECT u.id, u.email, u.role, a.id AS auth_id
---   FROM public.users u LEFT JOIN auth.users a ON lower(a.email) = lower(u.email);
 
 BEGIN;
 

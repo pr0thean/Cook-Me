@@ -6,6 +6,7 @@ import { getCurrentUser } from '@/lib/auth'
 import { prismaClient } from '@/lib/prismaClient'
 import { serverClient } from '@/lib/supabase/serverClient'
 import { deleteUserAccount } from '@/lib/users'
+import { getRecipeSlugsPostedOnBy, revalidatePostPages } from '@/lib/posts'
 import { ACCOUNT_PATH } from '@/utils/auth-redirect'
 import {
   changePasswordSchema,
@@ -36,7 +37,8 @@ export async function updateDisplayName(
     data: { name: result.data.name },
   })
 
-  // TODO(Phase 2): revalidate the recipe pages the user posted on, so their new name shows up
+  // Their name is shown on their posts
+  revalidatePostPages(await getRecipeSlugsPostedOnBy(user.id))
   revalidatePath(ACCOUNT_PATH)
 
   return { success: true, values: { name: result.data.name } }

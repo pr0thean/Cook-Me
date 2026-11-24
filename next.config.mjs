@@ -10,7 +10,7 @@ const nextConfig = {
     },
     experimental: {
         serverActions: {
-            bodySizeLimit: '3MB',
+            bodySizeLimit: '4MB', // a post can carry 3 photos of up to 1 MB each,
         },
     },
 };
