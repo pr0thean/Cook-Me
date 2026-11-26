@@ -2,7 +2,13 @@
 
 import { useRouter, usePathname } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
+import {
+  BookOpenIcon,
+  HomeIcon,
+  InformationCircleIcon,
+  PhotoIcon,
+  QuestionMarkCircleIcon,
+} from '@heroicons/react/24/outline'
 import { HeaderSearch, ClickOutsideEvent } from '@/features/layout/components/HeaderSearch'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
@@ -67,11 +73,27 @@ export const Header = () => {
       <header className="border-gray fixed top-0 z-30 h-16 w-full border-b bg-black px-6 py-4 text-white">
         <div
           id="tour-navigation"
-          className="absolute left-6 flex gap-4 sm:left-1/2 sm:-translate-x-1/2 sm:transform sm:gap-8"
+          className="absolute left-6 flex gap-5 md:left-1/2 md:-translate-x-1/2 md:transform md:gap-6 lg:gap-8"
         >
-          <HeaderLink href="/" label="Home" isSelected={pathname === '/'} />
-          <HeaderLink href="/recipes" label="Recipes" isSelected={pathname === '/recipes'} />
-          <HeaderLink href="/about" label="About" isSelected={pathname === '/about'} />
+          <HeaderLink href="/" label="Home" icon={HomeIcon} isSelected={pathname === '/'} />
+          <HeaderLink
+            href="/recipes"
+            label="Recipes"
+            icon={BookOpenIcon}
+            isSelected={pathname === '/recipes'}
+          />
+          <HeaderLink
+            href="/inspirations"
+            label="Inspirations"
+            icon={PhotoIcon}
+            isSelected={pathname === '/inspirations'}
+          />
+          <HeaderLink
+            href="/about"
+            label="About"
+            icon={InformationCircleIcon}
+            isSelected={pathname === '/about'}
+          />
         </div>
 
         <div className="absolute top-5 right-6 flex gap-4">

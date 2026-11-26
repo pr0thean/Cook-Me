@@ -36,8 +36,9 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong>Comments and photos</strong>: the text and photos you share under recipes are{' '}
-            <strong>public</strong>. Photos are re-encoded in your browser before upload, which
-            removes hidden metadata such as GPS location.
+            <strong>public</strong>, and your photos also appear on the Inspirations page and the
+            home page. Photos are re-encoded in your browser before upload, which removes hidden
+            metadata such as GPS location.
           </li>
         </ul>
 

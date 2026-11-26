@@ -40,6 +40,17 @@ export default function AboutPage() {
               <strong>Filters</strong>: Easily narrow down recipes by category, difficulty level, or
               specific tags
             </li>
+            <li>
+              <strong>Accounts</strong>: Sign up to join the community. New accounts are approved by
+              hand, and you can change your name, password or delete your account at any time.
+            </li>
+            <li>
+              <strong>Comments</strong>: Cooked something? Share how it went under the recipe.
+            </li>
+            <li>
+              <strong>Inspirations</strong>: Browse a wall of photos from everyone&apos;s comments
+              and jump straight to the recipe behind each one.
+            </li>
           </ul>
 
           <h2>Behind the Scenes</h2>
@@ -51,9 +62,19 @@ export default function AboutPage() {
           <ul>
             <li>Built with Next.js and TypeScript for a fast, modern web experience</li>
             <li>Styled using Tailwind CSS for a clean, responsive design</li>
-            <li>Data stored in Supabase</li>
+            <li>
+              Data, accounts and photos stored in Supabase (database, authentication and storage)
+            </li>
             <li>Prisma for efficient database operations</li>
-            <li>TanStack Query to query databse in an optimal way</li>
+            <li>TanStack Query to query the database in an optimal way</li>
+            <li>
+              Pages cached and refreshed on demand whenever a comment changes, so they stay fast and
+              up to date
+            </li>
+            <li>
+              Photos resized and compressed in your browser before upload, which also strips hidden
+              metadata such as GPS location
+            </li>
             <li>Rigorously tested using Playwright for both end-to-end and component testing</li>
           </ul>
 
@@ -62,7 +83,8 @@ export default function AboutPage() {
           <p>
             Whether you&apos;re a seasoned chef or just starting out in the kitchen, I hope Cook Me
             inspires you to try new recipes, experiment with flavors, and most importantly, enjoy
-            the process of creating delicious meals.
+            the process of creating delicious meals. And when you do, share a photo: it might
+            inspire someone else.
           </p>
 
           <p>Happy cooking!</p>

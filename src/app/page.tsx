@@ -3,6 +3,7 @@ import { Hero } from '@/components/molecules/Hero'
 import { GuidedTour } from '@/features/guided-tour/GuidedTour'
 import { Button } from '@/components/atoms/Button'
 import Statistics from '@/features/statistics/components/Statistics'
+import { CommunityPhotos } from '@/features/inspirations/components/CommunityPhotos'
 
 export default async function Home() {
   return (
@@ -19,6 +20,7 @@ export default async function Home() {
 
       <div className="space-y-6 px-4 sm:px-6 md:space-y-10">
         <Statistics />
+        <CommunityPhotos />
       </div>
 
       <GuidedTour />

@@ -74,6 +74,9 @@ export const tourSteps = (isDesktop: boolean): Step[] => [
           <strong>Recipes</strong>: View all available recipes.
         </div>
         <div>
+          <strong>Inspirations</strong>: See what others cooked from them.
+        </div>
+        <div>
           <strong>About</strong>: Learn more about Cook Me.
         </div>
       </div>

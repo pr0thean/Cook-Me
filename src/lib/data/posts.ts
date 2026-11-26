@@ -4,6 +4,11 @@ import type { Prisma } from '@/generated/prisma/client'
 import { prismaClient } from '@/lib/prismaClient'
 import { getImageUrl } from '@/lib/storage'
 import { POSTS_PER_PAGE, type PostData, type PostsPage } from '@/features/posts/types'
+import {
+  INSPIRATIONS_PER_PAGE,
+  type InspirationPhoto,
+  type InspirationsPage,
+} from '@/features/inspirations/types'
 
 /**
  * The one visibility rule for public post feeds: not hidden by the admin, and the author is approved
@@ -65,6 +70,40 @@ export async function getRecipePosts(
   const posts = (hasMore ? rows.slice(0, take) : rows).map(toPostData)
 
   return { posts, nextCursor: hasMore ? posts[posts.length - 1].id : null }
+}
+
+/**
+ * Photos from visible posts across all recipes, newest post first (a post's photos stay in order),
+ * one page at a time (`cursor` = last photo id seen). Feeds `/inspirations` and the home page strip.
+ */
+export async function getInspirationPhotos({
+  cursor,
+  take = INSPIRATIONS_PER_PAGE,
+}: { cursor?: number; take?: number } = {}): Promise<InspirationsPage> {
+  const rows = await prismaClient.postImage.findMany({
+    where: { post: visiblePostWhere },
+    orderBy: [{ createdAt: 'desc' }, { postId: 'desc' }, { position: 'asc' }],
+    take: take + 1, // one extra to know whether there's another page
+    ...(cursor && { cursor: { id: cursor }, skip: 1 }),
+    select: {
+      ...imageSelect,
+      createdAt: true,
+      post: { select: { id: true, content: true, user: { select: { id: true, name: true } } } },
+      recipe: { select: { slug: true, title: true } },
+    },
+  })
+
+  const hasMore = rows.length > take
+  const photos = (hasMore ? rows.slice(0, take) : rows).map((row): InspirationPhoto => ({
+    ...toImageData(row),
+    createdAt: row.createdAt.toISOString(),
+    postId: row.post.id,
+    content: row.post.content,
+    author: row.post.user,
+    recipe: row.recipe,
+  }))
+
+  return { photos, nextCursor: hasMore ? photos[photos.length - 1].id : null }
 }
 
 export function countRecipePosts(recipeId: number) {

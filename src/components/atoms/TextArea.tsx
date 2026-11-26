@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Label } from './Label'
 
@@ -9,14 +10,17 @@ interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
 
 /** Multi-line text field matching `TextInput`'s secondary (light background) style */
 export const TextArea = ({ name, label, error, className, ...props }: Props) => {
-  const errorId = `${name}-error`
+  // Unique per field, so forms sharing a page don't clash
+  const generatedId = useId()
+  const id = props.id ?? generatedId
+  const errorId = `${id}-error`
 
   return (
     <div className="flex flex-col gap-1 text-left">
-      {label && <Label name={name} label={label} className="text-black" />}
+      {label && <Label name={id} label={label} className="text-black" />}
 
       <textarea
-        id={name}
+        id={id}
         name={name}
         className={twMerge(
           'border-gray w-full rounded-sm border bg-white px-4 py-2 text-base text-black focus:outline-hidden',
