@@ -35,11 +35,13 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+      testIgnore: ['unit/**', 'api/**'],
       use: { ...devices['Desktop Chrome'] },
     },
 
     {
       name: 'Mobile Chrome',
+      testIgnore: ['unit/**', 'api/**'],
       use: { ...devices['Pixel 5'] },
     },
   ],

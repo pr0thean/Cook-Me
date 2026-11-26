@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { twMerge } from 'tailwind-merge'
 import { Label } from './Label'
@@ -45,13 +46,16 @@ export const TextInput = ({
   ...props
 }: Props) => {
   const inputClass = inputVariants({ variant, inputSize, isIcon: !!icon })
-  const errorId = `${name}-error`
+  // Unique per field, so forms sharing a page (e.g. sign-in + "forgot password" dialog) don't clash
+  const generatedId = useId()
+  const id = props.id ?? generatedId
+  const errorId = `${id}-error`
 
   return (
     <div className="flex flex-col gap-1 text-left">
       {label && (
         <Label
-          name={name}
+          name={id}
           label={label}
           className={variant === 'primary' ? 'text-white' : 'text-black'}
         />
@@ -59,7 +63,7 @@ export const TextInput = ({
 
       <div className="relative">
         <input
-          id={name}
+          id={id}
           name={name}
           className={twMerge(inputClass, className)}
           onChange={onChange}
